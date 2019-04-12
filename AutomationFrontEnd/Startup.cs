@@ -1,3 +1,5 @@
+using HomeAutomationRepositories.Repositories;
+using HomeAutomationRepositories.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,6 +35,8 @@ namespace AutomationFrontEnd
 			{
 				configuration.RootPath = "ClientApp/dist";
 			});
+			services.AddTransient<IRoomsService, RoomsService>();
+			services.AddTransient<IRoomRepository, RoomRepository>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

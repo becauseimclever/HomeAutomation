@@ -6,6 +6,8 @@ using System.Text;
 
 namespace HomeAutomationRepositories.Entities
 {
+	[BsonDiscriminator(RootClass = true)]
+	[BsonKnownTypes(typeof(PowerStripEntity))]
 	public class DeviceEntity
 	{
 		[BsonId]

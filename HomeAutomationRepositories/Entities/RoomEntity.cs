@@ -7,6 +7,7 @@ namespace HomeAutomationRepositories.Entities
 	public class RoomEntity
 	{
 		public string Name { get; set; }
-		public List<IDevice> Devices { get; set; }
+		public List<DeviceEntity> Devices { get; set; }
+		
 	}
 }

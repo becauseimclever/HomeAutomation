@@ -4,9 +4,10 @@ using System.Text;
 
 namespace HomeAutomationRepositories.Models
 {
-	public class Device
-	{
-		public string Name { get; set; }
+    public class Device
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
 
-	}
+    }
 }

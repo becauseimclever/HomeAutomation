@@ -4,7 +4,8 @@ using System.Text;
 
 namespace HomeAutomationRepositories.Models
 {
-	class PowerStrip : Device
-	{
-	}
+    public class PowerStrip : Device
+    {
+        public List<bool> outlets { get; set; }
+    }
 }

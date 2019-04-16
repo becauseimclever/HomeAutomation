@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.28721.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationFrontEnd", "AutomationFrontEnd\AutomationFrontEnd.csproj", "{4622FDE3-1B68-4ACF-A968-1EF77BEDE76F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeAutomationRepositories", "HomeAutomationRepositories\HomeAutomationRepositories.csproj", "{D42D935E-85D8-4C61-AA8A-0EB0D1B5C056}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeAutomationRepositories", "HomeAutomationRepositories\HomeAutomationRepositories.csproj", "{D42D935E-85D8-4C61-AA8A-0EB0D1B5C056}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomationMQTTServer", "AutomationMQTTServer\AutomationMQTTServer.csproj", "{40CD1B0D-A32F-4A24-A0FA-0D3608C78F73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationMQTTServer", "AutomationMQTTServer\AutomationMQTTServer.csproj", "{40CD1B0D-A32F-4A24-A0FA-0D3608C78F73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomationUnitTests", "AutomationUnitTests\AutomationUnitTests.csproj", "{5C36C7C2-6447-40F5-9CBE-80ED526A0B5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{40CD1B0D-A32F-4A24-A0FA-0D3608C78F73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40CD1B0D-A32F-4A24-A0FA-0D3608C78F73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40CD1B0D-A32F-4A24-A0FA-0D3608C78F73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C36C7C2-6447-40F5-9CBE-80ED526A0B5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C36C7C2-6447-40F5-9CBE-80ED526A0B5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C36C7C2-6447-40F5-9CBE-80ED526A0B5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C36C7C2-6447-40F5-9CBE-80ED526A0B5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

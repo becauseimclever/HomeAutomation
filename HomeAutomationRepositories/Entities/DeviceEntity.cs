@@ -6,12 +6,13 @@ using System.Text;
 
 namespace HomeAutomationRepositories.Entities
 {
-	[BsonDiscriminator(RootClass = true)]
-	[BsonKnownTypes(typeof(PowerStripEntity))]
-	public class DeviceEntity
-	{
-		[BsonId]
-		public ObjectId Id { get; set; }
-		public string Name { get; set; }
-	}
+    [BsonIgnoreExtraElements]
+    [BsonDiscriminator(RootClass = true)]
+    [BsonKnownTypes(typeof(PowerStripEntity))]
+    public class DeviceEntity
+    {
+        [BsonId]
+        public ObjectId Id { get; set; }
+        public string Name { get; set; }
+    }
 }

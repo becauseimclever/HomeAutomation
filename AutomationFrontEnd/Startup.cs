@@ -1,7 +1,9 @@
+using HomeAutomationRepositories.DataContext;
 using HomeAutomationRepositories.Repositories;
 using HomeAutomationRepositories.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -11,75 +13,89 @@ using Swashbuckle.AspNetCore.Swagger;
 
 namespace AutomationFrontEnd
 {
-	public class Startup
-	{
-		public Startup(IConfiguration configuration)
-		{
-			Configuration = configuration;
-		}
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
-		public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }
 
-		// This method gets called by the runtime. Use this method to add services to the container.
-		public void ConfigureServices(IServiceCollection services)
-		{
-			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-			services.AddSwaggerGen(c =>
-		   {
-			   c.SwaggerDoc("v1", new Info { Title = "Home Automation", Version = "v1" });
-		   });
+            services.AddSwaggerGen(c =>
+           {
+               c.SwaggerDoc("v1", new Info { Title = "Home Automation", Version = "v1" });
+           });
 
-			// In production, the Angular files will be served from this directory
-			services.AddSpaStaticFiles(configuration =>
-			{
-				configuration.RootPath = "ClientApp/dist";
-			});
-			services.AddTransient<IRoomsService, RoomsService>();
-			services.AddTransient<IRoomRepository, RoomRepository>();
-		}
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
+            services.AddTransient<IRoomsService, RoomsService>();
+            services.AddTransient<IRoomRepository, RoomRepository>();
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-		{
-			if (env.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-			}
-			else
-			{
-				app.UseExceptionHandler("/Error");
-				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-				app.UseHsts();
-			}
+            services.Configure<MongoSettings>(options =>
+            {
+                options.Database = Configuration.GetSection("MongoSettings:DataBase").Value;
+                options.RoomCollection = Configuration.GetSection("MongoSettings:RoomsCollection").Value;
+                options.ConnectionString = Configuration.GetConnectionString("AutomationDb");
+            });
 
-			app.UseHttpsRedirection();
-			app.UseStaticFiles();
-			app.UseSpaStaticFiles();
-			app.UseSwagger();
-			app.UseSwaggerUI(c =>
-		   {
-			   c.SwaggerEndpoint("/swagger/v1/swagger.json", "Home Automation");
-		   });
-			app.UseMvc(routes =>
-			{
-				routes.MapRoute(
-					name: "default",
-					template: "{controller}/{action=Index}/{id?}");
-			});
+            services.AddTransient<IMongoContext, MongoContext>();
+        }
 
-			app.UseSpa(spa =>
-			{
-				// To learn more about options for serving an Angular SPA from ASP.NET Core,
-				// see https://go.microsoft.com/fwlink/?linkid=864501
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            //if (env.IsDevelopment())
+            //{
+            app.UseDeveloperExceptionPage();
+            //}
+            //else
+            //{
+            //    app.UseExceptionHandler("/Error");
+            //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            //    app.UseHsts();
+            //}
 
-				spa.Options.SourcePath = "ClientApp";
+            //app.UseHttpsRedirection();
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor
+                                   | ForwardedHeaders.XForwardedProto
+            });
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+           {
+               c.SwaggerEndpoint("/swagger/v1/swagger.json", "Home Automation");
+           });
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action=Index}/{id?}");
+            });
 
-				if (env.IsDevelopment())
-				{
-					spa.UseAngularCliServer(npmScript: "start");
-				}
-			});
-		}
-	}
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
+
+                spa.Options.SourcePath = "ClientApp";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
+            });
+        }
+    }
 }

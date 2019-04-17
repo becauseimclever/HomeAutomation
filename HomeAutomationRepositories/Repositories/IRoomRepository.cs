@@ -10,7 +10,7 @@ namespace HomeAutomationRepositories.Repositories
     {
         Task<List<RoomEntity>> GetAll();
         Task<RoomEntity> GetById(ObjectId Id);
-        Task CreateRoom(RoomEntity roomEntity);
+        Task<RoomEntity> CreateRoom(RoomEntity roomEntity);
         Task<bool> Update(RoomEntity roomEntity);
         Task Delete(string id);
     }

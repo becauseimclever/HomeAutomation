@@ -31,8 +31,6 @@ namespace AutomationFrontEnd.Controllers
         [Route("")]
         public async Task<IActionResult> Create(Room room)
         {
-            room.Devices.Add(new PowerStrip() { Name = "Strippy", outlets = new List<bool>() { true, false } });
-
             await _roomsService.Create(room);
             return Ok();
         }

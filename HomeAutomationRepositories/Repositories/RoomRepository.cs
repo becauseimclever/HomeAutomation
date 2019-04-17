@@ -30,9 +30,10 @@ namespace HomeAutomationRepositories.Repositories
 
             return await roomCollection.Find(filter).FirstOrDefaultAsync();
         }
-        public async Task CreateRoom(RoomEntity roomEntity)
+        public async Task<RoomEntity> CreateRoom(RoomEntity roomEntity)
         {
             await roomCollection.InsertOneAsync(roomEntity);
+            return roomEntity;
         }
 
         public async Task<bool> Update(RoomEntity roomEntity)

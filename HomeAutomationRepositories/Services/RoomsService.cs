@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using HomeAutomationRepositories.Entities;
 using HomeAutomationRepositories.Models;
 using HomeAutomationRepositories.Repositories;
@@ -11,56 +12,37 @@ namespace HomeAutomationRepositories.Services
 {
     public class RoomsService : IRoomsService
     {
-        private readonly IRoomRepository roomRepo;
+        private readonly IRoomRepository _roomRepo;
+        private readonly IMapper _mapper;
 
-        public RoomsService(IRoomRepository roomRepository)
+        public RoomsService(IRoomRepository roomRepository, IMapper mapper)
         {
-            roomRepo = roomRepository;
+            _mapper = mapper;
+            _roomRepo = roomRepository;
         }
 
         public async Task<bool> AddDevice(string id, Device device)
         {
             var room = await GetById(id);
             room.Devices.Add(device);
-            return await roomRepo.Update(ConvertModeltoEntity(room));
+            return await _roomRepo.Update(ConvertModeltoEntity(room));
         }
 
         public async Task Create(Room room)
         {
-            var roomEntity = new RoomEntity()
-            {
-                Id = ObjectId.GenerateNewId(),
-                Name = room.Name,
-                Devices = new List<DeviceEntity>()
-            };
-            if (room.Devices.Count > 0)
-                foreach (var dev in room.Devices)
-                {
-                    if (dev.GetType() == typeof(PowerStrip))
-                    {
-                        roomEntity.Devices.Add(new PowerStripEntity()
-                        {
-                            outlets = ((PowerStrip)dev).outlets
-                        });
-                    }
-                    else
-                        roomEntity.Devices.Add(
-                            new DeviceEntity()
-                            {
-                                Name = dev.Name
-                            });
-                }
-            await roomRepo.CreateRoom(roomEntity);
+            RoomEntity roomEntity = (RoomEntity)_mapper.Map(room, typeof(Room), typeof(RoomEntity));
+
+            await _roomRepo.CreateRoom(roomEntity);
         }
 
         public async Task Delete(string id)
         {
-            await roomRepo.Delete(id);
+            await _roomRepo.Delete(id);
         }
 
         public async Task<List<Room>> GetAll()
         {
-            var rooms = await roomRepo.GetAll();
+            var rooms = await _roomRepo.GetAll();
             var roomsList = new List<Room>();
             foreach (var room in rooms)
             {
@@ -72,7 +54,7 @@ namespace HomeAutomationRepositories.Services
 
         public async Task<Room> GetById(string Id)
         {
-            var room = await roomRepo.GetById(ObjectId.Parse(Id));
+            var room = await _roomRepo.GetById(ObjectId.Parse(Id));
             return ConvertEntitytoModel(room);
 
         }
@@ -122,6 +104,7 @@ namespace HomeAutomationRepositories.Services
             }
             return roomEntity;
         }
+       
     }
 }
 

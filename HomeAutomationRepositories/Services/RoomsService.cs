@@ -21,18 +21,24 @@ namespace HomeAutomationRepositories.Services
             _roomRepo = roomRepository;
         }
 
-        public async Task<bool> AddDevice(string id, Device device)
+        public Task<bool> AddDevice(string id, Device device)
         {
-            var room = await GetById(id);
-            room.Devices.Add(device);
-            return await _roomRepo.Update(ConvertModeltoEntity(room));
+            throw new NotImplementedException();
         }
 
-        public async Task Create(Room room)
+        //public async Task<bool> AddDevice(string id, Device device)
+        //{
+        //    var room = await GetById(id);
+        //    room.Devices.Add(device);
+        //    return await _roomRepo.Update(ConvertModeltoEntity(room));
+        //}
+
+        public async Task<Room> Create(Room room)
         {
             RoomEntity roomEntity = (RoomEntity)_mapper.Map(room, typeof(Room), typeof(RoomEntity));
 
-            await _roomRepo.CreateRoom(roomEntity);
+            var newRoom = await _roomRepo.CreateRoom(roomEntity);
+            return ConvertEntitytoModel(newRoom);
         }
 
         public async Task Delete(string id)
@@ -104,7 +110,7 @@ namespace HomeAutomationRepositories.Services
             }
             return roomEntity;
         }
-       
+
     }
 }
 

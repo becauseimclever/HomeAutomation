@@ -10,7 +10,7 @@ namespace HomeAutomationRepositories.Services
     {
         Task<List<Room>> GetAll();
         Task<Room> GetById(string Id);
-        Task Create(Room room);
+        Task<Room> Create(Room room);
         Task<bool> AddDevice(string id, Device device);
         Task Delete(string id);
     }

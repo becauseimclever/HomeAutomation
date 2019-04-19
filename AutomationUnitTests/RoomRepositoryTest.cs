@@ -78,7 +78,10 @@ namespace AutomationUnitTests
         [Fact]
         public async Task CreateRoomReturnsRoom()
         {
-
+            _mockCollection
+                .Setup(x => x.InsertOneAsync(It.IsAny<RoomEntity>(), It.IsAny<InsertOneOptions>(), It.IsAny<CancellationToken>()))
+                .Callback()
+                .Returns(Task.CompletedTask);
         }
     }
 }

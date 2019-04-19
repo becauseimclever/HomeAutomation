@@ -36,19 +36,22 @@ namespace HomeAutomationRepositories.Repositories
             return roomEntity;
         }
 
-        public async Task<bool> Update(RoomEntity roomEntity)
+        public async Task<bool> UpdateName(RoomEntity roomEntity)
         {
             var builder = Builders<RoomEntity>.Filter;
             var filter = builder.Eq(x => x.Id, roomEntity.Id);
 
-            var returnValue = await roomCollection.ReplaceOneAsync(filter, roomEntity);
+            var update = Builders<RoomEntity>.Update.Set(x => x.Name, roomEntity.Name);
+
+            var returnValue = await roomCollection.UpdateOneAsync(filter, update);
             return returnValue.IsAcknowledged;
 
         }
 
-        public async Task Delete(string id)
+        public async Task<bool> Delete(string id)
         {
-            await roomCollection.DeleteOneAsync(x => x.Id == ObjectId.Parse(id));
+            var returnValue = await roomCollection.DeleteOneAsync(x => x.Id == ObjectId.Parse(id));
+            return returnValue.IsAcknowledged;
         }
     }
 }

@@ -39,17 +39,17 @@ namespace AutomationUnitTests
                 _roomEntity
             };
         }
-        [Fact]
-        public async Task CreateRoomReturnsRoom()
-        {
-            var mapConfig = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new DeviceProfile());
-                cfg.AddProfile(new RoomProfile());
-            });
-            _mapper = mapConfig.CreateMapper();
-            var service = new RoomsService(_mockRepo.Object, _mapper);
-            var response = await service.Create()
-        }
+        //[Fact]
+        //public async Task CreateRoomReturnsRoom()
+        //{
+        //    var mapConfig = new MapperConfiguration(cfg =>
+        //    {
+        //        cfg.AddProfile(new DeviceProfile());
+        //        cfg.AddProfile(new RoomProfile());
+        //    });
+        //    _mapper = mapConfig.CreateMapper();
+        //    var service = new RoomsService(_mockRepo.Object, _mapper);
+        //    var response = await service.Create();
+        //}
     }
 }

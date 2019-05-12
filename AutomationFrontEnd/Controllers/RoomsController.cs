@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using HomeAutomationRepositories.Authorization;
 using HomeAutomationRepositories.Models;
 using HomeAutomationRepositories.Services;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace AutomationFrontEnd.Controllers
 {
@@ -20,6 +18,7 @@ namespace AutomationFrontEnd.Controllers
         }
         [HttpGet]
         [Route("")]
+        [MacAuthorize("Admin")]
         public async Task<IActionResult> GetAllRooms(string Id = null)
         {
             if (Id != null)

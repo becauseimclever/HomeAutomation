@@ -75,13 +75,13 @@ namespace AutomationUnitTests
             Assert.IsType<RoomEntity>(result);
             Assert.Equal(_roomEntity.Id, result.Id);
         }
-        [Fact]
-        public async Task CreateRoomReturnsRoom()
-        {
-            _mockCollection
-                .Setup(x => x.InsertOneAsync(It.IsAny<RoomEntity>(), It.IsAny<InsertOneOptions>(), It.IsAny<CancellationToken>()))
-                .Callback()
-                .Returns(Task.CompletedTask);
-        }
+        //[Fact]
+        //public async Task CreateRoomReturnsRoom()
+        //{
+        //    _mockCollection
+        //        .Setup(x => x.InsertOneAsync(It.IsAny<RoomEntity>(), It.IsAny<InsertOneOptions>(), It.IsAny<CancellationToken>()))
+        //        .Callback()
+        //        .Returns(Task.CompletedTask);
+        //}
     }
 }

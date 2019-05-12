@@ -11,6 +11,10 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
+using HomeAutomationRepositories.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using HomeAutomationRepositories.Authorization;
+using IAuthorizationService = HomeAutomationRepositories.Services.IAuthorizationService;
 
 namespace AutomationFrontEnd
 {
@@ -27,6 +31,13 @@ namespace AutomationFrontEnd
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper();
+            services.AddSingleton<IAuthorizationPolicyProvider, MacPolicyProvider>();
+            services.AddSingleton<IAuthorizationHandler, MacAuthorizationHandler>();
+            services.AddSingleton<IMacAuthenticationService, MacAuthenticationService>();
+            services.AddTransient<IAuthorizationService, AuthorizationService>();
+
+            services.AddAuthentication(MacAuthenticationDefaults.AuthenticationScheme)
+                .AddMacAuth<MacAuthenticationService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSwaggerGen(c =>
@@ -41,11 +52,13 @@ namespace AutomationFrontEnd
             });
             services.AddTransient<IRoomsService, RoomsService>();
             services.AddTransient<IRoomRepository, RoomRepository>();
+            services.AddTransient<IUserClaimRepository, UserClaimRepository>();
 
             services.Configure<MongoSettings>(options =>
             {
                 options.Database = Configuration.GetSection("MongoSettings:DataBase").Value;
                 options.RoomCollection = Configuration.GetSection("MongoSettings:RoomsCollection").Value;
+                options.UserClaimCollection = Configuration.GetSection("MongoSettings:UserClaimCollection").Value;
                 options.ConnectionString = Configuration.GetConnectionString("AutomationDb");
             });
 
@@ -79,6 +92,7 @@ namespace AutomationFrontEnd
            {
                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Home Automation");
            });
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

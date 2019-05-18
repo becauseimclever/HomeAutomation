@@ -75,13 +75,19 @@ namespace AutomationUnitTests
             Assert.IsType<RoomEntity>(result);
             Assert.Equal(_roomEntity.Id, result.Id);
         }
-        //[Fact]
-        //public async Task CreateRoomReturnsRoom()
-        //{
-        //    _mockCollection
-        //        .Setup(x => x.InsertOneAsync(It.IsAny<RoomEntity>(), It.IsAny<InsertOneOptions>(), It.IsAny<CancellationToken>()))
-        //        .Callback()
-        //        .Returns(Task.CompletedTask);
-        //}
+
+        [Fact]
+        public async Task CreateRoomReturnsRoom()
+        {
+            _mockCollection.Setup(x => x.InsertOneAsync(
+                It.IsAny<RoomEntity>(),
+                It.IsAny<InsertOneOptions>(),
+                It.IsAny<CancellationToken>()
+                )).Returns(Task.FromResult(MongoHelper.BuildMockAsyncCursor((ICollection<RoomEntity>)_roomList)));
+            _mockContext.Setup(x => x.RoomCollection).Returns(_mockCollection.Object);
+
+            var repo = new RoomRepository(_mockContext.Object);
+            var result = await repo.CreateRoom(_roomEntity);
+        }
     }
 }

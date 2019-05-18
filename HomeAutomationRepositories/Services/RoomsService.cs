@@ -27,18 +27,18 @@ namespace HomeAutomationRepositories.Services
         {
             RoomEntity roomEntity = Room.ConvertToEntity(room);
 
-            var newRoom = await _roomRepo.CreateRoom(roomEntity);
+            var newRoom = await _roomRepo.CreateRoomAsync(roomEntity);
             return ConvertEntitytoModel(newRoom);
         }
 
         public async Task Delete(string id)
         {
-            await _roomRepo.Delete(id);
+            await _roomRepo.DeleteAsync(id);
         }
 
         public async Task<List<Room>> GetAll()
         {
-            var rooms = await _roomRepo.GetAll();
+            var rooms = await _roomRepo.GetAllAsync();
             var roomsList = new List<Room>();
             foreach (var room in rooms)
             {
@@ -50,7 +50,7 @@ namespace HomeAutomationRepositories.Services
 
         public async Task<Room> GetById(string Id)
         {
-            var room = await _roomRepo.GetById(ObjectId.Parse(Id));
+            var room = await _roomRepo.GetByIdAsync(ObjectId.Parse(Id));
             return ConvertEntitytoModel(room);
 
         }

@@ -19,24 +19,30 @@ namespace HomeAutomationRepositories.Repositories
             roomCollection = context.RoomCollection ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<List<RoomEntity>> GetAll()
+        #region Create
+        public async Task<RoomEntity> CreateRoomAsync(RoomEntity roomEntity)
+        {
+            await roomCollection.InsertOneAsync(roomEntity);
+            return roomEntity;
+        }
+
+        #endregion
+        #region Read
+        public async Task<List<RoomEntity>> GetAllAsync()
         {
             return await roomCollection.Find(_ => true).ToListAsync();
         }
-        public async Task<RoomEntity> GetById(ObjectId Id)
+        public async Task<RoomEntity> GetByIdAsync(ObjectId Id)
         {
             var builder = Builders<RoomEntity>.Filter;
             var filter = builder.Eq(x => x.Id, Id);
 
             return await roomCollection.Find(filter).FirstOrDefaultAsync();
         }
-        public async Task<RoomEntity> CreateRoom(RoomEntity roomEntity)
-        {
-            await roomCollection.InsertOneAsync(roomEntity);
-            return roomEntity;
-        }
+        #endregion
+        #region Update
 
-        public async Task<bool> UpdateName(RoomEntity roomEntity)
+        public async Task<bool> UpdateNameAsync(RoomEntity roomEntity)
         {
             var builder = Builders<RoomEntity>.Filter;
             var filter = builder.Eq(x => x.Id, roomEntity.Id);
@@ -47,11 +53,13 @@ namespace HomeAutomationRepositories.Repositories
             return returnValue.IsAcknowledged;
 
         }
-
-        public async Task<bool> Delete(string id)
+        #endregion
+        #region Delete
+        public async Task<bool> DeleteAsync(string id)
         {
             var returnValue = await roomCollection.DeleteOneAsync(x => x.Id == ObjectId.Parse(id));
             return returnValue.IsAcknowledged;
         }
+        #endregion
     }
 }

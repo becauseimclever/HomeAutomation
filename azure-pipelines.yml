@@ -7,8 +7,8 @@ trigger:
 - master
 
 pool:
-  vmImage: 'Ubuntu-16.04'
-
+  #vmImage: 'Ubuntu-16.04'
+  vmImage: 'windows-2019'
 variables:
   buildConfiguration: 'Release'
 
@@ -21,7 +21,7 @@ steps:
     command: build
     projects: '**/*.csproj'
     arguments: '--configuration $(buildconfiguration)'
-    
+
 - task: DotNetCoreCLI@2
   inputs:
     command: test

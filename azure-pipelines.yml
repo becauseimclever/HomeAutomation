@@ -22,7 +22,7 @@ steps:
     projects: '**/*.csproj'
     arguments: '--configuration $(buildconfiguration)'
 
-- script: dotnet test AutomationUnitTests/AutomationUnitTests.csproj --logger trx --collect "Code Coverage"
+- script: dotnet test AutomationUnitTests/AutomationUnitTests.csproj --logger trx --settings AutomationUnitTests/test.runsettings --collect "Code Coverage"
 - task: PublishTestResults@2
   inputs:
     testRunner: VSTest

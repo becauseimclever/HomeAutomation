@@ -54,7 +54,7 @@ namespace AutomationUnitTests
             _mockContext.Setup(x => x.RoomCollection).Returns(_mockCollection.Object);
 
             var repo = new RoomRepository(_mockContext.Object);
-            var result = await repo.GetAll();
+            var result = await repo.GetAllAsync();
 
             Assert.IsType<List<RoomEntity>>(result);
             Assert.NotEmpty(result);
@@ -70,7 +70,7 @@ namespace AutomationUnitTests
                     )).ReturnsAsync(MongoHelper.BuildMockAsyncCursor(_roomEntity));
             _mockContext.Setup(x => x.RoomCollection).Returns(_mockCollection.Object);
             var repo = new RoomRepository(_mockContext.Object);
-            var result = await repo.GetById(new ObjectId());
+            var result = await repo.GetByIdAsync(new ObjectId());
 
             Assert.IsType<RoomEntity>(result);
             Assert.Equal(_roomEntity.Id, result.Id);
@@ -87,7 +87,8 @@ namespace AutomationUnitTests
             _mockContext.Setup(x => x.RoomCollection).Returns(_mockCollection.Object);
 
             var repo = new RoomRepository(_mockContext.Object);
-            var result = await repo.CreateRoom(_roomEntity);
+            var result = await repo.CreateRoomAsync(_roomEntity);
+            Assert.NotNull(result);
         }
     }
 }

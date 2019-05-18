@@ -15,12 +15,14 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 using System.Text;
 
 namespace AutomationFrontEnd
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         public Startup(IConfiguration configuration)

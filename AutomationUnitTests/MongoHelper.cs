@@ -1,13 +1,13 @@
 ﻿using MongoDB.Driver;
 using Moq;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace AutomationUnitTests
 {
+    [ExcludeFromCodeCoverage]
+
     public static class MongoHelper
     {
         public static IAsyncCursor<T> BuildMockAsyncCursor<T>(T expectedResult)

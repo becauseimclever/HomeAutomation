@@ -3,9 +3,11 @@ using HomeAutomationRepositories.Repositories;
 using MongoDB.Bson;
 using Moq;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AutomationUnitTests
 {
+    [ExcludeFromCodeCoverage]
     public class RoomServiceTest
     {
         private Mock<IRoomRepository> _mockRepo;
@@ -31,6 +33,6 @@ namespace AutomationUnitTests
                 _roomEntity
             };
         }
-        
+
     }
 }

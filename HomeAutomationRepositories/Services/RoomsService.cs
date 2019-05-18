@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using HomeAutomationRepositories.Entities;
+﻿using HomeAutomationRepositories.Entities;
 using HomeAutomationRepositories.Models;
 using HomeAutomationRepositories.Repositories;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HomeAutomationRepositories.Services
 {
     public class RoomsService : IRoomsService
     {
         private readonly IRoomRepository _roomRepo;
-        private readonly IMapper _mapper;
 
-        public RoomsService(IRoomRepository roomRepository, IMapper mapper)
+        public RoomsService(IRoomRepository roomRepository)
         {
-            _mapper = mapper;
+
             _roomRepo = roomRepository;
         }
 
@@ -25,13 +22,6 @@ namespace HomeAutomationRepositories.Services
         {
             throw new NotImplementedException();
         }
-
-        //public async Task<bool> AddDevice(string id, Device device)
-        //{
-        //    var room = await GetById(id);
-        //    room.Devices.Add(device);
-        //    return await _roomRepo.Update(ConvertModeltoEntity(room));
-        //}
 
         public async Task<Room> Create(Room room)
         {

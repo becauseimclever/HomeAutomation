@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using HomeAutomationRepositories.Entities;
+﻿using HomeAutomationRepositories.Entities;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace HomeAutomationRepositories.DataContext
@@ -22,6 +20,5 @@ namespace HomeAutomationRepositories.DataContext
 
         }
         public IMongoCollection<RoomEntity> RoomCollection => _mongoDatabase.GetCollection<RoomEntity>(_roomCollection);
-        public IMongoCollection<UserClaimEntity> UserClaimCollection => _mongoDatabase.GetCollection<UserClaimEntity>(_userClaimCollection);
     }
 }

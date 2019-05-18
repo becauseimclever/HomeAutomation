@@ -4,8 +4,8 @@ using System.Text;
 
 namespace HomeAutomationRepositories.Authentication
 {
-    public static class MacAuthenticationDefaults
+    public class AuthenticationSettings
     {
-        public const string AuthenticationScheme = "MacAuth";
+        public string Secret { get; set; }
     }
 }

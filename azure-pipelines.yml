@@ -22,9 +22,8 @@ steps:
     projects: '**/*.csproj'
     arguments: '--configuration $(buildconfiguration)'
 
-- task: DotNetCoreCLI@2
+- script: dotnet test '**/*Test/*.csproj' --logger trx --collect "Code Coverage"
+- task: PublishTestResults@2
   inputs:
-    command: test
-    projects: '**/*Tests/*.csproj'
-    arguments: '--configuration $(buildconfiguration) --collect "Code Coverage"'
-- task: PublishBuildArtifacts@1
+    testRunner: VSTest
+    testResultsFiles: '**/*.trx'

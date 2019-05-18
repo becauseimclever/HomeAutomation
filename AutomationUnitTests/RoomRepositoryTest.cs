@@ -6,6 +6,7 @@ using MongoDB.Driver;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using Xunit;
 
 namespace AutomationUnitTests
 {
+    [ExcludeFromCodeCoverage]
     public class RoomRepositoryTest
     {
         private readonly Mock<IMongoCollection<RoomEntity>> _mockCollection;
@@ -89,6 +91,22 @@ namespace AutomationUnitTests
             var repo = new RoomRepository(_mockContext.Object);
             var result = await repo.CreateRoomAsync(_roomEntity);
             Assert.NotNull(result);
+        }
+        [Fact]
+        public async Task UpdateNameAsyncReturnsTrue()
+        {
+            Mock<UpdateResult> mockResult = new Mock<UpdateResult>();
+            mockResult.SetupGet(x => x.IsAcknowledged).Returns(true);
+            _mockCollection.Setup(x => x.UpdateOneAsync(
+                It.IsAny<FilterDefinition<RoomEntity>>(),
+               It.IsAny<UpdateDefinition<RoomEntity>>(),
+               It.IsAny<UpdateOptions>(),
+               It.IsAny<CancellationToken>()
+               )).ReturnsAsync(mockResult.Object);
+            _mockContext.Setup(x => x.RoomCollection).Returns(_mockCollection.Object);
+            var repo = new RoomRepository(_mockContext.Object);
+            var result = await repo.UpdateNameAsync(_roomEntity);
+            Assert.True(result);
         }
     }
 }

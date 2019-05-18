@@ -8,9 +8,9 @@ namespace HomeAutomationRepositories.Repositories
 {
     public interface IRoomRepository
     {
+        Task<RoomEntity> CreateRoomAsync(RoomEntity roomEntity);
         Task<List<RoomEntity>> GetAllAsync();
         Task<RoomEntity> GetByIdAsync(ObjectId Id);
-        Task<RoomEntity> CreateRoomAsync(RoomEntity roomEntity);
         Task<bool> UpdateNameAsync(RoomEntity roomEntity);
         Task<bool> DeleteAsync(string id);
     }

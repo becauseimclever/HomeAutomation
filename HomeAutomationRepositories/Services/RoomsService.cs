@@ -25,7 +25,7 @@ namespace HomeAutomationRepositories.Services
 
         public async Task<Room> Create(Room room)
         {
-            RoomEntity roomEntity = (RoomEntity)_mapper.Map(room, typeof(Room), typeof(RoomEntity));
+            RoomEntity roomEntity = Room.ConvertToEntity(room);
 
             var newRoom = await _roomRepo.CreateRoom(roomEntity);
             return ConvertEntitytoModel(newRoom);

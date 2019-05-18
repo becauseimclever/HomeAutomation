@@ -108,5 +108,19 @@ namespace AutomationUnitTests
             var result = await repo.UpdateNameAsync(_roomEntity);
             Assert.True(result);
         }
+        [Fact]
+        public async Task DeleteReturnsTrue()
+        {
+            Mock<DeleteResult> mockResult = new Mock<DeleteResult>();
+            mockResult.SetupGet(x => x.IsAcknowledged).Returns(true);
+            _mockCollection.Setup(x => x.DeleteOneAsync(
+                It.IsAny<FilterDefinition<RoomEntity>>(),
+                It.IsAny<CancellationToken>()
+                )).ReturnsAsync(mockResult.Object);
+            _mockContext.Setup(x => x.RoomCollection).Returns(_mockCollection.Object);
+            var repo = new RoomRepository(_mockContext.Object);
+            var result = await repo.DeleteAsync(_roomEntity.Id.ToString());
+            Assert.True(result);
+        }
     }
 }

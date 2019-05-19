@@ -12,6 +12,7 @@
                 <ModulePath>.*Microsoft.IdentityModel.Tokens.dll</ModulePath>
                 <ModulePath>.*Microsoft.IdentityModel.Logging.dll</ModulePath>
                 <ModulePath>.*Microsoft.*.dll</ModulePath>
+                <ModulePath>.*system.*.dll</ModulePath>
                 <!-- Add more ModulePath nodes here. -->
               </Exclude>
             </ModulePaths>

@@ -7,9 +7,11 @@
           <CodeCoverage>
             <ModulePaths>
               <Exclude>
+                <ModulePath>.*automationunittests.dll</ModulePath>
                 <ModulePath>.*Moq.dll</ModulePath>
                 <ModulePath>.*Microsoft.IdentityModel.Tokens.dll</ModulePath>
                 <ModulePath>.*Microsoft.IdentityModel.Logging.dll</ModulePath>
+                <ModulePath>.*Microsoft.*.dll</ModulePath>
                 <!-- Add more ModulePath nodes here. -->
               </Exclude>
             </ModulePaths>

@@ -13,6 +13,7 @@
                 <ModulePath>.*Microsoft.IdentityModel.Logging.dll</ModulePath>
                 <ModulePath>.*Microsoft.*.dll</ModulePath>
                 <ModulePath>.*system.*.dll</ModulePath>
+                <ModulePath>.*autofixture.dll</ModulePath>
                 <!-- Add more ModulePath nodes here. -->
               </Exclude>
             </ModulePaths>

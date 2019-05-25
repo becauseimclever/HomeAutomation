@@ -12,7 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace AutomationUnitTests
+namespace AutomationUnitTests.Repository
 {
     [ExcludeFromCodeCoverage]
     public class RoomRepositoryTest
@@ -43,7 +43,28 @@ namespace AutomationUnitTests
                 _roomEntity
             };
         }
+        [Fact]
+        public void ConstructorThrowsNullArgumentException()
+        {
+            Assert.Throws<ArgumentNullException>(() => new RoomRepository(null));
+        }
+        #region Create
+        [Fact]
+        public async Task CreateRoomReturnsRoom()
+        {
+            _mockCollection.Setup(x => x.InsertOneAsync(
+                It.IsAny<RoomEntity>(),
+                It.IsAny<InsertOneOptions>(),
+                It.IsAny<CancellationToken>()
+                )).Returns(Task.FromResult(MongoHelper.BuildMockAsyncCursor((ICollection<RoomEntity>)_roomList)));
+            _mockContext.Setup(x => x.RoomCollection).Returns(_mockCollection.Object);
 
+            var repo = new RoomRepository(_mockContext.Object);
+            var result = await repo.CreateRoomAsync(_roomEntity);
+            Assert.NotNull(result);
+        }
+        #endregion
+        #region Read
         [Fact]
         public async Task GetAllReturnsList()
         {
@@ -77,23 +98,10 @@ namespace AutomationUnitTests
             Assert.IsType<RoomEntity>(result);
             Assert.Equal(_roomEntity.Id, result.Id);
         }
-
+        #endregion
+        #region Update
         [Fact]
-        public async Task CreateRoomReturnsRoom()
-        {
-            _mockCollection.Setup(x => x.InsertOneAsync(
-                It.IsAny<RoomEntity>(),
-                It.IsAny<InsertOneOptions>(),
-                It.IsAny<CancellationToken>()
-                )).Returns(Task.FromResult(MongoHelper.BuildMockAsyncCursor((ICollection<RoomEntity>)_roomList)));
-            _mockContext.Setup(x => x.RoomCollection).Returns(_mockCollection.Object);
-
-            var repo = new RoomRepository(_mockContext.Object);
-            var result = await repo.CreateRoomAsync(_roomEntity);
-            Assert.NotNull(result);
-        }
-        [Fact]
-        public async Task UpdateNameAsyncReturnsTrue()
+        public async Task UpdateAsyncReturnsTrue()
         {
             Mock<UpdateResult> mockResult = new Mock<UpdateResult>();
             mockResult.SetupGet(x => x.IsAcknowledged).Returns(true);
@@ -105,9 +113,11 @@ namespace AutomationUnitTests
                )).ReturnsAsync(mockResult.Object);
             _mockContext.Setup(x => x.RoomCollection).Returns(_mockCollection.Object);
             var repo = new RoomRepository(_mockContext.Object);
-            var result = await repo.UpdateNameAsync(_roomEntity);
+            var result = await repo.UpdateAsync(_roomEntity);
             Assert.True(result);
         }
+        #endregion
+        #region Delete
         [Fact]
         public async Task DeleteReturnsTrue()
         {
@@ -122,5 +132,6 @@ namespace AutomationUnitTests
             var result = await repo.DeleteAsync(_roomEntity.Id.ToString());
             Assert.True(result);
         }
+        #endregion
     }
 }

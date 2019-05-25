@@ -1,6 +1,6 @@
 ﻿using HomeAutomationRepositories.DataContext;
 using HomeAutomationRepositories.Entities;
-using HomeAutomationRepositories.Models;
+using HomeAutomationRepositories.Repositories.Interface;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -16,7 +16,7 @@ namespace HomeAutomationRepositories.Repositories
 
         public RoomRepository(IMongoContext context)
         {
-            roomCollection = context.RoomCollection ?? throw new ArgumentNullException(nameof(context));
+            roomCollection = context?.RoomCollection ?? throw new ArgumentNullException(nameof(context));
         }
 
         #region Create
@@ -42,14 +42,16 @@ namespace HomeAutomationRepositories.Repositories
         #endregion
         #region Update
 
-        public async Task<bool> UpdateNameAsync(RoomEntity roomEntity)
+        public async Task<bool> UpdateAsync(RoomEntity roomEntity)
         {
             var builder = Builders<RoomEntity>.Filter;
             var filter = builder.Eq(x => x.Id, roomEntity.Id);
 
-            var update = Builders<RoomEntity>.Update.Set(x => x.Name, roomEntity.Name);
-
-            var returnValue = await roomCollection.UpdateOneAsync(filter, update);
+            var update = Builders<RoomEntity>.Update
+                .Set(x => x.Name, roomEntity.Name)
+                .Set(x => x.Devices, roomEntity.Devices);
+            var updateOptions = new UpdateOptions() { IsUpsert = false };
+            var returnValue = await roomCollection.UpdateOneAsync(filter, update, updateOptions);
             return returnValue.IsAcknowledged;
 
         }

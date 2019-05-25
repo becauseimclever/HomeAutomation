@@ -15,13 +15,13 @@ namespace HomeAutomationRepositories.Services
     public class UserService : IUserService
     {
         private readonly AuthenticationSettings _authenticationSettings;
-        private List<User> _users;
+        private List<UserEntity> _users;
         public UserService(IOptions<AuthenticationSettings> authSettings)
         {
             _authenticationSettings = authSettings.Value;
         }
 
-        public Task<User> Authenticate(string username, string password)
+        public Task<UserEntity> Authenticate(string username, string password)
         {
             var user = _users.SingleOrDefault(x => x.Username == username && x.Password == password);
             if (user == null) return null;
@@ -44,7 +44,7 @@ namespace HomeAutomationRepositories.Services
             return Task.FromResult(user);
         }
 
-        public Task<IEnumerable<User>> GetAll()
+        public Task<IEnumerable<UserEntity>> GetAll()
         {
             return Task.FromResult(_users.Select(x => { x.Password = null; return x; }));
         }

@@ -2,9 +2,11 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Diagnostics.CodeAnalysis;
 
 namespace HomeAutomationRepositories.DataContext
 {
+    [ExcludeFromCodeCoverage]
     public class MongoContext : IMongoContext
     {
         private readonly IMongoDatabase _mongoDatabase;
@@ -20,5 +22,7 @@ namespace HomeAutomationRepositories.DataContext
 
         }
         public IMongoCollection<RoomEntity> RoomCollection => _mongoDatabase.GetCollection<RoomEntity>(_roomCollection);
+
+        public IMongoCollection<UserEntity> UserCollection => _mongoDatabase.GetCollection<UserEntity>(_userClaimCollection);
     }
 }

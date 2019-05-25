@@ -8,10 +8,10 @@ namespace HomeAutomationRepositories.Services
 {
     public interface IRoomsService
     {
-        Task<List<Room>> GetAll();
-        Task<Room> GetById(string Id);
-        Task<Room> Create(Room room);
-        Task<bool> AddDevice(string id, Device device);
-        Task Delete(string id);
+        Task<Room> CreateAsync(Room room);
+        Task<List<Room>> GetAllAsync();
+        Task<Room> GetByIdAsync(string Id);
+        Task<bool> UpdateAsync(Room room);
+        Task<bool> DeleteAsync(string id);
     }
 }

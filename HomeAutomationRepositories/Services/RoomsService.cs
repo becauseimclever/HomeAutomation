@@ -1,6 +1,6 @@
 ﻿using HomeAutomationRepositories.Entities;
 using HomeAutomationRepositories.Models;
-using HomeAutomationRepositories.Repositories;
+using HomeAutomationRepositories.Repositories.Interface;
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
@@ -15,90 +15,42 @@ namespace HomeAutomationRepositories.Services
         public RoomsService(IRoomRepository roomRepository)
         {
 
-            _roomRepo = roomRepository;
+            _roomRepo = roomRepository ?? throw new ArgumentNullException(nameof(roomRepository));
         }
 
-        public Task<bool> AddDevice(string id, Device device)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Room> Create(Room room)
+        public async Task<Room> CreateAsync(Room room)
         {
             RoomEntity roomEntity = Room.ConvertToEntity(room);
 
             var newRoom = await _roomRepo.CreateRoomAsync(roomEntity);
-            return ConvertEntitytoModel(newRoom);
-        }
 
-        public async Task Delete(string id)
-        {
-            await _roomRepo.DeleteAsync(id);
+            return RoomEntity.ConvertToModel(newRoom);
         }
-
-        public async Task<List<Room>> GetAll()
+        public async Task<List<Room>> GetAllAsync()
         {
             var rooms = await _roomRepo.GetAllAsync();
             var roomsList = new List<Room>();
             foreach (var room in rooms)
             {
-                roomsList.Add(ConvertEntitytoModel(room));
+                roomsList.Add(RoomEntity.ConvertToModel(room));
             }
 
             return roomsList;
         }
 
-        public async Task<Room> GetById(string Id)
+        public async Task<Room> GetByIdAsync(string Id)
         {
             var room = await _roomRepo.GetByIdAsync(ObjectId.Parse(Id));
-            return ConvertEntitytoModel(room);
-
+            return RoomEntity.ConvertToModel(room);
         }
-        private Room ConvertEntitytoModel(RoomEntity roomEntity)
+        public async Task<bool> UpdateAsync(Room room)
         {
-            var room = new Room();
-            room.Name = roomEntity.Name;
-            room.Id = roomEntity.Id.ToString();
-
-            if (!(roomEntity == null) && !(roomEntity.Devices == null))
-            {
-                room.Devices = new List<Device>();
-                foreach (var device in roomEntity.Devices)
-                {
-                    room.Devices.Add(new Device() { Name = device.Name });
-                }
-            }
-            return room;
+            return await _roomRepo.UpdateAsync(Room.ConvertToEntity(room));
         }
-        private RoomEntity ConvertModeltoEntity(Room room)
-        {
-            var roomEntity = new RoomEntity()
-            {
-                Id = ObjectId.Parse(room.Id),
-                Name = room.Name
-            };
-            foreach (var device in room.Devices)
-            {
-                if (device.GetType() == typeof(PowerStrip))
-                {
-                    roomEntity.Devices.Add(new PowerStripEntity()
-                    {
-                        Id = ObjectId.Parse(device.Id),
-                        Name = device.Name,
-                        outlets = ((PowerStrip)device).outlets
 
-                    });
-                }
-                else
-                {
-                    roomEntity.Devices.Add(new DeviceEntity()
-                    {
-                        Id = ObjectId.Parse(device.Id),
-                        Name = device.Name,
-                    });
-                }
-            }
-            return roomEntity;
+        public async Task<bool> DeleteAsync(string id)
+        {
+            return await _roomRepo.DeleteAsync(id);
         }
 
     }

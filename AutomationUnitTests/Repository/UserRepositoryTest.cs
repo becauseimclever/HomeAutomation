@@ -69,7 +69,7 @@ namespace AutomationUnitTests.Repository
             Assert.NotEmpty(result);
         }
         [Fact]
-        public async Task GetByIdAsync()
+        public async Task GetByIdAsyncReturnsUserEntity()
         {
             _mockCollection.Setup(x => x.FindAsync(
                It.IsAny<FilterDefinition<UserEntity>>(),
@@ -82,6 +82,39 @@ namespace AutomationUnitTests.Repository
             Assert.IsType<UserEntity>(result);
             Assert.Equal(_userEntity.Id, result.Id);
         }
+        [Fact]
+        public async Task GetByUserNameAsyncReturnsUserEntity()
+        {
+            _mockCollection.Setup(x => x.FindAsync(
+               It.IsAny<FilterDefinition<UserEntity>>(),
+               It.IsAny<FindOptions<UserEntity>>(),
+               It.IsAny<CancellationToken>()))
+               .ReturnsAsync(MongoHelper.BuildMockAsyncCursor(_userEntity));
+            _mockContext.Setup(x => x.UserCollection).Returns(_mockCollection.Object);
+            var repo = new UserRepository(_mockContext.Object);
+            var result = await repo.GetByUserNameAsync(_userEntity.Username);
+            Assert.IsType<UserEntity>(result);
+            Assert.Equal(_userEntity.Id, result.Id);
+        }
         #endregion
+        #region Update
+        [Fact]
+        public async Task UpdateUserReturnsTrue()
+        {
+            Mock<UpdateResult> mockResult = new Mock<UpdateResult>();
+            mockResult.SetupGet(x => x.IsAcknowledged).Returns(true);
+            _mockCollection.Setup(x => x.UpdateOneAsync(
+                It.IsAny<FilterDefinition<UserEntity>>(),
+                It.IsAny<UpdateDefinition<UserEntity>>(),
+                It.IsAny<UpdateOptions>(),
+                It.IsAny<CancellationToken>()
+                )).ReturnsAsync(mockResult.Object);
+            _mockContext.Setup(x => x.UserCollection).Returns(_mockCollection.Object);
+            var repo = new UserRepository(_mockContext.Object);
+            var result = await repo.UpdateAsync(_userEntity);
+            Assert.True(result);
+        }
+        #endregion
+
     }
 }

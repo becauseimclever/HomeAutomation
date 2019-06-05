@@ -1,9 +1,8 @@
-﻿using MongoDB.Bson;
+﻿using HomeAutomationRepositories.Models;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace HomeAutomationRepositories.Entities
 {
@@ -20,5 +19,17 @@ namespace HomeAutomationRepositories.Entities
         [Required]
         public string Password { get; set; }
         public string Token { get; set; }
+        public static User ConvertToModel(UserEntity userEntity)
+        {
+            return new User()
+            {
+                Id = userEntity.Id.ToString(),
+                FirstName = userEntity.FirstName,
+                LastName = userEntity.LastName,
+                UserName = userEntity.Username,
+                Password = userEntity.Password,
+                Token = userEntity.Token
+            };
+        }
     }
 }

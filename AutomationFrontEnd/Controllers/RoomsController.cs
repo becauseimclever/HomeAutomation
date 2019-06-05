@@ -1,5 +1,6 @@
 ﻿using HomeAutomationRepositories.Models;
 using HomeAutomationRepositories.Services;
+using HomeAutomationRepositories.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

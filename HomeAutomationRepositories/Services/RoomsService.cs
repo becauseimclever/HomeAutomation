@@ -1,6 +1,7 @@
 ﻿using HomeAutomationRepositories.Entities;
 using HomeAutomationRepositories.Models;
 using HomeAutomationRepositories.Repositories.Interface;
+using HomeAutomationRepositories.Services.Interface;
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;

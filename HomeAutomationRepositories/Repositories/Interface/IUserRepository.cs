@@ -11,7 +11,8 @@ namespace HomeAutomationRepositories.Repositories.Interface
     public interface IUserRepository
     {
         Task<UserEntity> CreateUserAsync(UserEntity userEntity);
-        Task<List<UserEntity>> GetAllAsync();
+        Task<IEnumerable<UserEntity>> GetAllAsync();
         Task<UserEntity> GetByIdAsync(ObjectId Id);
+        Task<UserEntity> GetByUserNameAsync(string userName);
     }
 }

@@ -3,6 +3,7 @@ using HomeAutomationRepositories.DataContext;
 using HomeAutomationRepositories.Repositories;
 using HomeAutomationRepositories.Repositories.Interface;
 using HomeAutomationRepositories.Services;
+using HomeAutomationRepositories.Services.Interface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

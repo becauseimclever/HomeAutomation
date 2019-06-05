@@ -13,6 +13,7 @@ using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+using System.Security.Cryptography;
 
 namespace AutomationUnitTests.Service
 {
@@ -36,9 +37,38 @@ namespace AutomationUnitTests.Service
 
         }
         [Fact]
-        public void ConstructorThrowsArgumentNullException()
+        public void ConstructorWithNullOptionsThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() => new UserService(null, null));
+        }
+        [Fact]
+        public void ConstructorWithNullRepoThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => new UserService(_mockOptions.Object, null));
+        }
+        [Fact]
+        public async Task AuthenticateUserReturnsUser()
+        {
+            var shaManaged = new SHA512Managed();
+            var testPasswordBytes = shaManaged.ComputeHash(Encoding.UTF8.GetBytes("TestPassword"));
+            var testPassword = Convert.ToBase64String(testPasswordBytes);
+            var user = _fixture.Create<UserEntity>();
+            user.Password = testPassword;
+            _mockUserRepo.Setup(x => x.AuthenticateUserAsync(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(user);
+            var userService = new UserService(_mockOptions.Object, _mockUserRepo.Object);
+            var authenticatedUser = await userService.Authenticate(user.Username, "TestPassword");
+            Assert.NotNull(authenticatedUser.Token);
+            Assert.Equal(user.Username, authenticatedUser.UserName);
+        }
+        [Fact]
+        public async Task AuthenticateUserReturnsNull()
+        {
+            UserEntity userEntity = null;
+            _mockUserRepo.Setup(x => x.AuthenticateUserAsync(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(userEntity);
+
+            var userService = new UserService(_mockOptions.Object, _mockUserRepo.Object);
+            var authenticatedUser = await userService.Authenticate(string.Empty, "TestPassword");
+            Assert.Null(authenticatedUser);
         }
         #region Create
         [Fact]
@@ -68,6 +98,9 @@ namespace AutomationUnitTests.Service
             _mockUserRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(users);
             var userService = new UserService(_mockOptions.Object, _mockUserRepo.Object);
             var result = await userService.GetAllAsync();
+            Assert.IsAssignableFrom<IEnumerable<User>>(result);
+            Assert.NotNull(result);
+            Assert.All(result, x => Assert.NotNull(x.Id));
         }
         [Fact]
         public async Task GetByUserNameReturnsUser()

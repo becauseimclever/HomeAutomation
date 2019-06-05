@@ -38,6 +38,20 @@ namespace AutomationUnitTests.Repository
         {
             Assert.Throws<ArgumentNullException>(() => new UserRepository(null));
         }
+        [Fact]
+        public async Task AuthenticateUserAsyncReturnsUserEntity()
+        {
+            _mockCollection.Setup(x => x.FindAsync(
+               It.IsAny<FilterDefinition<UserEntity>>(),
+               It.IsAny<FindOptions<UserEntity>>(),
+               It.IsAny<CancellationToken>()))
+               .ReturnsAsync(MongoHelper.BuildMockAsyncCursor(_userEntity));
+            _mockContext.Setup(x => x.UserCollection).Returns(_mockCollection.Object);
+            var repo = new UserRepository(_mockContext.Object);
+            var result = await repo.AuthenticateUserAsync(_userEntity.Username, _userEntity.Password);
+            Assert.IsType<UserEntity>(result);
+            Assert.Equal(_userEntity.Id, result.Id);
+        }
         #region Create
         [Fact]
         public async Task CreateUserReturnsUser()

@@ -2,10 +2,13 @@
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace HomeAutomationRepositories.Entities
+
 {
+    [ExcludeFromCodeCoverage]
     [BsonDiscriminator("powerstripentity")]
     class PowerStripEntity : DeviceEntity
     {

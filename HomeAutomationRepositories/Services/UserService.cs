@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,7 +19,6 @@ namespace HomeAutomationRepositories.Services
     public class UserService : IUserService
     {
         private readonly AuthenticationSettings _authenticationSettings;
-        private IEnumerable<User> _users;
         private IUserRepository _userRepo;
 
         public UserService(IOptions<AuthenticationSettings> authSettings, IUserRepository userRepo)
@@ -28,19 +28,24 @@ namespace HomeAutomationRepositories.Services
             _userRepo = userRepo ?? throw new ArgumentNullException(nameof(userRepo));
         }
 
-        public Task<User> Authenticate(string username, string password)
+        public async Task<User> Authenticate(string username, string password)
         {
-            var user = _users.SingleOrDefault(x => x.UserName == username && x.Password == password);
+            var shaManaged = new SHA512Managed();
+            var encodedEncryptedPassword = Convert.ToBase64String(shaManaged.ComputeHash(Encoding.UTF8.GetBytes(password)));
+
+            var user = await _userRepo.AuthenticateUserAsync(username, encodedEncryptedPassword);
+
             if (user == null) return null;
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            var key = Encoding.ASCII.GetBytes(_authenticationSettings.Secret);
+            var key = Encoding.UTF8.GetBytes(_authenticationSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name,user.Id.ToString())
+                    new Claim(ClaimTypes.Name,user.Username.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier,user.Id.ToString())
                 }),
                 Expires = DateTime.MaxValue,
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)
@@ -48,7 +53,7 @@ namespace HomeAutomationRepositories.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
             user.Token = tokenHandler.WriteToken(token);
             user.Password = null;
-            return Task.FromResult(user);
+            return UserEntity.ConvertToModel(user);
         }
 
         #region Create

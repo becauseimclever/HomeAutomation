@@ -14,5 +14,6 @@ namespace HomeAutomationRepositories.Repositories.Interface
         Task<IEnumerable<UserEntity>> GetAllAsync();
         Task<UserEntity> GetByIdAsync(ObjectId Id);
         Task<UserEntity> GetByUserNameAsync(string userName);
+        Task<UserEntity> AuthenticateUserAsync(string userName, string password);
     }
 }

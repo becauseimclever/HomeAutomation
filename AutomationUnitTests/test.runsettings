@@ -17,6 +17,16 @@
                 <!-- Add more ModulePath nodes here. -->
               </Exclude>
             </ModulePaths>
+            <!-- Match attributes on any code element: -->
+            <Attributes>
+              <Exclude>
+                <Attribute>^System\.Diagnostics\.DebuggerHiddenAttribute$</Attribute>
+                <Attribute>^System\.Diagnostics\.DebuggerNonUserCodeAttribute$</Attribute>
+                <Attribute>^System\.Runtime\.CompilerServices.CompilerGeneratedAttribute$</Attribute>
+                <Attribute>^System\.CodeDom\.Compiler.GeneratedCodeAttribute$</Attribute>
+                <Attribute>^System\.Diagnostics\.CodeAnalysis.ExcludeFromCodeCoverageAttribute$</Attribute>
+              </Exclude>
+            </Attributes>
             <UseVerifiableInstrumentation>True</UseVerifiableInstrumentation>
             <AllowLowIntegrityProcesses>True</AllowLowIntegrityProcesses>
             <CollectFromChildProcesses>True</CollectFromChildProcesses>

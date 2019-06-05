@@ -17,6 +17,8 @@ namespace HomeAutomationRepositories.Repositories
         {
             userCollection = context?.UserCollection ?? throw new ArgumentNullException(nameof(context));
         }
+
+
         #region Create
         public async Task<UserEntity> CreateUserAsync(UserEntity userEntity)
         {
@@ -26,6 +28,12 @@ namespace HomeAutomationRepositories.Repositories
 
         #endregion
         #region Read  
+        public async Task<UserEntity> AuthenticateUserAsync(string userName, string password)
+        {
+            var builder = Builders<UserEntity>.Filter;
+            var filter = builder.Eq(x => x.Username, userName) & builder.Eq(x => x.Password, password);
+            return await userCollection.Find(filter).FirstOrDefaultAsync();
+        }
         public async Task<IEnumerable<UserEntity>> GetAllAsync()
         {
             return await userCollection.Find(_ => true).ToListAsync();

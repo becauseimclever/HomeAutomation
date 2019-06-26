@@ -1,6 +1,7 @@
 ﻿using HomeAutomationRepositories.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
 
 namespace HomeAutomationRepositories.Entities
 {

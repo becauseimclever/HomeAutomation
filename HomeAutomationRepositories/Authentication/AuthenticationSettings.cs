@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HomeAutomationRepositories.Authentication
+﻿namespace HomeAutomationRepositories.Authentication
 {
     public class AuthenticationSettings
     {

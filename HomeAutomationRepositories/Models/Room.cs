@@ -23,6 +23,7 @@ namespace HomeAutomationRepositories.Models
             foreach (var device in room.Devices)
             {
                 roomEntity.Devices.Add(Device.ConvertToEntity(device));
+
             }
             return roomEntity;
         }

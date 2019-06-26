@@ -14,7 +14,6 @@ using Xunit;
 
 namespace AutomationUnitTests.Repository
 {
-    [ExcludeFromCodeCoverage]
     public class RoomRepositoryTest
     {
         private readonly Mock<IMongoCollection<RoomEntity>> _mockCollection;
@@ -31,11 +30,11 @@ namespace AutomationUnitTests.Repository
                 Name = "TestDevice",
                 Devices = new List<DeviceEntity>()
                       {
-                           new DeviceEntity()
-                           {
-                                Id = ObjectId.GenerateNewId(),
-                                 Name="TestDevice"
-                           }
+                           //new DeviceEntity()
+                           //{
+                           //     Id = ObjectId.GenerateNewId(),
+                           //      Name="TestDevice"
+                           //}
                       }
             };
             _roomList = new List<RoomEntity>()

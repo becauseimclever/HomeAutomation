@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeAutomationRepositories"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationMQTTServer", "AutomationMQTTServer\AutomationMQTTServer.csproj", "{40CD1B0D-A32F-4A24-A0FA-0D3608C78F73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomationUnitTests", "AutomationUnitTests\AutomationUnitTests.csproj", "{5C36C7C2-6447-40F5-9CBE-80ED526A0B5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationUnitTests", "AutomationUnitTests\AutomationUnitTests.csproj", "{5C36C7C2-6447-40F5-9CBE-80ED526A0B5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeAutomationPropertiesTests", "HomeAutomationPropertiesTests\HomeAutomationPropertiesTests.csproj", "{1C5A6627-B675-445C-ACC4-11F8D42CBC96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{5C36C7C2-6447-40F5-9CBE-80ED526A0B5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C36C7C2-6447-40F5-9CBE-80ED526A0B5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C36C7C2-6447-40F5-9CBE-80ED526A0B5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C5A6627-B675-445C-ACC4-11F8D42CBC96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C5A6627-B675-445C-ACC4-11F8D42CBC96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C5A6627-B675-445C-ACC4-11F8D42CBC96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C5A6627-B675-445C-ACC4-11F8D42CBC96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

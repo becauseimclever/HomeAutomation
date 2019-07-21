@@ -1,5 +1,4 @@
 ﻿using HomeAutomationRepositories.Entities;
-using HomeAutomationRepositories.Models;
 using HomeAutomationRepositories.Repositories.Interface;
 using HomeAutomationRepositories.Services.Interface;
 using MongoDB.Bson;
@@ -15,38 +14,30 @@ namespace HomeAutomationRepositories.Services
 
         public RoomsService(IRoomRepository roomRepository)
         {
-
             _roomRepo = roomRepository ?? throw new ArgumentNullException(nameof(roomRepository));
         }
 
         public async Task<Room> CreateAsync(Room room)
         {
-            RoomEntity roomEntity = Room.ConvertToEntity(room);
+            var newRoom = await _roomRepo.CreateRoomAsync(room);
 
-            var newRoom = await _roomRepo.CreateRoomAsync(roomEntity);
-
-            return RoomEntity.ConvertToModel(newRoom);
+            return newRoom;
         }
         public async Task<List<Room>> GetAllAsync()
         {
             var rooms = await _roomRepo.GetAllAsync();
-            var roomsList = new List<Room>();
-            foreach (var room in rooms)
-            {
-                roomsList.Add(RoomEntity.ConvertToModel(room));
-            }
 
-            return roomsList;
+            return rooms;
         }
 
         public async Task<Room> GetByIdAsync(string Id)
         {
             var room = await _roomRepo.GetByIdAsync(ObjectId.Parse(Id));
-            return RoomEntity.ConvertToModel(room);
+            return room;
         }
         public async Task<bool> UpdateAsync(Room room)
         {
-            return await _roomRepo.UpdateAsync(Room.ConvertToEntity(room));
+            return await _roomRepo.UpdateAsync(room);
         }
 
         public async Task<bool> DeleteAsync(string id)

@@ -17,8 +17,8 @@ namespace HomeAutomationRepositories.DataContext
             _mongoDatabase = client.GetDatabase(settings.Value.Database);
             _roomCollection = settings.Value.RoomCollection;
             _userClaimCollection = settings.Value.UserClaimCollection;
-                    }
-        public IMongoCollection<RoomEntity> RoomCollection => _mongoDatabase.GetCollection<RoomEntity>(_roomCollection);
+        }
+        public IMongoCollection<Room> RoomCollection => _mongoDatabase.GetCollection<Room>(_roomCollection);
         public IMongoCollection<UserEntity> UserCollection => _mongoDatabase.GetCollection<UserEntity>(_userClaimCollection);
     }
 }

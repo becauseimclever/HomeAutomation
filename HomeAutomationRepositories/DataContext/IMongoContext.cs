@@ -5,7 +5,7 @@ namespace HomeAutomationRepositories.DataContext
 {
     public interface IMongoContext
     {
-        IMongoCollection<RoomEntity> RoomCollection { get; }
+        IMongoCollection<Room> RoomCollection { get; }
         IMongoCollection<UserEntity> UserCollection { get; }
     }
 }

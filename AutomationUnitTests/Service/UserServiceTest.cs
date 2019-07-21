@@ -76,7 +76,7 @@ namespace AutomationUnitTests.Service
         {
             var user = _fixture.Create<User>();
             user.Id = ObjectId.GenerateNewId().ToString();
-            _mockUserRepo.Setup(x => x.CreateUserAsync(It.IsAny<UserEntity>())).ReturnsAsync(User.ConvertToEntity(user));
+            _mockUserRepo.Setup(x => x.CreateUserAsync(It.IsAny<UserEntity>())).ReturnsAsync(new UserEntity(user));
 
             var userService = new UserService(_mockOptions.Object, _mockUserRepo.Object);
             var result = await userService.CreateAsync(user);

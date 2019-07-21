@@ -19,7 +19,8 @@ namespace AutomationUnitTests.Service
         public RoomsServiceTest()
         {
             fixture = new Fixture();
-            fixture.Register<ObjectId>(() => ObjectId.GenerateNewId());
+            fixture.Register(() => ObjectId.GenerateNewId());
+            fixture.Register<DeviceEntity>(() => new PowerStripEntity());
             _mockRepo = new Mock<IRoomRepository>();
         }
         [Fact]
@@ -32,7 +33,7 @@ namespace AutomationUnitTests.Service
         {
             var room = fixture.Create<Room>();
             room.Id = ObjectId.GenerateNewId().ToString();
-            _mockRepo.Setup(x => x.CreateRoomAsync(It.IsAny<RoomEntity>())).ReturnsAsync(Room.ConvertToEntity(room));
+            _mockRepo.Setup(x => x.CreateRoomAsync(It.IsAny<RoomEntity>())).ReturnsAsync();
             var roomService = new RoomsService(_mockRepo.Object);
             var result = await roomService.CreateAsync(room);
 

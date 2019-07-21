@@ -1,7 +1,5 @@
-﻿using HomeAutomationRepositories.Models;
-using System;
+﻿using HomeAutomationRepositories.Entities;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HomeAutomationRepositories.Services.Interface

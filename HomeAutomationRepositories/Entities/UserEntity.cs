@@ -8,6 +8,16 @@ namespace HomeAutomationRepositories.Entities
 {
     public class UserEntity
     {
+        public UserEntity() { }
+        public UserEntity(User user)
+        {
+            this.FirstName = user.FirstName;
+            this.Id = ObjectId.Parse(user.Id);
+            this.LastName = user.LastName;
+            this.Password = user.Password;
+            this.Token = user.Token;
+            this.Username = user.UserName;
+        }
         [BsonId]
         public ObjectId Id { get; set; }
         [Required]
@@ -19,17 +29,6 @@ namespace HomeAutomationRepositories.Entities
         [Required]
         public string Password { get; set; }
         public string Token { get; set; }
-        public static User ConvertToModel(UserEntity userEntity)
-        {
-            return new User()
-            {
-                Id = userEntity.Id.ToString(),
-                FirstName = userEntity.FirstName,
-                LastName = userEntity.LastName,
-                UserName = userEntity.Username,
-                Password = userEntity.Password,
-                Token = userEntity.Token
-            };
-        }
+
     }
 }

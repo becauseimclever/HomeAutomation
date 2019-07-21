@@ -12,7 +12,7 @@ namespace HomeAutomationRepositories.Repositories
     public class RoomRepository : IRoomRepository
     {
 
-        public IMongoCollection<RoomEntity> roomCollection;
+        public IMongoCollection<Room> roomCollection;
 
         public RoomRepository(IMongoContext context)
         {
@@ -20,21 +20,21 @@ namespace HomeAutomationRepositories.Repositories
         }
 
         #region Create
-        public async Task<RoomEntity> CreateRoomAsync(RoomEntity roomEntity)
+        public async Task<Room> CreateRoomAsync(Room room)
         {
-            await roomCollection.InsertOneAsync(roomEntity);
-            return roomEntity;
+            await roomCollection.InsertOneAsync(room);
+            return room;
         }
 
         #endregion
         #region Read
-        public async Task<List<RoomEntity>> GetAllAsync()
+        public async Task<List<Room>> GetAllAsync()
         {
             return await roomCollection.Find(_ => true).ToListAsync();
         }
-        public async Task<RoomEntity> GetByIdAsync(ObjectId Id)
+        public async Task<Room> GetByIdAsync(ObjectId Id)
         {
-            var builder = Builders<RoomEntity>.Filter;
+            var builder = Builders<Room>.Filter;
             var filter = builder.Eq(x => x.Id, Id);
 
             return await roomCollection.Find(filter).FirstOrDefaultAsync();
@@ -42,12 +42,12 @@ namespace HomeAutomationRepositories.Repositories
         #endregion
         #region Update
 
-        public async Task<bool> UpdateAsync(RoomEntity roomEntity)
+        public async Task<bool> UpdateAsync(Room roomEntity)
         {
-            var builder = Builders<RoomEntity>.Filter;
+            var builder = Builders<Room>.Filter;
             var filter = builder.Eq(x => x.Id, roomEntity.Id);
 
-            var update = Builders<RoomEntity>.Update
+            var update = Builders<Room>.Update
                 .Set(x => x.Name, roomEntity.Name)
                 .Set(x => x.Devices, roomEntity.Devices);
             var updateOptions = new UpdateOptions() { IsUpsert = false };

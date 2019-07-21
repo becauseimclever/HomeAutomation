@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AutomationUnitTests.Repository
 {
-    class DeviceRepositoryTest
+    public class DeviceRepositoryTest
     {
     }
 }

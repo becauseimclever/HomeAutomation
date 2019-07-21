@@ -53,28 +53,28 @@ namespace HomeAutomationRepositories.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
             user.Token = tokenHandler.WriteToken(token);
             user.Password = null;
-            return UserEntity.ConvertToModel(user);
+            return new User(user);
         }
 
         #region Create
         public async Task<User> CreateAsync(User user)
         {
-            return UserEntity.ConvertToModel(
-                await _userRepo.CreateUserAsync(User.ConvertToEntity(user)));
+            return new User(
+                await _userRepo.CreateUserAsync(new UserEntity(user)));
         }
         #endregion
         #region Read
         public async Task<IEnumerable<User>> GetAllAsync()
         {
             var entities = await _userRepo.GetAllAsync();
-            var models = entities.Select(x => UserEntity.ConvertToModel(x));
+            var models = entities.Select(x => new User(x));
             return models;
         }
 
         public async Task<User> GetByUserNameAsync(string userName)
         {
             var user = await _userRepo.GetByUserNameAsync(userName);
-            return UserEntity.ConvertToModel(user);
+            return new User(user);
         }
 
         #endregion

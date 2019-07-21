@@ -1,3 +1,4 @@
+using AutoMapper;
 using HomeAutomationRepositories.Authentication;
 using HomeAutomationRepositories.DataContext;
 using HomeAutomationRepositories.Repositories;
@@ -24,20 +25,32 @@ using System.Text;
 
 namespace AutomationFrontEnd
 {
+    /// <summary>
+    /// Startup
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class Startup
     {
+        /// <summary>
+        /// Startup
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             MongoDefaults.GuidRepresentation = GuidRepresentation.Standard;
+
+            services.AddAutoMapper(assemblies: typeof(Startup).Assembly);
+
             RegisterServices(services);
             RegisterHandlers(services);
             RegisterRepositories(services);

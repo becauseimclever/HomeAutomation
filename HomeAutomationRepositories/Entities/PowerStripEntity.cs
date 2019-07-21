@@ -1,9 +1,5 @@
-﻿using HomeAutomationRepositories.Models;
-using MongoDB.Bson.Serialization.Attributes;
-using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Text;
 
 namespace HomeAutomationRepositories.Entities
 

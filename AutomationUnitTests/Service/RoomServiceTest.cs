@@ -1,6 +1,5 @@
 ﻿using AutoFixture;
 using HomeAutomationRepositories.Entities;
-using HomeAutomationRepositories.Models;
 using HomeAutomationRepositories.Repositories.Interface;
 using HomeAutomationRepositories.Services;
 using MongoDB.Bson;
@@ -32,21 +31,20 @@ namespace AutomationUnitTests.Service
         public async Task CreateRoomReturnsRoom()
         {
             var room = fixture.Create<Room>();
-            room.Id = ObjectId.GenerateNewId().ToString();
-            _mockRepo.Setup(x => x.CreateRoomAsync(It.IsAny<RoomEntity>())).ReturnsAsync();
+            room.Id = ObjectId.GenerateNewId();
+            _mockRepo.Setup(x => x.CreateRoomAsync(It.IsAny<Room>())).ReturnsAsync(room);
             var roomService = new RoomsService(_mockRepo.Object);
-            var result = await roomService.CreateAsync(room);
+            var result = await roomService.CreateAsync(room).ConfigureAwait(true);
 
             Assert.NotNull(result);
             Assert.IsType<Room>(result);
             Assert.Equal(room.Id, result.Id);
             Assert.Equal(room.Name, result.Name);
-            Assert.Equal(room.Devices.Count, result.Devices.Count);
         }
         [Fact]
         public async Task GetAllReturnsListOfRooms()
         {
-            var rooms = fixture.Create<List<RoomEntity>>();
+            var rooms = fixture.Create<List<Room>>();
             _mockRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(rooms);
 
             var roomService = new RoomsService(_mockRepo.Object);
@@ -59,7 +57,7 @@ namespace AutomationUnitTests.Service
         [Fact]
         public async Task GetByIdReturnsRoom()
         {
-            var room = fixture.Create<RoomEntity>();
+            var room = fixture.Create<Room>();
             _mockRepo.Setup(x => x.GetByIdAsync(It.IsAny<ObjectId>())).ReturnsAsync(room);
 
             var roomsService = new RoomsService(_mockRepo.Object);
@@ -67,15 +65,15 @@ namespace AutomationUnitTests.Service
 
             Assert.NotNull(result);
             Assert.IsType<Room>(result);
-            Assert.Equal(room.Id.ToString(), result.Id);
+            Assert.Equal(room.Id, result.Id);
         }
         [Fact]
         public async Task UpdateReturnsTrue()
         {
             var room = fixture.Create<Room>();
-            room.Id = ObjectId.GenerateNewId().ToString();
+            room.Id = ObjectId.GenerateNewId();
 
-            _mockRepo.Setup(x => x.UpdateAsync(It.IsAny<RoomEntity>())).ReturnsAsync(true);
+            _mockRepo.Setup(x => x.UpdateAsync(It.IsAny<Room>())).ReturnsAsync(true);
             var roomService = new RoomsService(_mockRepo.Object);
             var result = await roomService.UpdateAsync(room);
         }

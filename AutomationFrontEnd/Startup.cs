@@ -146,7 +146,6 @@ namespace AutomationFrontEnd
         private void RegisterServices(IServiceCollection services)
         {
             services.AddTransient<IRoomsService, RoomsService>();
-            services.AddScoped<IUserService, UserService>();
         }
         private void RegisterHandlers(IServiceCollection services)
         {

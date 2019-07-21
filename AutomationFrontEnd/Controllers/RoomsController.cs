@@ -1,5 +1,4 @@
-﻿using HomeAutomationRepositories.Models;
-using HomeAutomationRepositories.Services;
+﻿using HomeAutomationRepositories.Entities;
 using HomeAutomationRepositories.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -44,9 +43,9 @@ namespace AutomationFrontEnd.Controllers
         public async Task<IActionResult> GetAllRooms(string Id = null)
         {
             if (Id != null)
-                return Ok(await _roomsService.GetByIdAsync(Id));
+                return Ok(await _roomsService.GetByIdAsync(Id).ConfigureAwait(true));
 
-            return Ok(await _roomsService.GetAllAsync());
+            return Ok(await _roomsService.GetAllAsync().ConfigureAwait(true));
         }
         #endregion
         #region Update

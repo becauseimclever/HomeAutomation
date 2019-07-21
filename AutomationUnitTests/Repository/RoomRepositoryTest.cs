@@ -16,28 +16,21 @@ namespace AutomationUnitTests.Repository
 {
     public class RoomRepositoryTest
     {
-        private readonly Mock<IMongoCollection<RoomEntity>> _mockCollection;
+        private readonly Mock<IMongoCollection<Room>> _mockCollection;
         private readonly Mock<IMongoContext> _mockContext;
-        private readonly List<RoomEntity> _roomList;
-        private readonly RoomEntity _roomEntity;
+        private readonly List<Room> _roomList;
+        private readonly Room _roomEntity;
         public RoomRepositoryTest()
         {
-            _mockCollection = new Mock<IMongoCollection<RoomEntity>>();
+            _mockCollection = new Mock<IMongoCollection<Room>>();
             _mockContext = new Mock<IMongoContext>();
-            _roomEntity = new RoomEntity()
+            _roomEntity = new Room()
             {
                 Id = ObjectId.GenerateNewId(),
                 Name = "TestDevice",
-                Devices = new List<DeviceEntity>()
-                      {
-                           //new DeviceEntity()
-                           //{
-                           //     Id = ObjectId.GenerateNewId(),
-                           //      Name="TestDevice"
-                           //}
-                      }
+                
             };
-            _roomList = new List<RoomEntity>()
+            _roomList = new List<Room>()
             {
                 _roomEntity
             };
@@ -52,10 +45,10 @@ namespace AutomationUnitTests.Repository
         public async Task CreateRoomReturnsRoom()
         {
             _mockCollection.Setup(x => x.InsertOneAsync(
-                It.IsAny<RoomEntity>(),
+                It.IsAny<Room>(),
                 It.IsAny<InsertOneOptions>(),
                 It.IsAny<CancellationToken>()
-                )).Returns(Task.FromResult(MongoHelper.BuildMockAsyncCursor((ICollection<RoomEntity>)_roomList)));
+                )).Returns(Task.FromResult(MongoHelper.BuildMockAsyncCursor((ICollection<Room>)_roomList)));
             _mockContext.Setup(x => x.RoomCollection).Returns(_mockCollection.Object);
 
             var repo = new RoomRepository(_mockContext.Object);
@@ -69,16 +62,16 @@ namespace AutomationUnitTests.Repository
         {
             _mockCollection
                 .Setup(x => x.FindAsync(
-                    It.IsAny<FilterDefinition<RoomEntity>>(),
-                    It.IsAny<FindOptions<RoomEntity>>(),
+                    It.IsAny<FilterDefinition<Room>>(),
+                    It.IsAny<FindOptions<Room>>(),
                     It.IsAny<CancellationToken>()
-                )).ReturnsAsync(MongoHelper.BuildMockAsyncCursor((ICollection<RoomEntity>)_roomList));
+                )).ReturnsAsync(MongoHelper.BuildMockAsyncCursor((ICollection<Room>)_roomList));
             _mockContext.Setup(x => x.RoomCollection).Returns(_mockCollection.Object);
 
             var repo = new RoomRepository(_mockContext.Object);
             var result = await repo.GetAllAsync();
 
-            Assert.IsType<List<RoomEntity>>(result);
+            Assert.IsType<List<Room>>(result);
             Assert.NotEmpty(result);
         }
         [Fact]
@@ -86,15 +79,15 @@ namespace AutomationUnitTests.Repository
         {
             _mockCollection
                 .Setup(x => x.FindAsync(
-                    It.IsAny<FilterDefinition<RoomEntity>>(),
-                    It.IsAny<FindOptions<RoomEntity>>(),
+                    It.IsAny<FilterDefinition<Room>>(),
+                    It.IsAny<FindOptions<Room>>(),
                     It.IsAny<CancellationToken>()
                     )).ReturnsAsync(MongoHelper.BuildMockAsyncCursor(_roomEntity));
             _mockContext.Setup(x => x.RoomCollection).Returns(_mockCollection.Object);
             var repo = new RoomRepository(_mockContext.Object);
             var result = await repo.GetByIdAsync(new ObjectId());
 
-            Assert.IsType<RoomEntity>(result);
+            Assert.IsType<Room>(result);
             Assert.Equal(_roomEntity.Id, result.Id);
         }
         #endregion
@@ -105,8 +98,8 @@ namespace AutomationUnitTests.Repository
             Mock<UpdateResult> mockResult = new Mock<UpdateResult>();
             mockResult.SetupGet(x => x.IsAcknowledged).Returns(true);
             _mockCollection.Setup(x => x.UpdateOneAsync(
-                It.IsAny<FilterDefinition<RoomEntity>>(),
-               It.IsAny<UpdateDefinition<RoomEntity>>(),
+                It.IsAny<FilterDefinition<Room>>(),
+               It.IsAny<UpdateDefinition<Room>>(),
                It.IsAny<UpdateOptions>(),
                It.IsAny<CancellationToken>()
                )).ReturnsAsync(mockResult.Object);
@@ -123,7 +116,7 @@ namespace AutomationUnitTests.Repository
             Mock<DeleteResult> mockResult = new Mock<DeleteResult>();
             mockResult.SetupGet(x => x.IsAcknowledged).Returns(true);
             _mockCollection.Setup(x => x.DeleteOneAsync(
-                It.IsAny<FilterDefinition<RoomEntity>>(),
+                It.IsAny<FilterDefinition<Room>>(),
                 It.IsAny<CancellationToken>()
                 )).ReturnsAsync(mockResult.Object);
             _mockContext.Setup(x => x.RoomCollection).Returns(_mockCollection.Object);

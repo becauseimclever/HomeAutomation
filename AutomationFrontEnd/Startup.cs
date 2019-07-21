@@ -39,7 +39,9 @@ namespace AutomationFrontEnd
         {
             Configuration = configuration;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public IConfiguration Configuration { get; }
         /// <summary>
         /// This method gets called by the runtime. Use this method to add services to the container.
@@ -93,9 +95,13 @@ namespace AutomationFrontEnd
 
             services.AddTransient<IMongoContext, MongoContext>();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public static void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             //if (env.IsDevelopment())
             //{

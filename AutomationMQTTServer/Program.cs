@@ -26,81 +26,82 @@ namespace AutomationMQTTServer
         public static void Main(string[] args)
         {
             var currentPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var certificate = new X509Certificate2(
+            using (var certificate = new X509Certificate2(
                 Path.Combine(currentPath, "certificate.pfx"),
                 "test",
-                X509KeyStorageFlags.Exportable);
+                X509KeyStorageFlags.Exportable))
+            {
+                var config = ReadConfiguration(currentPath);
 
-            var config = ReadConfiguration(currentPath);
-
-            var optionsBuilder = new MqttServerOptionsBuilder()
-                .WithDefaultEndpoint()
-                .WithDefaultEndpointPort(1883)
-                .WithEncryptedEndpoint()
-                .WithEncryptedEndpointPort(config.Port)
-                .WithEncryptionCertificate(certificate.Export(X509ContentType.Pfx))
-                .WithEncryptionSslProtocol(SslProtocols.Tls12)
-                .WithConnectionValidator(
-                    c =>
-                    {
-                        var currentUser = config.Users.FirstOrDefault(u => u.UserName == c.Username);
-
-                        if (currentUser == null)
+                var optionsBuilder = new MqttServerOptionsBuilder()
+                    .WithDefaultEndpoint()
+                    .WithDefaultEndpointPort(1883)
+                    .WithEncryptedEndpoint()
+                    .WithEncryptedEndpointPort(config.Port)
+                    .WithEncryptionCertificate(certificate.Export(X509ContentType.Pfx))
+                    .WithEncryptionSslProtocol(SslProtocols.Tls12)
+                    .WithConnectionValidator(
+                        c =>
                         {
-                            c.ReturnCode = MqttConnectReturnCode.ConnectionRefusedBadUsernameOrPassword;
-                            return;
-                        }
+                            var currentUser = config.Users.FirstOrDefault(u => u.UserName == c.Username);
 
-                        if (c.Username != currentUser.UserName)
+                            if (currentUser == null)
+                            {
+                                c.ReasonCode = MqttConnectReasonCode.BadUserNameOrPassword;
+                                return;
+                            }
+
+                            if (c.Username != currentUser.UserName)
+                            {
+                                c.ReasonCode = MqttConnectReasonCode.BadUserNameOrPassword;
+                                return;
+                            }
+
+                            if (c.Password != currentUser.Password)
+                            {
+                                c.ReasonCode = MqttConnectReasonCode.BadUserNameOrPassword;
+                                return;
+                            }
+                            c.ReasonCode = MqttConnectReasonCode.Success;
+                        })
+                    .WithSubscriptionInterceptor(
+                        c =>
                         {
-                            c.ReturnCode = MqttConnectReturnCode.ConnectionRefusedBadUsernameOrPassword;
-                            return;
-                        }
+                            var currentUser = config.Users.FirstOrDefault(u => u.ClientId == c.ClientId);
 
-                        if (c.Password != currentUser.Password)
-                        {
-                            c.ReturnCode = MqttConnectReturnCode.ConnectionRefusedBadUsernameOrPassword;
-                            return;
-                        }
+                            if (currentUser == null)
+                            {
+                                c.AcceptSubscription = false;
+                                c.CloseConnection = true;
+                                return;
+                            }
 
-                        c.ReturnCode = MqttConnectReturnCode.ConnectionAccepted;
-                    })
-                .WithSubscriptionInterceptor(
-                    c =>
-                    {
-                        var currentUser = config.Users.FirstOrDefault(u => u.ClientId == c.ClientId);
+                            var topic = c.TopicFilter.Topic;
 
-                        if (currentUser == null)
-                        {
-                            c.AcceptSubscription = false;
-                            c.CloseConnection = true;
-                            return;
-                        }
-
-                        var topic = c.TopicFilter.Topic;
-
-                        if (currentUser.AllowedTopics.Contains(topic))
-                        {
-                            c.AcceptSubscription = true;
-                            return;
-                        }
-
-                        foreach (var allowedTopic in currentUser.AllowedTopics)
-                        {
-                            var isTopicValid = TopicChecker.Test(allowedTopic, topic);
-                            if (isTopicValid)
+                            if (currentUser.AllowedTopics.Contains(topic))
                             {
                                 c.AcceptSubscription = true;
                                 return;
                             }
-                        }
 
-                        c.AcceptSubscription = false;
-                        c.CloseConnection = true;
-                    });
+                            foreach (var allowedTopic in currentUser.AllowedTopics)
+                            {
+                                var isTopicValid = TopicChecker.Test(allowedTopic, topic);
+                                if (isTopicValid)
+                                {
+                                    c.AcceptSubscription = true;
+                                    return;
+                                }
+                            }
 
-            var mqttServer = new MqttFactory().CreateMqttServer();
-            mqttServer.StartAsync(optionsBuilder.Build());
+                            c.AcceptSubscription = false;
+                            c.CloseConnection = true;
+                        });
+
+
+                var mqttServer = new MqttFactory().CreateMqttServer();
+                mqttServer.StartAsync(optionsBuilder.Build());
+            }
             Console.ReadLine();
         }
         /// <summary>

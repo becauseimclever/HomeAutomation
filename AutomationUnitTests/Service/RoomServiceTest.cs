@@ -48,7 +48,7 @@ namespace AutomationUnitTests.Service
             _mockRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(rooms);
 
             var roomService = new RoomsService(_mockRepo.Object);
-            var results = await roomService.GetAllAsync();
+            var results = await roomService.GetAllAsync().ConfigureAwait(true);
 
             Assert.IsType<List<Room>>(results);
             Assert.NotEmpty(results);
@@ -61,7 +61,7 @@ namespace AutomationUnitTests.Service
             _mockRepo.Setup(x => x.GetByIdAsync(It.IsAny<ObjectId>())).ReturnsAsync(room);
 
             var roomsService = new RoomsService(_mockRepo.Object);
-            var result = await roomsService.GetByIdAsync(room.Id.ToString());
+            var result = await roomsService.GetByIdAsync(room.Id.ToString()).ConfigureAwait(true);
 
             Assert.NotNull(result);
             Assert.IsType<Room>(result);
@@ -75,7 +75,7 @@ namespace AutomationUnitTests.Service
 
             _mockRepo.Setup(x => x.UpdateAsync(It.IsAny<Room>())).ReturnsAsync(true);
             var roomService = new RoomsService(_mockRepo.Object);
-            var result = await roomService.UpdateAsync(room);
+            var result = await roomService.UpdateAsync(room).ConfigureAwait(true);
         }
         [Fact]
         public async Task DeleteReturnsTrue()
@@ -83,7 +83,7 @@ namespace AutomationUnitTests.Service
             _mockRepo.Setup(x => x.DeleteAsync(It.IsAny<string>())).ReturnsAsync(true);
 
             var roomService = new RoomsService(_mockRepo.Object);
-            var result = await roomService.DeleteAsync("IDSTRING");
+            var result = await roomService.DeleteAsync("IDSTRING").ConfigureAwait(true);
 
             Assert.True(result);
 

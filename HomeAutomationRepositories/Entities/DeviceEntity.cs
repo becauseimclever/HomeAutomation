@@ -6,9 +6,9 @@ namespace HomeAutomationRepositories.Entities
     [BsonIgnoreExtraElements]
     [BsonDiscriminator(RootClass = true)]
     [BsonKnownTypes(typeof(PowerStripEntity))]
-    public abstract class DeviceEntity
+    public class Device
     {
-      
+
         [BsonId]
         public ObjectId Id { get; set; }
         public string Name { get; set; }

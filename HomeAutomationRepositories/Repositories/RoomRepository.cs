@@ -5,6 +5,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HomeAutomationRepositories.Repositories
@@ -12,17 +13,19 @@ namespace HomeAutomationRepositories.Repositories
     public class RoomRepository : IRoomRepository
     {
 
-        public IMongoCollection<Room> roomCollection;
+        private IMongoCollection<Room> roomCollection;
 
-        public RoomRepository(IMongoContext context)
+        public RoomRepository(IMongoContext<Room> context)
         {
-            roomCollection = context?.RoomCollection ?? throw new ArgumentNullException(nameof(context));
+            var _context = context ?? throw new ArgumentNullException(nameof(context));
+            roomCollection = context.MongoCollection;
         }
 
         #region Create
         public async Task<Room> CreateRoomAsync(Room room)
         {
-            await roomCollection.InsertOneAsync(room);
+            var _room = room ?? throw new ArgumentNullException(nameof(room));
+            await roomCollection.InsertOneAsync(_room).ConfigureAwait(true);
             return room;
         }
 
@@ -30,28 +33,32 @@ namespace HomeAutomationRepositories.Repositories
         #region Read
         public async Task<List<Room>> GetAllAsync()
         {
-            return await roomCollection.Find(_ => true).ToListAsync();
+            var filter = Builders<Room>.Filter.Empty;
+            var results = await roomCollection.FindAsync(filter).ConfigureAwait(true);
+
+            return await results.ToListAsync().ConfigureAwait(true);
         }
         public async Task<Room> GetByIdAsync(ObjectId Id)
         {
             var builder = Builders<Room>.Filter;
             var filter = builder.Eq(x => x.Id, Id);
 
-            return await roomCollection.Find(filter).FirstOrDefaultAsync();
+            return await roomCollection.Find(filter).FirstOrDefaultAsync().ConfigureAwait(true);
         }
+
         #endregion
         #region Update
 
         public async Task<bool> UpdateAsync(Room roomEntity)
         {
             var builder = Builders<Room>.Filter;
-            var filter = builder.Eq(x => x.Id, roomEntity.Id);
+            var filter = builder.Eq(x => x.Id, roomEntity?.Id);
 
             var update = Builders<Room>.Update
-                .Set(x => x.Name, roomEntity.Name)
-                .Set(x => x.Devices, roomEntity.Devices);
+                .Set(x => x.Name, roomEntity?.Name)
+                .Set(x => x.Devices, roomEntity?.Devices);
             var updateOptions = new UpdateOptions() { IsUpsert = false };
-            var returnValue = await roomCollection.UpdateOneAsync(filter, update, updateOptions);
+            var returnValue = await roomCollection.UpdateOneAsync(filter, update, updateOptions).ConfigureAwait(true);
             return returnValue.IsAcknowledged;
 
         }
@@ -59,9 +66,11 @@ namespace HomeAutomationRepositories.Repositories
         #region Delete
         public async Task<bool> DeleteAsync(string id)
         {
-            var returnValue = await roomCollection.DeleteOneAsync(x => x.Id == ObjectId.Parse(id));
+            var returnValue = await roomCollection.DeleteOneAsync(x => x.Id == ObjectId.Parse(id)).ConfigureAwait(true);
             return returnValue.IsAcknowledged;
         }
+
+
         #endregion
     }
 }

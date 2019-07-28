@@ -54,7 +54,6 @@ namespace AutomationFrontEnd
             services.AddAutoMapper(assemblies: typeof(Startup).Assembly);
 
             RegisterServices(services);
-            RegisterHandlers(services);
             RegisterRepositories(services);
             RegisterOptions(services);
 
@@ -93,7 +92,6 @@ namespace AutomationFrontEnd
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddTransient<IMongoContext, MongoContext>();
         }
         /// <summary>
         /// 
@@ -149,16 +147,14 @@ namespace AutomationFrontEnd
             });
         }
 
-        private void RegisterServices(IServiceCollection services)
+        private static void RegisterServices(IServiceCollection services)
         {
             services.AddTransient<IRoomsService, RoomsService>();
         }
-        private void RegisterHandlers(IServiceCollection services)
+      
+        private static void RegisterRepositories(IServiceCollection services)
         {
-
-        }
-        private void RegisterRepositories(IServiceCollection services)
-        {
+            services.AddSingleton(typeof(IMongoContext<>), typeof(MongoContext<>));
             services.AddTransient<IRoomRepository, RoomRepository>();
 
         }
@@ -167,8 +163,6 @@ namespace AutomationFrontEnd
             services.Configure<MongoSettings>(options =>
             {
                 options.Database = Configuration.GetSection("MongoSettings:DataBase").Value;
-                options.RoomCollection = Configuration.GetSection("MongoSettings:RoomsCollection").Value;
-                options.UserClaimCollection = Configuration.GetSection("MongoSettings:UserClaimCollection").Value;
                 options.ConnectionString = Configuration.GetConnectionString("AutomationDb");
             });
             services.Configure<AuthenticationSettings>(options => Configuration.GetSection("AuthenticationSettings").Get<AuthenticationSettings>());

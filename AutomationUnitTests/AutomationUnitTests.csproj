@@ -24,4 +24,8 @@
     <ProjectReference Include="..\HomeAutomationRepositories\HomeAutomationRepositories.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controller\" />
+  </ItemGroup>
+
 </Project>

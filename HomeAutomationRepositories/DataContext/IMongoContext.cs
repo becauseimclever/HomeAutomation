@@ -3,8 +3,8 @@ using MongoDB.Driver;
 
 namespace HomeAutomationRepositories.DataContext
 {
-    public interface IMongoContext
+    public interface IMongoContext<T> where T : class
     {
-        IMongoCollection<Room> RoomCollection { get; }
+        IMongoCollection<T> MongoCollection { get; }
     }
 }

@@ -7,18 +7,19 @@ using System.Diagnostics.CodeAnalysis;
 namespace HomeAutomationRepositories.DataContext
 {
     [ExcludeFromCodeCoverage]
-    public class MongoContext : IMongoContext
+
+    public class MongoContext<T> : IMongoContext<T> where T : class
     {
         private readonly IMongoDatabase _mongoDatabase;
-        private readonly string _roomCollection;
 
         public MongoContext(IOptions<MongoSettings> settings)
         {
             if (settings == null) throw new ArgumentNullException(nameof(settings));
             var client = new MongoClient(settings.Value.ConnectionString);
             _mongoDatabase = client.GetDatabase(settings.Value.Database);
-            _roomCollection = settings.Value.RoomCollection;
         }
-        public IMongoCollection<Room> RoomCollection => _mongoDatabase.GetCollection<Room>(_roomCollection);
+        public IMongoCollection<T> MongoCollection => _mongoDatabase.GetCollection<T>(typeof(T).Name);
+
+
     }
 }

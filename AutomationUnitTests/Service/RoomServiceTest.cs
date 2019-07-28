@@ -19,7 +19,7 @@ namespace AutomationUnitTests.Service
         {
             fixture = new Fixture();
             fixture.Register(() => ObjectId.GenerateNewId());
-            fixture.Register<DeviceEntity>(() => new PowerStripEntity());
+            fixture.Register<Device>(() => new PowerStripEntity());
             _mockRepo = new Mock<IRoomRepository>();
         }
         [Fact]

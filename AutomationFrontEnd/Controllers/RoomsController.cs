@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace AutomationFrontEnd.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class RoomsController : ControllerBase
@@ -28,7 +31,7 @@ namespace AutomationFrontEnd.Controllers
         [Route("")]
         public async Task<IActionResult> Create(Room room)
         {
-            await _roomsService.CreateAsync(room);
+            await _roomsService.CreateAsync(room).ConfigureAwait(true);
             return Ok();
         }
         #endregion
@@ -47,6 +50,7 @@ namespace AutomationFrontEnd.Controllers
 
             return Ok(await _roomsService.GetAllAsync().ConfigureAwait(true));
         }
+
         #endregion
         #region Update
 

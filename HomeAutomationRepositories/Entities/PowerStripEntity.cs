@@ -5,7 +5,7 @@ namespace HomeAutomationRepositories.Entities
 
 {
     [BsonDiscriminator("powerstripentity")]
-    public class PowerStripEntity : DeviceEntity
+    public class PowerStripEntity : Device
     {
         public List<bool> outlets { get; set; }
     }

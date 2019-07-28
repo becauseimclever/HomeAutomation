@@ -19,30 +19,30 @@ namespace HomeAutomationRepositories.Services
 
         public async Task<Room> CreateAsync(Room room)
         {
-            var newRoom = await _roomRepo.CreateRoomAsync(room);
+            var newRoom = await _roomRepo.CreateRoomAsync(room).ConfigureAwait(true);
 
             return newRoom;
         }
         public async Task<List<Room>> GetAllAsync()
         {
-            var rooms = await _roomRepo.GetAllAsync();
+            var rooms = await _roomRepo.GetAllAsync().ConfigureAwait(true);
 
             return rooms;
         }
 
         public async Task<Room> GetByIdAsync(string Id)
         {
-            var room = await _roomRepo.GetByIdAsync(ObjectId.Parse(Id));
+            var room = await _roomRepo.GetByIdAsync(ObjectId.Parse(Id)).ConfigureAwait(true);
             return room;
         }
         public async Task<bool> UpdateAsync(Room room)
         {
-            return await _roomRepo.UpdateAsync(room);
+            return await _roomRepo.UpdateAsync(room).ConfigureAwait(true);
         }
 
         public async Task<bool> DeleteAsync(string id)
         {
-            return await _roomRepo.DeleteAsync(id);
+            return await _roomRepo.DeleteAsync(id).ConfigureAwait(true);
         }
 
     }

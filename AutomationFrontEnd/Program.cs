@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,26 +10,28 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace AutomationFrontEnd
-{/// <summary>
-/// 
-/// </summary>
-	public static class Program
-	{
+{
+    [ExcludeFromCodeCoverage]
+    /// <summary>
+    /// 
+    /// </summary>
+    public static class Program
+    {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="args"></param>
 		public static void Main(string[] args)
-		{
-			CreateWebHostBuilder(args).Build().Run();
-		}
+        {
+            CreateWebHostBuilder(args).Build().Run();
+        }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
 		public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-			WebHost.CreateDefaultBuilder(args)
-				.UseStartup<Startup>();
-	}
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>();
+    }
 }

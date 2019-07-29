@@ -19,7 +19,6 @@ namespace HomeAutomationRepositories.DataContext
             _mongoDatabase = client.GetDatabase(settings.Value.Database);
         }
         public IMongoCollection<T> MongoCollection => _mongoDatabase.GetCollection<T>(typeof(T).Name);
-
-
+        
     }
 }

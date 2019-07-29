@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace HomeAutomationRepositories.Entities
 
 {
-    [BsonDiscriminator("powerstripentity")]
-    public class PowerStripEntity : Device
+    [BsonDiscriminator("powerstrip")]
+    public class PowerStrip : Device
     {
-        public List<bool> outlets { get; set; }
+        public List<bool> Outlets { get; set; }
     }
 }

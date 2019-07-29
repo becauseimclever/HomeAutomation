@@ -31,8 +31,8 @@ namespace AutomationFrontEnd.Controllers
         [Route("")]
         public async Task<IActionResult> Create(Room room)
         {
-            await _roomsService.CreateAsync(room).ConfigureAwait(true);
-            return Ok();
+            var value = await _roomsService.CreateAsync(room).ConfigureAwait(true);
+            return Ok(value);
         }
         #endregion
         #region Read

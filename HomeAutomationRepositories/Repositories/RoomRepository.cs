@@ -1,6 +1,6 @@
 ﻿using HomeAutomationRepositories.DataContext;
 using HomeAutomationRepositories.Entities;
-using HomeAutomationRepositories.Repositories.Interface;
+using HomeAutomationRepositories.Repositories.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -13,20 +13,20 @@ namespace HomeAutomationRepositories.Repositories
     public class RoomRepository : IRoomRepository
     {
 
-        private IMongoCollection<Room> roomCollection;
+        private IMongoCollection<Room> _roomCollection;
 
         public RoomRepository(IMongoContext<Room> context)
         {
             var _context = context ?? throw new ArgumentNullException(nameof(context));
-            roomCollection = context.MongoCollection;
+            _roomCollection = context.MongoCollection;
         }
 
         #region Create
         public async Task<Room> CreateRoomAsync(Room room)
         {
             var _room = room ?? throw new ArgumentNullException(nameof(room));
-            await roomCollection.InsertOneAsync(_room).ConfigureAwait(true);
-            return room;
+            await _roomCollection.InsertOneAsync(_room).ConfigureAwait(true);
+            return _room;
         }
 
         #endregion
@@ -34,7 +34,7 @@ namespace HomeAutomationRepositories.Repositories
         public async Task<List<Room>> GetAllAsync()
         {
             var filter = Builders<Room>.Filter.Empty;
-            var results = await roomCollection.FindAsync(filter).ConfigureAwait(true);
+            var results = await _roomCollection.FindAsync(filter).ConfigureAwait(true);
 
             return await results.ToListAsync().ConfigureAwait(true);
         }
@@ -43,7 +43,7 @@ namespace HomeAutomationRepositories.Repositories
             var builder = Builders<Room>.Filter;
             var filter = builder.Eq(x => x.Id, Id);
 
-            return await roomCollection.Find(filter).FirstOrDefaultAsync().ConfigureAwait(true);
+            return await _roomCollection.Find(filter).FirstOrDefaultAsync().ConfigureAwait(true);
         }
 
         #endregion
@@ -56,9 +56,9 @@ namespace HomeAutomationRepositories.Repositories
 
             var update = Builders<Room>.Update
                 .Set(x => x.Name, roomEntity?.Name)
-                .Set(x => x.Devices, roomEntity?.Devices);
+                .Set(x => x.DeviceIds, roomEntity?.DeviceIds);
             var updateOptions = new UpdateOptions() { IsUpsert = false };
-            var returnValue = await roomCollection.UpdateOneAsync(filter, update, updateOptions).ConfigureAwait(true);
+            var returnValue = await _roomCollection.UpdateOneAsync(filter, update, updateOptions).ConfigureAwait(true);
             return returnValue.IsAcknowledged;
 
         }
@@ -66,7 +66,7 @@ namespace HomeAutomationRepositories.Repositories
         #region Delete
         public async Task<bool> DeleteAsync(string id)
         {
-            var returnValue = await roomCollection.DeleteOneAsync(x => x.Id == ObjectId.Parse(id)).ConfigureAwait(true);
+            var returnValue = await _roomCollection.DeleteOneAsync(x => x.Id == ObjectId.Parse(id)).ConfigureAwait(true);
             return returnValue.IsAcknowledged;
         }
 

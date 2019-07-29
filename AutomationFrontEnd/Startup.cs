@@ -1,11 +1,9 @@
 using AutoMapper;
-using HomeAutomationRepositories.Authentication;
 using HomeAutomationRepositories.DataContext;
 using HomeAutomationRepositories.Repositories;
-using HomeAutomationRepositories.Repositories.Interface;
+using HomeAutomationRepositories.Repositories.Interfaces;
 using HomeAutomationRepositories.Services;
 using HomeAutomationRepositories.Services.Interface;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -13,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Swashbuckle.AspNetCore.Swagger;
@@ -21,7 +18,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
-using System.Text;
 
 namespace AutomationFrontEnd
 {
@@ -60,23 +56,7 @@ namespace AutomationFrontEnd
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.ASCII.GetBytes(Configuration.GetSection("AuthenticationSettings").Get<AuthenticationSettings>().Secret)),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
+
 
             services.AddSwaggerGen(c =>
            {
@@ -150,12 +130,14 @@ namespace AutomationFrontEnd
         private static void RegisterServices(IServiceCollection services)
         {
             services.AddTransient<IRoomsService, RoomsService>();
+            services.AddTransient<IDeviceService, DeviceService>();
         }
-      
+
         private static void RegisterRepositories(IServiceCollection services)
         {
             services.AddSingleton(typeof(IMongoContext<>), typeof(MongoContext<>));
             services.AddTransient<IRoomRepository, RoomRepository>();
+            services.AddTransient<IDeviceRepository, DeviceRepository>();
 
         }
         private void RegisterOptions(IServiceCollection services)
@@ -165,7 +147,6 @@ namespace AutomationFrontEnd
                 options.Database = Configuration.GetSection("MongoSettings:DataBase").Value;
                 options.ConnectionString = Configuration.GetConnectionString("AutomationDb");
             });
-            services.Configure<AuthenticationSettings>(options => Configuration.GetSection("AuthenticationSettings").Get<AuthenticationSettings>());
         }
     }
 }

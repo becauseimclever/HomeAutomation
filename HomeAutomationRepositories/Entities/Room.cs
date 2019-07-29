@@ -10,6 +10,7 @@ namespace HomeAutomationRepositories.Entities
         [BsonId]
         public ObjectId Id { get; set; }
         public string Name { get; set; }
-        public IEnumerable<Device> Devices { get; set; }
+        public IEnumerable<string> DeviceIds { get; set; }
+
     }
 }

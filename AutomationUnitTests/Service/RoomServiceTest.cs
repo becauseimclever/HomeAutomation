@@ -1,6 +1,6 @@
 ﻿using AutoFixture;
 using HomeAutomationRepositories.Entities;
-using HomeAutomationRepositories.Repositories.Interface;
+using HomeAutomationRepositories.Repositories.Interfaces;
 using HomeAutomationRepositories.Services;
 using MongoDB.Bson;
 using Moq;
@@ -13,27 +13,30 @@ namespace AutomationUnitTests.Service
 {
     public class RoomsServiceTest
     {
-        private readonly Mock<IRoomRepository> _mockRepo;
+        private readonly Mock<IRoomRepository> _mockRoomRepo;
+        private readonly Mock<IDeviceRepository> _mockDeviceRepo;
         private Fixture fixture;
         public RoomsServiceTest()
         {
             fixture = new Fixture();
             fixture.Register(() => ObjectId.GenerateNewId());
-            fixture.Register<Device>(() => new PowerStripEntity());
-            _mockRepo = new Mock<IRoomRepository>();
+            fixture.Register<Device>(() => new PowerStrip());
+            _mockRoomRepo = new Mock<IRoomRepository>();
+            _mockDeviceRepo = new Mock<IDeviceRepository>();
         }
         [Fact]
         public void ConstuctorThrowArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new RoomsService(null));
+            Assert.Throws<ArgumentNullException>(() => new RoomsService(null, null));
+            Assert.Throws<ArgumentNullException>(() => new RoomsService(_mockRoomRepo.Object, null));
         }
         [Fact]
         public async Task CreateRoomReturnsRoom()
         {
             var room = fixture.Create<Room>();
             room.Id = ObjectId.GenerateNewId();
-            _mockRepo.Setup(x => x.CreateRoomAsync(It.IsAny<Room>())).ReturnsAsync(room);
-            var roomService = new RoomsService(_mockRepo.Object);
+            _mockRoomRepo.Setup(x => x.CreateRoomAsync(It.IsAny<Room>())).ReturnsAsync(room);
+            var roomService = new RoomsService(_mockRoomRepo.Object, _mockDeviceRepo.Object);
             var result = await roomService.CreateAsync(room).ConfigureAwait(true);
 
             Assert.NotNull(result);
@@ -45,9 +48,9 @@ namespace AutomationUnitTests.Service
         public async Task GetAllReturnsListOfRooms()
         {
             var rooms = fixture.Create<List<Room>>();
-            _mockRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(rooms);
+            _mockRoomRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(rooms);
 
-            var roomService = new RoomsService(_mockRepo.Object);
+            var roomService = new RoomsService(_mockRoomRepo.Object, _mockDeviceRepo.Object);
             var results = await roomService.GetAllAsync().ConfigureAwait(true);
 
             Assert.IsType<List<Room>>(results);
@@ -58,9 +61,9 @@ namespace AutomationUnitTests.Service
         public async Task GetByIdReturnsRoom()
         {
             var room = fixture.Create<Room>();
-            _mockRepo.Setup(x => x.GetByIdAsync(It.IsAny<ObjectId>())).ReturnsAsync(room);
+            _mockRoomRepo.Setup(x => x.GetByIdAsync(It.IsAny<ObjectId>())).ReturnsAsync(room);
 
-            var roomsService = new RoomsService(_mockRepo.Object);
+            var roomsService = new RoomsService(_mockRoomRepo.Object, _mockDeviceRepo.Object);
             var result = await roomsService.GetByIdAsync(room.Id.ToString()).ConfigureAwait(true);
 
             Assert.NotNull(result);
@@ -73,16 +76,16 @@ namespace AutomationUnitTests.Service
             var room = fixture.Create<Room>();
             room.Id = ObjectId.GenerateNewId();
 
-            _mockRepo.Setup(x => x.UpdateAsync(It.IsAny<Room>())).ReturnsAsync(true);
-            var roomService = new RoomsService(_mockRepo.Object);
+            _mockRoomRepo.Setup(x => x.UpdateAsync(It.IsAny<Room>())).ReturnsAsync(true);
+            var roomService = new RoomsService(_mockRoomRepo.Object, _mockDeviceRepo.Object);
             var result = await roomService.UpdateAsync(room).ConfigureAwait(true);
         }
         [Fact]
         public async Task DeleteReturnsTrue()
         {
-            _mockRepo.Setup(x => x.DeleteAsync(It.IsAny<string>())).ReturnsAsync(true);
+            _mockRoomRepo.Setup(x => x.DeleteAsync(It.IsAny<string>())).ReturnsAsync(true);
 
-            var roomService = new RoomsService(_mockRepo.Object);
+            var roomService = new RoomsService(_mockRoomRepo.Object, _mockDeviceRepo.Object);
             var result = await roomService.DeleteAsync("IDSTRING").ConfigureAwait(true);
 
             Assert.True(result);

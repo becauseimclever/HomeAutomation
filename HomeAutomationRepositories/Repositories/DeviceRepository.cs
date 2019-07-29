@@ -1,6 +1,6 @@
 ﻿using HomeAutomationRepositories.DataContext;
 using HomeAutomationRepositories.Entities;
-using HomeAutomationRepositories.Repositories.Interface;
+using HomeAutomationRepositories.Repositories.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -18,6 +18,12 @@ namespace HomeAutomationRepositories.Repositories
         {
             var _context = context ?? throw new ArgumentNullException(nameof(context));
             _collection = _context.MongoCollection;
+        }
+        public async Task<Device> CreateDeviceAsync(Device device)
+        {
+            var _device = device ?? throw new ArgumentNullException(nameof(device));
+            await _collection.InsertOneAsync(_device).ConfigureAwait(true);
+            return _device;
         }
         public async Task<Device> GetDeviceAsync(string deviceId)
         {

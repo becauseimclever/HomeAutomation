@@ -1,5 +1,9 @@
 ﻿using AutomationMQTTServer.Handlers;
 using HomeAutomationRepositories.DataContext;
+using HomeAutomationRepositories.Repositories;
+using HomeAutomationRepositories.Repositories.Interfaces;
+using HomeAutomationRepositories.Services;
+using HomeAutomationRepositories.Services.Interface;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -43,7 +47,10 @@ namespace AutomationMQTTServer
                             options.ConnectionString = hostContext.Configuration.GetConnectionString("AutomationDb");
 
                         });
+                        services.AddSingleton(typeof(IMongoContext<>), typeof(MongoContext<>));
                         services.AddSingleton<IHostedService, DaemonService>();
+                        services.AddTransient<IRoomsService, RoomsService>();
+                        services.AddTransient<IRoomRepository, RoomRepository>();
                         services.AddTransient<IMqttServerApplicationMessageInterceptor, ApplicationMessageInterceptor>();
                     })
                     .ConfigureLogging((hostingContext, logging) =>

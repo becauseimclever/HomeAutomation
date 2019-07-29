@@ -11,16 +11,16 @@ using Microsoft.Extensions.Logging;
 
 namespace AutomationFrontEnd
 {
-    [ExcludeFromCodeCoverage]
     /// <summary>
-    /// 
+    /// Entry point for HomeAutomation Web API
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public static class Program
     {
         /// <summary>
-        /// 
+        /// Main Void for Web API
         /// </summary>
-        /// <param name="args"></param>
+        /// <param name="args">Args not used</param>
 		public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();

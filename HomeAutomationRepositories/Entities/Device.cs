@@ -5,7 +5,7 @@ namespace HomeAutomationRepositories.Entities
 {
     [BsonIgnoreExtraElements]
     [BsonDiscriminator(RootClass = true)]
-    [BsonKnownTypes(typeof(PowerStripEntity))]
+    [BsonKnownTypes(typeof(PowerStrip))]
     public class Device
     {
 

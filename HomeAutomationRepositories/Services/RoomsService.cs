@@ -1,5 +1,6 @@
 ﻿using HomeAutomationRepositories.Entities;
-using HomeAutomationRepositories.Repositories.Interface;
+using VM = HomeAutomationRepositories.ViewModels;
+using HomeAutomationRepositories.Repositories.Interfaces;
 using HomeAutomationRepositories.Services.Interface;
 using MongoDB.Bson;
 using System;
@@ -11,10 +12,12 @@ namespace HomeAutomationRepositories.Services
     public class RoomsService : IRoomsService
     {
         private readonly IRoomRepository _roomRepo;
+        private readonly IDeviceRepository _deviceRepo;
 
-        public RoomsService(IRoomRepository roomRepository)
+        public RoomsService(IRoomRepository roomRepository, IDeviceRepository deviceRepository)
         {
             _roomRepo = roomRepository ?? throw new ArgumentNullException(nameof(roomRepository));
+            _deviceRepo = deviceRepository ?? throw new ArgumentNullException(nameof(deviceRepository));
         }
 
         public async Task<Room> CreateAsync(Room room)
@@ -34,6 +37,16 @@ namespace HomeAutomationRepositories.Services
         {
             var room = await _roomRepo.GetByIdAsync(ObjectId.Parse(Id)).ConfigureAwait(true);
             return room;
+        }
+        public async Task<VM.Room> GetByIdWithDevicesAsync(string Id)
+        {
+            var room = await GetByIdAsync(Id).ConfigureAwait(true);
+            var list = new List<Device>();
+            foreach (var id in room.DeviceIds)
+            {
+                list.Add(await _deviceRepo.GetDeviceAsync(id).ConfigureAwait(true));
+            }
+            return new VM.Room() { Id = room.Id, Name = room.Name, Devices = list };
         }
         public async Task<bool> UpdateAsync(Room room)
         {

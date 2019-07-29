@@ -3,7 +3,7 @@ using MongoDB.Bson;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace HomeAutomationRepositories.Repositories.Interface
+namespace HomeAutomationRepositories.Repositories.Interfaces
 {
     public interface IRoomRepository
     {

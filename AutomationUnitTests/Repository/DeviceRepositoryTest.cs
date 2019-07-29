@@ -1,7 +1,7 @@
 ﻿using HomeAutomationRepositories.DataContext;
 using HomeAutomationRepositories.Entities;
 using HomeAutomationRepositories.Repositories;
-using HomeAutomationRepositories.Repositories.Interface;
+using HomeAutomationRepositories.Repositories.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Moq;

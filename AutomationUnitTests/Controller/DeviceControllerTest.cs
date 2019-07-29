@@ -14,20 +14,26 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
+
 namespace AutomationUnitTests.Controller
 {
-    public class RoomsControllerTest
+    public class DeviceControllerTest
     {
-        private readonly Mock<IRoomsService> _mockService;
-        public RoomsControllerTest()
+        private readonly Mock<IDeviceService> _mockService;
+        public DeviceControllerTest()
         {
-            _mockService = new Mock<IRoomsService>();
+            _mockService = new Mock<IDeviceService>();
         }
         [Fact]
-        public void CreateRoomController()
+        public void CreateDeviceController()
         {
-            var controller = new RoomsController(_mockService.Object);
+            var controller = new DeviceController(_mockService.Object);
             Assert.NotNull(controller);
+        }
+        [Fact]
+        public void CreateDeviceControllerThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => { var controller = new DeviceController(null); });
         }
     }
 }

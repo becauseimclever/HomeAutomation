@@ -49,6 +49,8 @@ namespace AutomationMQTTServer
                         });
                         services.AddSingleton(typeof(IMongoContext<>), typeof(MongoContext<>));
                         services.AddSingleton<IHostedService, DaemonService>();
+                        services.AddTransient<IDeviceService, DeviceService>();
+                        services.AddTransient<IDeviceRepository, DeviceRepository>();
                         services.AddTransient<IRoomsService, RoomsService>();
                         services.AddTransient<IRoomRepository, RoomRepository>();
                         services.AddTransient<IMqttServerApplicationMessageInterceptor, ApplicationMessageInterceptor>();

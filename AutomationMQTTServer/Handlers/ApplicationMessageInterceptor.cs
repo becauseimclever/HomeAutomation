@@ -16,13 +16,15 @@ namespace AutomationMQTTServer.Handlers
         public async Task InterceptApplicationMessagePublishAsync(MqttApplicationMessageInterceptorContext context)
         {
             var _context = context ?? throw new ArgumentNullException(nameof(context));
-            var device = await _deviceService.GetDeviceById(context.ClientId).ConfigureAwait(true);
+            var objectId = context.ClientId.Substring(0, 24);
+            var device = await _deviceService.GetDeviceById(objectId).ConfigureAwait(true);
 
 
             var topic = _context.ApplicationMessage.Topic;
             var segments = topic.Split('/');
 
             Console.WriteLine(device);
+            Console.WriteLine(device.GetType());
             Console.WriteLine(_context.ClientId);
             Console.WriteLine(_context.ApplicationMessage.Topic);
 

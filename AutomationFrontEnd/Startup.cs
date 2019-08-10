@@ -1,4 +1,3 @@
-using AutoMapper;
 using HomeAutomationRepositories.DataContext;
 using HomeAutomationRepositories.Repositories;
 using HomeAutomationRepositories.Repositories.Interfaces;
@@ -47,7 +46,6 @@ namespace AutomationFrontEnd
         {
             MongoDefaults.GuidRepresentation = GuidRepresentation.Standard;
 
-            services.AddAutoMapper(assemblies: typeof(Startup).Assembly);
 
             RegisterServices(services);
             RegisterRepositories(services);

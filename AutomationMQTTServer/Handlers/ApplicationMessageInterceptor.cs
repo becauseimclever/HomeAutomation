@@ -19,7 +19,6 @@ namespace AutomationMQTTServer.Handlers
             var objectId = context.ClientId.Substring(0, 24);
             var device = await _deviceService.GetDeviceById(objectId).ConfigureAwait(true);
 
-
             var topic = _context.ApplicationMessage.Topic;
             var segments = topic.Split('/');
 

@@ -29,7 +29,7 @@ namespace AutomationMQTTServer.Handlers
 
             Console.WriteLine(_context.ApplicationMessage.ConvertPayloadToString());
             return;
-        }
+        } .
 
 
     }

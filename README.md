@@ -22,3 +22,14 @@ A big thank you to all the libraries we depend on for this project.
 * xUnit - https://github.com/xunit/xunit
 
 And a big thank you to the folks over at Studio 3T for providing me with a free license for their product. 
+
+## Getting setup for development
+What you'll need:
+ * Visual Studio 2019 Preview (or VS code)
+ * DotNet Core 3.0 preview (currently preview 8)
+ * MongoDB 
+    * Current settings file points to localhost:27017
+    * Current version 4.0.6
+### The Code
+Right now, the AutomationFrontEnd project is about to be removed, in favor of the AutomationAPI project. The AutomationAPI project is a change in direction in regards to how the devices are handled. Devices are now going to be handled as plugins, and loaded at application start, instead of being directly in the repository project. The thought is that community provided plugins can be created, without the need to include them in the core repo.
+

@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace AutomationAPI.Controllers
+namespace BecauseImClever.AutomationAPI.Controllers
 {
+    [Obsolete]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase

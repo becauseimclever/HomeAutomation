@@ -1,10 +1,7 @@
-﻿using HomeAutomationRepositories.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BecauseImClever.HomeAutomationRepositories.Entities;
 using System.Threading.Tasks;
 
-namespace HomeAutomationRepositories.Services.Interface
+namespace BecauseImClever.HomeAutomationRepositories.Services.Interface
 {
     public interface IDeviceService
     {

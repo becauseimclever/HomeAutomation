@@ -1,10 +1,9 @@
-﻿using HomeAutomationRepositories.Entities;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace HomeAutomationRepositories.DataContext
+namespace BecauseImClever.HomeAutomationRepositories.DataContext
 {
     [ExcludeFromCodeCoverage]
 

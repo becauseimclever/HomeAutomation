@@ -1,9 +1,9 @@
-﻿using HomeAutomationRepositories.Entities;
+﻿using BecauseImClever.HomeAutomationRepositories.Entities;
 using MongoDB.Bson;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace HomeAutomationRepositories.Repositories.Interfaces
+namespace BecauseImClever.HomeAutomationRepositories.Repositories.Interfaces
 {
     public interface IRoomRepository
     {

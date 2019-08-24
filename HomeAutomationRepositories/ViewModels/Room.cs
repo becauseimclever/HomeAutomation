@@ -1,8 +1,8 @@
-﻿using HomeAutomationRepositories.Entities;
+﻿using BecauseImClever.HomeAutomationRepositories.Entities;
 using MongoDB.Bson;
 using System.Collections.Generic;
 
-namespace HomeAutomationRepositories.ViewModels
+namespace BecauseImClever.HomeAutomationRepositories.ViewModels
 {
     public class Room
     {

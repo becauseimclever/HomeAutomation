@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace HomeAutomationRepositories.Entities
+namespace BecauseImClever.HomeAutomationRepositories.Entities
 {
     [BsonIgnoreExtraElements]
     [BsonDiscriminator(RootClass = true)]

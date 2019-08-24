@@ -1,10 +1,7 @@
-using HomeAutomationRepositories.DataContext;
-using HomeAutomationRepositories.Plugins;
+using BecauseImClever.HomeAutomationRepositories.DataContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -12,7 +9,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Linq;
 
-namespace AutomationAPI
+namespace BecauseImClever.AutomationAPI
 {
     public class Startup
     {

@@ -1,14 +1,12 @@
-﻿using HomeAutomationRepositories.DataContext;
-using HomeAutomationRepositories.Entities;
-using HomeAutomationRepositories.Repositories.Interfaces;
+﻿using BecauseImClever.HomeAutomationRepositories.DataContext;
+using BecauseImClever.HomeAutomationRepositories.Entities;
+using BecauseImClever.HomeAutomationRepositories.Repositories.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace HomeAutomationRepositories.Repositories
+namespace BecauseImClever.HomeAutomationRepositories.Repositories
 {
     public class DeviceRepository : IDeviceRepository
     {

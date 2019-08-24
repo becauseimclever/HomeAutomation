@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
-namespace PowerStripPlugin
+namespace BecauseImClever.PowerStripPlugin
 {
     [ApiController]
     [Route("api/[controller]")]

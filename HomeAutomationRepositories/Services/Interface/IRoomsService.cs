@@ -1,8 +1,8 @@
-﻿using HomeAutomationRepositories.Entities;
+﻿using BecauseImClever.HomeAutomationRepositories.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace HomeAutomationRepositories.Services.Interface
+namespace BecauseImClever.HomeAutomationRepositories.Services.Interface
 {
     public interface IRoomsService
     {

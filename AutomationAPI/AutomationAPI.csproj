@@ -10,6 +10,10 @@
 
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
+    <RootNamespace>BecauseImClever.AutomationAPI</RootNamespace>
+    <PackageId>BecauseImClever.AutomationAPI</PackageId>
+    <Authors>BecauseImClever.AutomationAPI</Authors>
+    <Product>BecauseImClever.AutomationAPI</Product>
   </PropertyGroup>
 
   <ItemGroup>

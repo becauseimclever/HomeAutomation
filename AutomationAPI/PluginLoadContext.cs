@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Runtime.Loader;
 
-namespace AutomationAPI
+namespace BecauseImClever.AutomationAPI
 
 {
     public class PluginLoadContext : AssemblyLoadContext

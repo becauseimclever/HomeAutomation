@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 
-namespace HomeAutomationRepositories.Entities
+namespace BecauseImClever.HomeAutomationRepositories.Entities
 
 {
     [BsonDiscriminator("powerstrip")]

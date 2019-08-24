@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BecauseImClever.HomeAutomationRepositories.Plugins
+namespace BecauseImClever.DeviceBase
 {
     public interface IDevicePlugin
     {

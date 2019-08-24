@@ -6,7 +6,7 @@ using HomeAutomationRepositories.Services.Interface;
 using Microsoft.Extensions.DependencyInjection;
 
 
-namespace PowerStripPlugin
+namespace BecauseImClever.PowerStripPlugin
 {
     public class PowerStrip : IDevicePlugin
     {

@@ -1,4 +1,4 @@
-﻿namespace HomeAutomationRepositories.DataContext
+﻿namespace BecauseImClever.HomeAutomationRepositories.DataContext
 {
     public class MongoSettings
     {

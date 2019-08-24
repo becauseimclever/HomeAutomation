@@ -1,7 +1,8 @@
 using System;
 
-namespace AutomationAPI
+namespace BecauseImClever.AutomationAPI
 {
+    [Obsolete]
     public class WeatherForecast
     {
         public DateTime Date { get; set; }

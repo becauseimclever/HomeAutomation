@@ -1,7 +1,6 @@
-﻿using HomeAutomationRepositories.Entities;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 
-namespace HomeAutomationRepositories.DataContext
+namespace BecauseImClever.HomeAutomationRepositories.DataContext
 {
     public interface IMongoContext<T> where T : class
     {

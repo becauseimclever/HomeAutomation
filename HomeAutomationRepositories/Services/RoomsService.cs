@@ -1,13 +1,13 @@
-﻿using HomeAutomationRepositories.Entities;
-using VM = HomeAutomationRepositories.ViewModels;
-using HomeAutomationRepositories.Repositories.Interfaces;
-using HomeAutomationRepositories.Services.Interface;
+﻿using BecauseImClever.HomeAutomationRepositories.Entities;
+using BecauseImClever.HomeAutomationRepositories.Repositories.Interfaces;
+using BecauseImClever.HomeAutomationRepositories.Services.Interface;
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using VM = BecauseImClever.HomeAutomationRepositories.ViewModels;
 
-namespace HomeAutomationRepositories.Services
+namespace BecauseImClever.HomeAutomationRepositories.Services
 {
     public class RoomsService : IRoomsService
     {

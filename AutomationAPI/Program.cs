@@ -20,6 +20,13 @@ namespace AutomationAPI
         public static void Main(string[] args)
         {
 
+
+            var host = CreateHostBuilder(args);
+            RegisterPlugins(host);
+            host.Build().Run();
+        }
+        private static void RegisterPlugins(IHostBuilder host)
+        {
             var pluginFolder = Path.Combine(AppContext.BaseDirectory, "Plugins");
             if (!Directory.Exists(pluginFolder)) { Directory.CreateDirectory(pluginFolder); }
             var pluginPaths = Directory.GetDirectories(pluginFolder);
@@ -33,16 +40,11 @@ namespace AutomationAPI
                 Assembly pluginAssembly = LoadPlugin(pluginPath);
                 return CreateDevices(pluginAssembly);
             }).ToList();
-            var host = CreateHostBuilder(args);
-
             foreach (var pluginType in devicePlugins)
             {
                 host.ConfigureServices((hostContext, services) => pluginType.RegisterDependencies(services));
             }
-
-            host.Build().Run();
         }
-
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                  .ConfigureWebHostDefaults(webBuilder =>

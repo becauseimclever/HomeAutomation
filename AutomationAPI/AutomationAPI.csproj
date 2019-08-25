@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -41,7 +41,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AutomationServices\AutomationLogic.csproj" />
     <ProjectReference Include="..\DeviceBase\DeviceBase.csproj" />
-    <ProjectReference Include="..\HomeAutomationRepositories\AutomationRepositories.csproj" />
+    <ProjectReference Include="..\AutomationRepositories\AutomationRepositories.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

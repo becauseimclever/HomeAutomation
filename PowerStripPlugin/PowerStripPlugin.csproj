@@ -2,7 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>C:\Users\thegu\source\repos\HomeAutomation\AutomationAPI\bin\Debug\netcoreapp3.0\Plugins\PowerStripPlugin\</OutputPath>
+    <DocumentationFile>C:\Users\thegu\source\repos\HomeAutomation\PowerStripPlugin\PowerStripPlugin.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

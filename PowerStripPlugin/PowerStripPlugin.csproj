@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DeviceBase\DeviceBase.csproj" />
-    <ProjectReference Include="..\HomeAutomationRepositories\AutomationRepositories.csproj" />
   </ItemGroup>
 
 </Project>

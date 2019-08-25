@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28721.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationFrontEnd", "AutomationFrontEnd\AutomationFrontEnd.csproj", "{4622FDE3-1B68-4ACF-A968-1EF77BEDE76F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationRepositories", "AutomationRepositories\AutomationRepositories.csproj", "{D42D935E-85D8-4C61-AA8A-0EB0D1B5C056}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationMQTTServer", "AutomationMQTTServer\AutomationMQTTServer.csproj", "{40CD1B0D-A32F-4A24-A0FA-0D3608C78F73}"
@@ -18,11 +16,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerStripPlugin", "PowerSt
 		{D42D935E-85D8-4C61-AA8A-0EB0D1B5C056} = {D42D935E-85D8-4C61-AA8A-0EB0D1B5C056}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceBase", "DeviceBase\DeviceBase.csproj", "{5D87344F-126F-44BB-9F60-95976DB4A78B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeviceBase", "DeviceBase\DeviceBase.csproj", "{5D87344F-126F-44BB-9F60-95976DB4A78B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomationLogic", "AutomationServices\AutomationLogic.csproj", "{CACA3D0A-5ACA-4475-B20C-E4E2AB417578}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationLogic", "AutomationServices\AutomationLogic.csproj", "{CACA3D0A-5ACA-4475-B20C-E4E2AB417578}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomationModels", "AutomationModels\AutomationModels.csproj", "{157881D4-DD88-4936-AF3B-50A04006FFD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationModels", "AutomationModels\AutomationModels.csproj", "{157881D4-DD88-4936-AF3B-50A04006FFD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,10 +28,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4622FDE3-1B68-4ACF-A968-1EF77BEDE76F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4622FDE3-1B68-4ACF-A968-1EF77BEDE76F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4622FDE3-1B68-4ACF-A968-1EF77BEDE76F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4622FDE3-1B68-4ACF-A968-1EF77BEDE76F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D42D935E-85D8-4C61-AA8A-0EB0D1B5C056}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D42D935E-85D8-4C61-AA8A-0EB0D1B5C056}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D42D935E-85D8-4C61-AA8A-0EB0D1B5C056}.Release|Any CPU.ActiveCfg = Release|Any CPU

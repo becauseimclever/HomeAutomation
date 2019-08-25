@@ -12,7 +12,7 @@ namespace BecauseImClever.AutomationLogic.Services
         private readonly IRoomRepository _roomRepository;
         public RoomService(IRoomRepository roomRepository)
         {
-            _roomRepository = roomRepository;
+            _roomRepository = roomRepository ?? throw new ArgumentNullException(nameof(roomRepository));
         }
         public async ValueTask<Room> CreateAsync(Room room)
         {
@@ -22,17 +22,17 @@ namespace BecauseImClever.AutomationLogic.Services
         {
             return await _roomRepository.GetAllAsync();
         }
-        public ValueTask<Room> GetByIdAsync(string Id)
+        public async ValueTask<Room> GetByIdAsync(string Id)
         {
-            throw new NotImplementedException();
+            return await _roomRepository.GetByIdAsync(Guid.Parse(Id));
         }
-        public ValueTask<Room> UpdateAsync(Room room)
+        public async ValueTask<bool> UpdateAsync(Room room)
         {
-            throw new NotImplementedException();
+            return await _roomRepository.UpdateAsync(room);
         }
-        public ValueTask<bool> DeleteAsync(string Id)
+        public async ValueTask<bool> DeleteAsync(string Id)
         {
-            throw new NotImplementedException();
+            return await _roomRepository.DeleteAsync(Id);
         }
     }
 }

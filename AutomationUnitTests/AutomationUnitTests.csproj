@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AutomationAPI\AutomationAPI.csproj" />
-    <ProjectReference Include="..\AutomationFrontEnd\AutomationFrontEnd.csproj" />
     <ProjectReference Include="..\AutomationModels\AutomationModels.csproj" />
     <ProjectReference Include="..\AutomationServices\AutomationLogic.csproj" />
     <ProjectReference Include="..\DeviceBase\DeviceBase.csproj" />

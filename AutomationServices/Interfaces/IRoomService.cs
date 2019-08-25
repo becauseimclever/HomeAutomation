@@ -11,7 +11,7 @@ namespace BecauseImClever.AutomationLogic.Interfaces
         ValueTask<Room> CreateAsync(Room room);
         ValueTask<IEnumerable<Room>> GetAllAsync();
         ValueTask<Room> GetByIdAsync(string Id);
-        ValueTask<Room> UpdateAsync(Room room);
+        ValueTask<bool> UpdateAsync(Room room);
         ValueTask<bool> DeleteAsync(string id);
 
     }

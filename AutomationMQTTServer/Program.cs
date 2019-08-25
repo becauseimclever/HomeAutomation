@@ -1,17 +1,14 @@
 ﻿using AutomationMQTTServer.Handlers;
-using HomeAutomationRepositories.DataContext;
-using HomeAutomationRepositories.Repositories;
-using HomeAutomationRepositories.Repositories.Interfaces;
-using HomeAutomationRepositories.Services;
-using HomeAutomationRepositories.Services.Interface;
+using BecauseImClever.AutomationLogic.Interfaces;
+using BecauseImClever.AutomationLogic.Services;
+using BecauseImClever.AutomationRepositories;
+using BecauseImClever.AutomationRepositories.DataContext;
+using BecauseImClever.AutomationRepositories.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using MQTTnet;
 using MQTTnet.Server;
-using System;
-using System.Configuration;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -49,9 +46,7 @@ namespace AutomationMQTTServer
                         });
                         services.AddSingleton(typeof(IMongoContext<>), typeof(MongoContext<>));
                         services.AddSingleton<IHostedService, DaemonService>();
-                        services.AddTransient<IDeviceService, DeviceService>();
-                        services.AddTransient<IDeviceRepository, DeviceRepository>();
-                        services.AddTransient<IRoomsService, RoomsService>();
+                        services.AddTransient<IRoomService, RoomService>();
                         services.AddTransient<IRoomRepository, RoomRepository>();
                         services.AddTransient<IMqttServerApplicationMessageInterceptor, ApplicationMessageInterceptor>();
                     })

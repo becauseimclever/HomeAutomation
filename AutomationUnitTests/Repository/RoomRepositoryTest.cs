@@ -1,18 +1,15 @@
-﻿using HomeAutomationRepositories.DataContext;
-using HomeAutomationRepositories.Entities;
-using HomeAutomationRepositories.Repositories;
-using MongoDB.Bson;
+﻿using BecauseImClever.AutomationModels;
+using BecauseImClever.AutomationRepositories.DataContext;
+using BecauseImClever.AutomationRepositories;
 using MongoDB.Driver;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace AutomationUnitTests.Repository
+namespace BecauseImClever.AutomationUnitTests.Repository
 {
     public class RoomRepositoryTest
     {
@@ -26,7 +23,7 @@ namespace AutomationUnitTests.Repository
             _mockContext = new Mock<IMongoContext<Room>>();
             _roomEntity = new Room()
             {
-                Id = ObjectId.GenerateNewId(),
+                Id = Guid.NewGuid(),
                 Name = "TestDevice",
 
             };
@@ -91,7 +88,7 @@ namespace AutomationUnitTests.Repository
                     )).ReturnsAsync(MongoHelper.BuildMockAsyncCursor(_roomEntity));
             _mockContext.Setup(x => x.MongoCollection).Returns(_mockCollection.Object);
             var repo = new RoomRepository(_mockContext.Object);
-            var result = await repo.GetByIdAsync(new ObjectId()).ConfigureAwait(true);
+            var result = await repo.GetByIdAsync(Guid.NewGuid()).ConfigureAwait(true);
 
             Assert.IsType<Room>(result);
             Assert.Equal(_roomEntity.Id, result.Id);

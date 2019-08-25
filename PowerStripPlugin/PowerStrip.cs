@@ -1,8 +1,4 @@
-﻿using HomeAutomationRepositories.Plugins;
-using HomeAutomationRepositories.Repositories;
-using HomeAutomationRepositories.Repositories.Interfaces;
-using HomeAutomationRepositories.Services;
-using HomeAutomationRepositories.Services.Interface;
+﻿using BecauseImClever.DeviceBase;
 using Microsoft.Extensions.DependencyInjection;
 
 
@@ -21,8 +17,7 @@ namespace BecauseImClever.PowerStripPlugin
 
         public void RegisterDependencies(IServiceCollection services)
         {
-            services.AddTransient<IDeviceService, DeviceService>();
-            services.AddTransient<IDeviceRepository, DeviceRepository>();
+
         }
     }
 }

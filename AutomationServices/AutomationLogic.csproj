@@ -2,15 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <RootNamespace>BecauseImClever.AutomationLogic</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\DeviceBase\DeviceBase.csproj" />
     <ProjectReference Include="..\HomeAutomationRepositories\AutomationRepositories.csproj" />
   </ItemGroup>
 

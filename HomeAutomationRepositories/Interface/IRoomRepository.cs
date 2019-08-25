@@ -1,15 +1,15 @@
-﻿using BecauseImClever.HomeAutomationRepositories.Entities;
-using MongoDB.Bson;
+﻿using BecauseImClever.AutomationModels;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BecauseImClever.HomeAutomationRepositories.Repositories.Interfaces
+namespace BecauseImClever.AutomationRepositories.Interfaces
 {
     public interface IRoomRepository
     {
         Task<Room> CreateRoomAsync(Room roomEntity);
         Task<List<Room>> GetAllAsync();
-        Task<Room> GetByIdAsync(ObjectId Id);
+        Task<Room> GetByIdAsync(Guid Id);
         Task<bool> UpdateAsync(Room roomEntity);
         Task<bool> DeleteAsync(string id);
     }

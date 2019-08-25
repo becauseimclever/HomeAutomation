@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 
-namespace AutomationUnitTests
+namespace BecauseImClever.AutomationUnitTests
 {
     [ExcludeFromCodeCoverage]
-
     public static class MongoHelper
     {
         public static IAsyncCursor<T> BuildMockAsyncCursor<T>(T expectedResult)

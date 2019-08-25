@@ -3,7 +3,7 @@ using MongoDB.Driver;
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BecauseImClever.HomeAutomationRepositories.DataContext
+namespace BecauseImClever.AutomationRepositories.DataContext
 {
     [ExcludeFromCodeCoverage]
 

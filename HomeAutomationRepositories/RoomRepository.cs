@@ -1,13 +1,12 @@
-﻿using BecauseImClever.HomeAutomationRepositories.DataContext;
-using BecauseImClever.HomeAutomationRepositories.Entities;
-using BecauseImClever.HomeAutomationRepositories.Repositories.Interfaces;
-using MongoDB.Bson;
+﻿using BecauseImClever.AutomationModels;
+using BecauseImClever.AutomationRepositories.DataContext;
+using BecauseImClever.AutomationRepositories.Interfaces;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BecauseImClever.HomeAutomationRepositories.Repositories
+namespace BecauseImClever.AutomationRepositories
 {
     public class RoomRepository : IRoomRepository
     {
@@ -37,7 +36,7 @@ namespace BecauseImClever.HomeAutomationRepositories.Repositories
 
             return await results.ToListAsync().ConfigureAwait(true);
         }
-        public async Task<Room> GetByIdAsync(ObjectId Id)
+        public async Task<Room> GetByIdAsync(Guid Id)
         {
             var builder = Builders<Room>.Filter;
             var filter = builder.Eq(x => x.Id, Id);
@@ -54,8 +53,7 @@ namespace BecauseImClever.HomeAutomationRepositories.Repositories
             var filter = builder.Eq(x => x.Id, roomEntity?.Id);
 
             var update = Builders<Room>.Update
-                .Set(x => x.Name, roomEntity?.Name)
-                .Set(x => x.DeviceIds, roomEntity?.DeviceIds);
+                .Set(x => x.Name, roomEntity?.Name);
             var updateOptions = new UpdateOptions() { IsUpsert = false };
             var returnValue = await _roomCollection.UpdateOneAsync(filter, update, updateOptions).ConfigureAwait(true);
             return returnValue.IsAcknowledged;
@@ -65,7 +63,8 @@ namespace BecauseImClever.HomeAutomationRepositories.Repositories
         #region Delete
         public async Task<bool> DeleteAsync(string id)
         {
-            var returnValue = await _roomCollection.DeleteOneAsync(x => x.Id == ObjectId.Parse(id)).ConfigureAwait(true);
+            var returnValue = await _roomCollection.DeleteOneAsync(x => x.Id == Guid.Parse(id)).ConfigureAwait(true);
+
             return returnValue.IsAcknowledged;
         }
 

@@ -1,32 +1,20 @@
-﻿using AutomationFrontEnd.Controllers;
-using HomeAutomationRepositories.DataContext;
-using HomeAutomationRepositories.Entities;
-using HomeAutomationRepositories.Repositories;
-using HomeAutomationRepositories.Repositories.Interfaces;
-using HomeAutomationRepositories.Services.Interface;
-using MongoDB.Bson;
-using MongoDB.Driver;
+﻿using AutomationAPI.Controllers;
+using BecauseImClever.AutomationLogic.Interfaces;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Xunit;
-namespace AutomationUnitTests.Controller
+namespace BecauseImClever.AutomationUnitTests.Controller
 {
     public class RoomsControllerTest
     {
-        private readonly Mock<IRoomsService> _mockService;
+        private readonly Mock<IRoomService> _mockService;
         public RoomsControllerTest()
         {
-            _mockService = new Mock<IRoomsService>();
+            _mockService = new Mock<IRoomService>();
         }
         [Fact]
         public void CreateRoomController()
         {
-            var controller = new RoomsController(_mockService.Object);
+            var controller = new RoomController(_mockService.Object);
             Assert.NotNull(controller);
         }
     }

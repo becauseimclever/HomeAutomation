@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 
-namespace BecauseImClever.HomeAutomationRepositories.DataContext
+namespace BecauseImClever.AutomationRepositories.DataContext
 {
     public interface IMongoContext<T> where T : class
     {

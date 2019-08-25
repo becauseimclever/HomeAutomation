@@ -20,7 +20,7 @@ namespace BecauseImClever.AutomationRepositories
         }
 
         #region Create
-        public async Task<Room> CreateRoomAsync(Room room)
+        public async ValueTask<Room> CreateRoomAsync(Room room)
         {
             var _room = room ?? throw new ArgumentNullException(nameof(room));
             await _roomCollection.InsertOneAsync(_room).ConfigureAwait(true);
@@ -67,7 +67,6 @@ namespace BecauseImClever.AutomationRepositories
 
             return returnValue.IsAcknowledged;
         }
-
 
         #endregion
     }

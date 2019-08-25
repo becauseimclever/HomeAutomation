@@ -7,7 +7,7 @@ namespace BecauseImClever.AutomationRepositories.Interfaces
 {
     public interface IRoomRepository
     {
-        Task<Room> CreateRoomAsync(Room roomEntity);
+        ValueTask<Room> CreateRoomAsync(Room roomEntity);
         Task<List<Room>> GetAllAsync();
         Task<Room> GetByIdAsync(Guid Id);
         Task<bool> UpdateAsync(Room roomEntity);

@@ -12,16 +12,15 @@ namespace BecauseImClever.AutomationLogic.Services
         private readonly IRoomRepository _roomRepository;
         public RoomService(IRoomRepository roomRepository)
         {
-
+            _roomRepository = roomRepository;
         }
-
-        public ValueTask<Room> CreateAsync(Room room)
+        public async ValueTask<Room> CreateAsync(Room room)
         {
-            throw new NotImplementedException();
+            return await _roomRepository.CreateRoomAsync(room);
         }
-        public ValueTask<IEnumerable<Room>> GetAllAsync()
+        public async ValueTask<IEnumerable<Room>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _roomRepository.GetAllAsync();
         }
         public ValueTask<Room> GetByIdAsync(string Id)
         {

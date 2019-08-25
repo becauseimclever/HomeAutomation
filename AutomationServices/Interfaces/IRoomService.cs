@@ -8,6 +8,9 @@ namespace BecauseImClever.AutomationLogic.Interfaces
 {
     public interface IRoomService
     {
+        ValueTask<Room> CreateAsync(Room room);
+        ValueTask<IEnumerable<Room>> GetAllAsync();
+        ValueTask<Room> GetByIdAsync(string Id);
         ValueTask<Room> UpdateAsync(Room room);
         ValueTask<bool> DeleteAsync(string id);
 

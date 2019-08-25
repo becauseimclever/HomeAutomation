@@ -18,5 +18,12 @@ namespace AutomationAPI.Controllers
         {
             _roomService = roomService;
         }
+        [HttpGet]
+        [Route("")]
+        public async ValueTask<IActionResult> GetAllAsync()
+        {
+            var rooms = await _roomService.GetAllAsync();
+            return Ok(rooms);
+        }
     }
 }

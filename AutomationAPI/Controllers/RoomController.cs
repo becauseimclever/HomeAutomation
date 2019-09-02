@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BecauseImClever.AutomationLogic.Interfaces;
-using Microsoft.AspNetCore.Http;
+﻿using BecauseImClever.AutomationLogic.Interfaces;
+using BecauseImClever.AutomationModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace AutomationAPI.Controllers
 {
@@ -18,12 +15,29 @@ namespace AutomationAPI.Controllers
         {
             _roomService = roomService;
         }
+        #region Create
+        [HttpPost]
+        [Route("")]
+        public async ValueTask<IActionResult> CreateAsync(Room room)
+        {
+            var newRoom = await _roomService.CreateAsync(room);
+            return Ok(newRoom);
+        }
+        #endregion
+
         [HttpGet]
         [Route("")]
         public async ValueTask<IActionResult> GetAllAsync()
         {
             var rooms = await _roomService.GetAllAsync();
             return Ok(rooms);
+        }
+        [HttpGet]
+        [Route("{Id}")]
+        public async ValueTask<IActionResult> GetByIdAsync(string Id)
+        {
+            var room = await _roomService.GetByIdAsync(Id);
+            return Ok(room);
         }
     }
 }

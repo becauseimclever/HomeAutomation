@@ -1,4 +1,5 @@
-﻿using BecauseImClever.DeviceBase;
+﻿using System.Collections.Generic;
+using BecauseImClever.DeviceBase;
 using Microsoft.Extensions.DependencyInjection;
 
 
@@ -10,10 +11,8 @@ namespace BecauseImClever.PowerStripPlugin
 
         public string Description => "Represents the Powerstrip Plugin";
 
-        public int Execute()
-        {
-            return 0;
-        }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1065:Do not raise exceptions in unexpected locations", Justification = "<Pending>")]
+        public IEnumerable<IDeviceAction> Actions => throw new System.NotImplementedException();
 
         public void RegisterDependencies(IServiceCollection services)
         {

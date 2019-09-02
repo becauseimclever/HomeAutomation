@@ -52,7 +52,6 @@ namespace BecauseImClever.AutomationAPI
         }
         static IEnumerable<IDevicePlugin> CreateDevices(Assembly assembly)
         {
-            int count = 0;
             foreach (Type type in assembly.GetTypes())
             {
                 if (typeof(IDevicePlugin).IsAssignableFrom(type))
@@ -60,17 +59,9 @@ namespace BecauseImClever.AutomationAPI
                     IDevicePlugin result = Activator.CreateInstance(type) as IDevicePlugin;
                     if (result != null)
                     {
-                        count++;
                         yield return result;
                     }
                 }
-            }
-            if (count == 0)
-            {
-                string availableTypes = string.Join(",", assembly.GetTypes().Select(t => t.FullName));
-                //    throw new ApplicationException(
-                //$"Can't find any type which implements IDevicePlugin in {assembly} from {assembly.Location}.\n" +
-                //$"Available types: {availableTypes}");
             }
         }
     }

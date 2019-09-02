@@ -5,4 +5,8 @@
     <RootNamespace>BecauseImClever.AutomationModels</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DeviceBase\DeviceBase.csproj" />
+  </ItemGroup>
+
 </Project>

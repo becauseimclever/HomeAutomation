@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BecauseImClever.DeviceBase;
+using System;
+using System.Collections.Generic;
 
 namespace BecauseImClever.AutomationModels
 {
@@ -6,5 +8,6 @@ namespace BecauseImClever.AutomationModels
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public IEnumerable<Device> Devices { get; set; }
     }
 }

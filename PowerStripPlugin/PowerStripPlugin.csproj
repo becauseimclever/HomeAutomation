@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <AssemblyName>BecauseImClever.PowerStripPlugin</AssemblyName>
   </PropertyGroup>
 
 
@@ -16,5 +17,9 @@
   <ItemGroup>
     <ProjectReference Include="..\DeviceBase\DeviceBase.csproj" />
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="start XCOPY  $(OutDir)*.$(ProjectName).* ..\AutomationAPI\bin\Debug\netcoreapp3.0\Plugins\$(ProjectName) /c /i /s /y" />
+  </Target>
 
 </Project>

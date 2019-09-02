@@ -11,12 +11,11 @@ namespace BecauseImClever.AutomationAPI
         public PluginLoadContext(string pluginPath)
         {
             _resolver = new AssemblyDependencyResolver(pluginPath);
-
         }
         protected override Assembly Load(AssemblyName assemblyName)
         {
             string assemblyPath = _resolver.ResolveAssemblyToPath(assemblyName);
-            
+
             if (assemblyPath != null && assemblyPath.Contains("\\Plugins\\"))
             {
                 return LoadFromAssemblyPath(assemblyPath);

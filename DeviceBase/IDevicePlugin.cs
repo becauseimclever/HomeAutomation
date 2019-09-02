@@ -9,7 +9,7 @@ namespace BecauseImClever.DeviceBase
     {
         string Name { get; }
         string Description { get; }
-        int Execute();
+        IEnumerable<IDeviceAction> Actions { get; }
         void RegisterDependencies(IServiceCollection services);
     }
 }

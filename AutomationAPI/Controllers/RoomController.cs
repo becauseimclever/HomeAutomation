@@ -1,6 +1,7 @@
 ﻿using BecauseImClever.AutomationLogic.Interfaces;
 using BecauseImClever.AutomationModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace AutomationAPI.Controllers
@@ -13,7 +14,7 @@ namespace AutomationAPI.Controllers
 
         public RoomController(IRoomService roomService)
         {
-            _roomService = roomService;
+            _roomService = roomService ?? throw new ArgumentNullException(nameof(roomService));
         }
         #region Create
         [HttpPost]

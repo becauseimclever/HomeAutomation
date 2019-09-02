@@ -6,5 +6,6 @@ namespace PowerStripPlugin.Services
 {
     public class PowerStripService
     {
+
     }
 }

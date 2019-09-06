@@ -26,7 +26,7 @@ namespace BecauseImClever.AutomationAPI
                  });
         static void RegisterPlugins(IHostBuilder host)
         {
-            var pluginFolder = Path.Combine(AppContext.BaseDirectory, "Plugins");
+            var pluginFolder = Path.Combine(Directory.GetCurrentDirectory(), "Plugins");
             if (!Directory.Exists(pluginFolder)) { Directory.CreateDirectory(pluginFolder); }
             var pluginPaths = Directory.GetDirectories(pluginFolder);
             var dllPaths = pluginPaths.SelectMany(path =>

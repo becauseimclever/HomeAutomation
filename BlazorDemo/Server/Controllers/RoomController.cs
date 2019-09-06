@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
-namespace AutomationAPI.Controllers
+namespace BlazorDemo.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -39,24 +39,6 @@ namespace AutomationAPI.Controllers
         {
             var room = await _roomService.GetByIdAsync(Id);
             return Ok(room);
-        }
-        [HttpPut]
-        [Route("")]
-        public async ValueTask<IActionResult> UpdateAsync(Room room)
-        {
-            var updateRoom = await _roomService.UpdateAsync(room);
-            return Ok(updateRoom);
-        }
-        [HttpDelete]
-        [Route("{Id}")]
-        public async ValueTask<IActionResult> DeleteAsync(string Id)
-        {
-            bool success = await _roomService.DeleteAsync(Id);
-            if (success)
-                return NoContent();
-            else
-                return BadRequest();
-
         }
     }
 }

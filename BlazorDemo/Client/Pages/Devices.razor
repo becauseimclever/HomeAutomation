@@ -1,9 +1,9 @@
-﻿@page "/devices/{DeviceId}"
+﻿@page "/rooms/{RoomId}/devices/"
 <h3>Devices</h3>
 
 @code {
     [Parameter]
-    public Guid DeviceId
+    public Guid RoomId
     {
         get; set;
     }

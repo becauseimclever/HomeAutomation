@@ -24,6 +24,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationModels", "Automat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDemo.Client", "BlazorDemo\Client\BlazorDemo.Client.csproj", "{683298DF-1F7D-4A1A-B61B-989AE570E44C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomationWebApi", "AutomationWebApi\AutomationWebApi.csproj", "{37AFF644-D0E9-4752-B0DC-67FC7171B0CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +68,10 @@ Global
 		{683298DF-1F7D-4A1A-B61B-989AE570E44C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{683298DF-1F7D-4A1A-B61B-989AE570E44C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{683298DF-1F7D-4A1A-B61B-989AE570E44C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37AFF644-D0E9-4752-B0DC-67FC7171B0CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37AFF644-D0E9-4752-B0DC-67FC7171B0CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37AFF644-D0E9-4752-B0DC-67FC7171B0CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37AFF644-D0E9-4752-B0DC-67FC7171B0CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

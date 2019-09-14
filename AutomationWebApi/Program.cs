@@ -7,9 +7,9 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace BecauseImClever.AutomationAPI
+namespace BecauseImClever.AutomationWebApi
 {
-    public static class Program
+    public class Program
     {
         public static void Main(string[] args)
         {
@@ -20,10 +20,10 @@ namespace BecauseImClever.AutomationAPI
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                 .ConfigureWebHostDefaults(webBuilder =>
-                 {
-                     webBuilder.UseStartup<Startup>();
-                 });
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
         static void RegisterPlugins(IHostBuilder host)
         {
             var pluginFolder = Path.Combine(Directory.GetCurrentDirectory(), "Plugins");
@@ -64,5 +64,7 @@ namespace BecauseImClever.AutomationAPI
                 }
             }
         }
+
+
     }
 }

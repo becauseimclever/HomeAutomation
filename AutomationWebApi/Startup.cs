@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using BecauseImClever.AutomationLogic.Interfaces;
 using BecauseImClever.AutomationLogic.Services;
 using BecauseImClever.AutomationRepositories;
@@ -5,16 +9,15 @@ using BecauseImClever.AutomationRepositories.DataContext;
 using BecauseImClever.AutomationRepositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Linq;
 
-namespace BecauseImClever.AutomationAPI
+namespace BecauseImClever.AutomationWebApi
 {
     public class Startup
     {
@@ -22,10 +25,11 @@ namespace BecauseImClever.AutomationAPI
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
 
+
         // This method gets called by the runtime. Use this method to add services to the container.
+        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             RegisterRepositories(services);
@@ -54,27 +58,19 @@ namespace BecauseImClever.AutomationAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseResponseCompression();
-
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
                 app.UseBlazorDebugging();
             }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                //app.UseHsts();
-            }
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Home Automation V1");
             });
-            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseClientSideBlazorFiles<BlazorDemo.Client.Startup>();
 
@@ -99,7 +95,7 @@ namespace BecauseImClever.AutomationAPI
         {
             services.AddTransient<IRoomRepository, RoomRepository>();
         }
-        private  void RegisterOptions(IServiceCollection services)
+        private void RegisterOptions(IServiceCollection services)
         {
             services.Configure<MongoSettings>(options =>
             {

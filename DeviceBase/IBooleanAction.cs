@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BecauseImClever.DeviceBase
 {
-    public interface IBooleanAction
+    public interface IBooleanAction : IDeviceAction
     {
         ValueTask<bool> CurrentState(Guid Id);
         ValueTask<bool> SetState(Guid Id, bool state);

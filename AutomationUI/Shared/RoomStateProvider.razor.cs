@@ -12,5 +12,6 @@ namespace BecauseImClever.AutomationUI.Shared
     {
         [Parameter] public RenderFragment ChildContent { get; set; }
         public List<Room> RoomList { get; set; }
+
     }
 }

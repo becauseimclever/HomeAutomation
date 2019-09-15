@@ -1,5 +1,4 @@
-﻿@using BecauseImClever.AutomationModels
-<div class="top-row pl-4 navbar navbar-dark">
+﻿<div class="top-row pl-4 navbar navbar-dark">
     <a class="navbar-brand" href="">AutomationUI</a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
@@ -22,7 +21,6 @@
 </div>
 
 @code {
-    [CascadingParameter] List<Room> rooms { get; set; }
     bool collapseNavMenu = true;
 
     string NavMenuCssClass => collapseNavMenu ? "collapse" : null;

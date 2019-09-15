@@ -11,8 +11,8 @@ namespace BecauseImClever.AutomationUI.Pages
 {
     public class RoomsBase : ComponentBase
     {
-        [CascadingParameter] public List<Room> rooms { get; set; }
         [Inject] HttpClient httpClient { get; set; }
+        public List<Room> rooms { get; set; }
         public bool isLoading = false;
         protected override async Task OnInitializedAsync()
         {

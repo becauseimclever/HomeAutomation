@@ -1,4 +1,5 @@
 ﻿using BecauseImClever.AutomationModels;
+using BecauseImClever.DeviceBase;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,9 @@ namespace BecauseImClever.AutomationUI.Components
         [Inject] HttpClient httpClient { get; set; }
         [Parameter] public Room room { get; set; }
         [Parameter] public EventCallback Delete { get; set; }
-        public async Task UpdateRoom(Room room)
+
+        public async Task UpdateRoom()
         {
-            Console.WriteLine(room.Id);
             var updatedRoom = await httpClient.PutJsonAsync<Room>(@"api/room", room);
             Console.WriteLine(updatedRoom.Name + " was updated.");
 
@@ -31,6 +32,16 @@ namespace BecauseImClever.AutomationUI.Components
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+        public async Task NewDevice()
+        {
+            if (room.Devices == null)
+                room.Devices = new List<Device>();
+
+            var list = room.Devices.ToList();
+            list.Add(new GenericDevice() { Id = Guid.NewGuid(), Name = "Generic Device" });
+            room.Devices = list;
+            await UpdateRoom();
         }
     }
 }

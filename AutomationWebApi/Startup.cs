@@ -81,7 +81,7 @@ namespace BecauseImClever.AutomationWebApi
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
-                endpoints.MapFallbackToClientSideBlazor<BlazorDemo.Client.Startup>("index.html");
+                endpoints.MapFallbackToClientSideBlazor<AutomationUI.Startup>("index.html");
 
             });
 

@@ -32,7 +32,7 @@
                 </div>
                 <div class="text-center">
                     <button type="button" class="btn btn-info rounded-0 py-2 px-4 mr-2"
-                            @onclick="@(() => UpdateRoom(room))">
+                            @onclick="UpdateRoom">
                         Update
                     </button>
                     <button type="button" class="btn btn-danger rounded-0 py-2 px-4"
@@ -41,9 +41,15 @@
                     </button>
                 </div>
                 <div class="text-center">
-                    <NavLink class="nav-link" href="devices">
-                        <span class="oi oi-puzzle-piece" aria-hidden="true"></span> View Devices
-                    </NavLink>
+                    @if (room.Devices != null)
+                        @foreach (var device in room.Devices)
+                        {
+                            <DeviceComponent device="device" />
+                        }
+                    <button type="button" class="btn btn-info rounded-0 py-2 px-4 mr-2"
+                            @onclick="NewDevice">
+                        Add Device
+                    </button>
                 </div>
             </div>
         </div>

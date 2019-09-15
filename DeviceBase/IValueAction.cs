@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BecauseImClever.DeviceBase
 {
-    public interface IValueAction
+    public interface IValueAction : IDeviceAction
     {
     }
 }

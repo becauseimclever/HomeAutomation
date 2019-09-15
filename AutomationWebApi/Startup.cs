@@ -72,7 +72,7 @@ namespace BecauseImClever.AutomationWebApi
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Home Automation V1");
             });
             app.UseStaticFiles();
-            app.UseClientSideBlazorFiles<BlazorDemo.Client.Startup>();
+            app.UseClientSideBlazorFiles<AutomationUI.Startup>();
 
             app.UseRouting();
 

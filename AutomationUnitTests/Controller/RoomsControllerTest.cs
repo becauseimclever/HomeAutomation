@@ -1,5 +1,4 @@
 ﻿using AutoFixture;
-using AutomationAPI.Controllers;
 using BecauseImClever.AutomationLogic.Interfaces;
 using BecauseImClever.AutomationModels;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +9,7 @@ using Xunit;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Collections.Generic;
+using AutomationWebApi.Controllers;
 
 namespace BecauseImClever.AutomationUnitTests.Controller
 {

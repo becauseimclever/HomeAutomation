@@ -19,7 +19,6 @@ namespace BecauseImClever.AutomationRepositories
         {
             var _context = context ?? throw new ArgumentNullException(nameof(context));
             _roomCollection = context.MongoCollection;
-            if (BsonClassMap.IsClassMapRegistered(typeof(GenericDevice))) BsonClassMap.RegisterClassMap<GenericDevice>();
         }
 
         #region Create

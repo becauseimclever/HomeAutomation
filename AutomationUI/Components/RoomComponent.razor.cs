@@ -39,7 +39,6 @@ namespace BecauseImClever.AutomationUI.Components
                 room.Devices = new List<Device>();
 
             var list = room.Devices.ToList();
-            list.Add(new GenericDevice() { Id = Guid.NewGuid(), Name = "Generic Device" });
             room.Devices = list;
             await UpdateRoom();
         }

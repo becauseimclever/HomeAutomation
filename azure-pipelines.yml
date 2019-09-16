@@ -11,8 +11,12 @@ pool:
   vmImage: 'windows-2019'
 variables:
   buildConfiguration: 'Release'
-
 steps:
+- task: DotNetCoreInstaller@0
+  inputs:
+    packageType: 'sdk'
+    version: '3.0.100-preview9-014004'
+
 - script: dotnet restore
 
 - task: DotNetCoreCLI@2

@@ -1,7 +1,9 @@
 ﻿using AutoFixture;
+using AutoFixture.Kernel;
 using BecauseImClever.AutomationLogic.Services;
 using BecauseImClever.AutomationModels;
 using BecauseImClever.AutomationRepositories.Interfaces;
+using BecauseImClever.DeviceBase;
 using MongoDB.Bson;
 using Moq;
 using System;
@@ -20,6 +22,7 @@ namespace BecauseImClever.AutomationUnitTests.Service
         {
             fixture = new Fixture();
             fixture.Register(() => Guid.NewGuid());
+            fixture.Customizations.Add(new TypeRelay(typeof(Device), typeof(GenericDevice)));
             _mockRoomRepo = new Mock<IRoomRepository>();
         }
         [Fact]
@@ -27,7 +30,7 @@ namespace BecauseImClever.AutomationUnitTests.Service
         {
             Assert.Throws<ArgumentNullException>(() => new RoomService(null));
         }
-        [Fact(Skip ="This is borked")]
+        [Fact]
         public async Task CreateRoomReturnsRoom()
         {
             var room = fixture.Create<Room>();
@@ -41,7 +44,7 @@ namespace BecauseImClever.AutomationUnitTests.Service
             Assert.Equal(room.Id, result.Id);
             Assert.Equal(room.Name, result.Name);
         }
-        [Fact(Skip = "This is borked")]
+        [Fact]
         public async Task GetAllReturnsListOfRooms()
         {
             var rooms = fixture.Create<List<Room>>();
@@ -54,7 +57,7 @@ namespace BecauseImClever.AutomationUnitTests.Service
             Assert.NotEmpty(results);
             Assert.Equal(rooms.Count, results.Count());
         }
-        [Fact(Skip = "This is borked")]
+        [Fact]
         public async Task GetByIdReturnsRoom()
         {
             var room = fixture.Create<Room>();
@@ -67,7 +70,7 @@ namespace BecauseImClever.AutomationUnitTests.Service
             Assert.IsType<Room>(result);
             Assert.Equal(room.Id, result.Id);
         }
-        [Fact(Skip = "This is borked")]
+        [Fact]
         public async Task UpdateReturnsTrue()
         {
             var room = fixture.Create<Room>();

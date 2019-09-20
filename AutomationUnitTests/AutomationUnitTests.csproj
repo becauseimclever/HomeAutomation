@@ -2,11 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-
     <IsPackable>false</IsPackable>
-
     <RootNamespace>BecauseImClever.AutomationUnitTests</RootNamespace>
-
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
@@ -27,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AutomationAPI\AutomationAPI.csproj" />
     <ProjectReference Include="..\AutomationModels\AutomationModels.csproj" />
     <ProjectReference Include="..\AutomationServices\AutomationLogic.csproj" />
     <ProjectReference Include="..\AutomationWebApi\AutomationWebApi.csproj" />

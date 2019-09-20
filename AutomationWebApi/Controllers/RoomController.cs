@@ -1,7 +1,9 @@
 ﻿using BecauseImClever.AutomationLogic.Interfaces;
 using BecauseImClever.AutomationModels;
+using BecauseImClever.DeviceBase;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AutomationWebApi.Controllers
@@ -37,8 +39,7 @@ namespace AutomationWebApi.Controllers
         [Route("{Id}")]
         public async ValueTask<IActionResult> GetByIdAsync(string Id)
         {
-            var room = await _roomService.GetByIdAsync(Id);
-            return Ok(room);
+            return Ok(await _roomService.GetByIdAsync(Id));
         }
         [HttpPut]
         [Route("")]

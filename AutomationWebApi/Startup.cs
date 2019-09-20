@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutomationWebApi;
 using BecauseImClever.AutomationLogic.Interfaces;
 using BecauseImClever.AutomationLogic.Services;
 using BecauseImClever.AutomationRepositories;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,6 +47,9 @@ namespace BecauseImClever.AutomationWebApi
                 {
                     apm.ApplicationParts.Add(new AssemblyPart(t.Assembly));
                 }
+            }).AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.TypeNameHandling = Newtonsoft.Json.TypeNameHandling.All;
             });
             services.AddSwaggerGen(c =>
             {

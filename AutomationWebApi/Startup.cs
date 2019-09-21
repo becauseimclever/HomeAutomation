@@ -50,6 +50,7 @@ namespace BecauseImClever.AutomationWebApi
             }).AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.TypeNameHandling = Newtonsoft.Json.TypeNameHandling.All;
+                options.SerializerSettings.SerializationBinder = new DeviceDeserializer();
             });
             services.AddSwaggerGen(c =>
             {

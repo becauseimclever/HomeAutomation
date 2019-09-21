@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BecauseImClever.AutomationUI.Components;
+using Newtonsoft.Json;
+using BecauseImClever.DeviceBase;
 
 namespace BecauseImClever.AutomationUI.Pages
 {
@@ -21,7 +23,11 @@ namespace BecauseImClever.AutomationUI.Pages
         public async Task LoadRooms()
         {
             isLoading = true;
-            rooms = await httpClient.GetJsonAsync<List<Room>>(@"api/room");
+            var temp = await httpClient.GetAsync(@"api/room");
+            Console.WriteLine(await temp.Content.ReadAsStringAsync());
+            var temp2 = JsonConvert.DeserializeObject<List<Room>>(await temp.Content.ReadAsStringAsync(), new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All });
+            Console.WriteLine(temp2);
+            rooms = temp2;
 
             isLoading = false;
         }

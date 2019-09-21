@@ -1,57 +1,37 @@
-﻿using BecauseImClever.DeviceBase;
+﻿using Newtonsoft.Json.Serialization;
 using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
-using System.Reflection;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace AutomationWebApi
 {
-    public class DeviceDeserializer : JsonConverter<Device>
+    public class DeviceDeserializer : DefaultSerializationBinder
     {
-        public override bool CanConvert(Type typeToConvert)
+        private static readonly Regex regex = new Regex(
+       @"System\.Private\.CoreLib(, Version=[\d\.]+)?(, Culture=[\w-]+)(, PublicKeyToken=[\w\d]+)?");
+        private static readonly ConcurrentDictionary<Type, (string assembly, string type)> cache =
+        new ConcurrentDictionary<Type, (string, string)>();
+        public override void BindToName(Type serializedType, out string assemblyName, out string typeName)
         {
-            return typeToConvert.IsSubclassOf(typeof(Device)) ;
-        }
+            base.BindToName(serializedType, out assemblyName, out typeName);
 
-        public override Device Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            while (reader.Read())
+            if (cache.TryGetValue(serializedType, out var name))
             {
-                Console.Write(reader.TokenType);
-
-                switch (reader.TokenType)
-                {
-                    case JsonTokenType.PropertyName:
-                    case JsonTokenType.String:
-                        {
-                            string text = reader.GetString();
-                            Console.Write(" ");
-                            Console.Write(text);
-                            break;
-                        }
-
-                    case JsonTokenType.Number:
-                        {
-                            int value = reader.GetInt32();
-                            Console.Write(" ");
-                            Console.Write(value);
-                            break;
-                        }
-
-                        // Other token types elided for brevity
-                }
+                assemblyName = name.assembly;
+                typeName = name.type;
             }
+            else
+            {
+                if (assemblyName.AsSpan().Contains("System.Private.CoreLib".AsSpan(), StringComparison.OrdinalIgnoreCase))
+                    assemblyName = regex.Replace(assemblyName, "mscorlib");
 
-            Console.WriteLine();
-            return new GenericDevice();
+                if (typeName.AsSpan().Contains("System.Private.CoreLib".AsSpan(), StringComparison.OrdinalIgnoreCase))
+                    typeName = regex.Replace(typeName, "mscorlib");
+
+                cache.TryAdd(serializedType, (assemblyName, typeName));
+            }
         }
 
-        public override void Write(Utf8JsonWriter writer, Device value, JsonSerializerOptions options)
-        {
-            JsonSerializer.Serialize(writer, value, value.GetType(), options);
-        }
     }
 }

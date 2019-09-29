@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.28721.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationRepositories", "AutomationRepositories\AutomationRepositories.csproj", "{D42D935E-85D8-4C61-AA8A-0EB0D1B5C056}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationMQTTServer", "AutomationMQTTServer\AutomationMQTTServer.csproj", "{40CD1B0D-A32F-4A24-A0FA-0D3608C78F73}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationUnitTests", "AutomationUnitTests\AutomationUnitTests.csproj", "{5C36C7C2-6447-40F5-9CBE-80ED526A0B5F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerStripPlugin", "PowerStripPlugin\PowerStripPlugin.csproj", "{609D70F9-F57E-4862-A9E0-DF35F1EDC95B}"
@@ -34,10 +32,6 @@ Global
 		{D42D935E-85D8-4C61-AA8A-0EB0D1B5C056}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D42D935E-85D8-4C61-AA8A-0EB0D1B5C056}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D42D935E-85D8-4C61-AA8A-0EB0D1B5C056}.Release|Any CPU.Build.0 = Release|Any CPU
-		{40CD1B0D-A32F-4A24-A0FA-0D3608C78F73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{40CD1B0D-A32F-4A24-A0FA-0D3608C78F73}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{40CD1B0D-A32F-4A24-A0FA-0D3608C78F73}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{40CD1B0D-A32F-4A24-A0FA-0D3608C78F73}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5C36C7C2-6447-40F5-9CBE-80ED526A0B5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5C36C7C2-6447-40F5-9CBE-80ED526A0B5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C36C7C2-6447-40F5-9CBE-80ED526A0B5F}.Release|Any CPU.ActiveCfg = Release|Any CPU

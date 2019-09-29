@@ -10,6 +10,6 @@ namespace BecauseImClever.DeviceBase
         string Name { get; }
         string Description { get; }
         IEnumerable<IDeviceAction> Actions { get; }
-        void RegisterDependencies(IServiceCollection services);
+       void RegisterDependencies(IServiceCollection services);
     }
 }

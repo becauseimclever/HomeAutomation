@@ -95,6 +95,7 @@ namespace BecauseImClever.AutomationWebApi
         private static void RegisterServices(IServiceCollection services)
         {
             services.AddTransient<IRoomService, RoomService>();
+            services.AddSingleton<IPluginService, PluginService>();
             services.AddTransient(typeof(IMongoContext<>), typeof(MongoContext<>));
         }
         private static void RegisterRepositories(IServiceCollection services)

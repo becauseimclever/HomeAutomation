@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -19,11 +20,12 @@ namespace BecauseImClever.AutomationUI
         {
             try
             {
-                var bytes = await Http.GetByteArrayAsync("_framework/_bin/ClassLibrary1.dll");
+                var bytes = await Http.GetByteArrayAsync(@"api/Plugin/PowerStripPlugin");
+                
                 var assembly = System.Reflection.Assembly.Load(bytes);
-                var t = assembly.GetType("ClassLibrary1.Class1");
-                var m = t.GetMethod("GetMessage");
-                Console.WriteLine($"ClassLibrary1.Class1.GetMessage(): {m.Invoke(null, null)}");
+                var t = assembly.GetType("BecauseImClever.PowerStripPlugin.PowerStrip");
+                var m = t.GetMethod("RegisterDependencies");
+                Console.WriteLine($"BecauseImClever.PowerStripPlugin.PowerStrip.RegisterDependencies(): {m.Invoke(t.TypeInitializer.Invoke(null) , null)}");
             }
             catch (Exception ex)
             {

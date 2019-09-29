@@ -59,6 +59,7 @@ namespace BecauseImClever.AutomationWebApi
                     IDevicePlugin result = Activator.CreateInstance(type) as IDevicePlugin;
                     if (result != null)
                     {
+                        Console.WriteLine(type.Name);
                         yield return result;
                     }
                 }

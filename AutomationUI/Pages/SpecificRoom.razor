@@ -1,0 +1,14 @@
+﻿@page "/rooms/{id:guid}"
+@inherits BecauseImClever.AutomationUI.Pages.SpecificRoomBase
+<EditForm Model="@room">
+    <h3>@room.Name</h3>
+    <InputCheckbox id="status" @bind-Value="room.Status" /> @room.Status
+    <ul>
+        @if (room.Devices != null)
+        {
+            @foreach (var device in room.Devices)
+            {
+                <li>@device.Name - @device.Id - @nameof(device)</li>
+            }}
+    </ul>
+</EditForm>

@@ -2,7 +2,7 @@
 @using BecauseImClever.AutomationUI.Components
 @inherits BecauseImClever.AutomationUI.Pages.RoomsBase
 <h3>Rooms</h3>
-@if (rooms == null)
+@if (RoomList == null)
 {
     if (isLoading)
     {
@@ -17,9 +17,9 @@
 else
 {
     <div class="row">
-        @foreach (var room in rooms)
+        @foreach (var room in RoomList)
         {
-            <RoomComponent room="@room" Delete="@(()=> {  Console.WriteLine(room.Name + " is getting deleted"); rooms.Remove(room);})"></RoomComponent>
+            <RoomComponent room="@room" Delete="@(()=> {  Console.WriteLine(room.Name + " is getting deleted"); RoomList.Remove(room);})"></RoomComponent>
         }
     </div>
     <div class="row">

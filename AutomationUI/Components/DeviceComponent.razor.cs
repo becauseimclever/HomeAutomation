@@ -8,16 +8,14 @@ using System.Threading.Tasks;
 
 namespace BecauseImClever.AutomationUI.Components
 {
-    public class DeviceComponentBase : ComponentBase
-    {
-        [Inject] HttpClient HttpClient { get; set; }
-        [Parameter] public Device device { get; set; }
+	public class DeviceComponentBase : ComponentBase
+	{
+		[Inject] HttpClient HttpClient { get; set; }
+		[Parameter] public Device device { get; set; }
 
-        protected async override Task OnInitializedAsync()
-        {
-
-
-            await base.OnInitializedAsync();
-        }
-    }
+		protected async override Task OnInitializedAsync()
+		{
+			await base.OnInitializedAsync();
+		}
+	}
 }

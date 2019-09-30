@@ -8,13 +8,16 @@ namespace BecauseImClever.PowerStripPlugin
 {
 	public class PowerStrip : IDevicePlugin
 	{
-		
+
 		public string Name => "PowerStrip";
 
 		public string Description => "Represents the Powerstrip Plugin";
 
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1065:Do not raise exceptions in unexpected locations", Justification = "<Pending>")]
-		public IEnumerable<IDeviceAction> Actions => throw new System.NotImplementedException();
+		public IEnumerable<IDeviceAction> Actions => new List<IDeviceAction>
+		{
+
+		};
 
 		public void RegisterDependencies(IServiceCollection services)
 		{

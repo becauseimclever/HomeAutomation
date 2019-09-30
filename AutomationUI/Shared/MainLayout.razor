@@ -1,4 +1,7 @@
 ﻿@inherits LayoutComponentBase
+@inject HttpClient httpClient
+@using Newtonsoft.Json
+@using BecauseImClever.AutomationModels
 <div class="sidebar">
     <NavMenu />
 </div>
@@ -7,9 +10,24 @@
     <div class="top-row px-4">
         <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
     </div>
-    <RoomStateProvider>
+    <CascadingValue Value="@RoomList">
         <div class="content px-4">
             @Body
         </div>
-    </RoomStateProvider>
+    </CascadingValue>
 </div>
+@code{
+    private List<Room> RoomList = new List<Room>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var rawRooms = await httpClient.GetAsync(@"api/room");
+        var rooms = JsonConvert.DeserializeObject<List<Room>>(await rawRooms.Content.ReadAsStringAsync(), new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All });
+        RoomList = rooms;
+        foreach (var room in RoomList)
+        {
+            Console.WriteLine(room.Id);
+        }
+
+    }
+}

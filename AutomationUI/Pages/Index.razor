@@ -1,5 +1,13 @@
 ﻿@page "/"
-
+@inherits BecauseImClever.AutomationUI.Pages.IndexBase
 <h1>Hello, world!</h1>
-
-Welcome to your new app.
+<p>Available Rooms</p>
+<ul>
+    @foreach (var room in RoomList)
+    {
+        @if (room.Status)
+        {
+            <li><a href="/rooms/@room.Id.ToString()">@room.Name</a></li>
+        }
+    }
+</ul>

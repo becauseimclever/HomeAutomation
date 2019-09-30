@@ -32,11 +32,11 @@ And a big thank you to the folks over at Studio 3T for providing me with a free 
 
 What you'll need:
 
-* Visual Studio 2019 Preview (or VS code)
-* DotNet Core 3.0 preview (currently preview 8)
+* Visual Studio 2019 16.3 or newer (or VS code)
+* DotNet Core 3.0
 * MongoDB
-    * Current settings file points to localhost:27017
-    * Current version 4.0.6
+  * Current settings file points to localhost:27017
+  * Current version 4.0.6
 
 ### The Code
 

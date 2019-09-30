@@ -14,13 +14,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerStripPlugin", "PowerSt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeviceBase", "DeviceBase\DeviceBase.csproj", "{5D87344F-126F-44BB-9F60-95976DB4A78B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationLogic", "AutomationServices\AutomationLogic.csproj", "{CACA3D0A-5ACA-4475-B20C-E4E2AB417578}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationModels", "AutomationModels\AutomationModels.csproj", "{157881D4-DD88-4936-AF3B-50A04006FFD8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationWebApi", "AutomationWebApi\AutomationWebApi.csproj", "{37AFF644-D0E9-4752-B0DC-67FC7171B0CA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationUI", "AutomationUI\AutomationUI.csproj", "{526C718B-7548-4AE0-9E9E-5393EECE357E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationLogic", "AutomationLogic\AutomationLogic.csproj", "{5563B938-167D-42B7-A250-EBF5A9EE1EAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,10 +44,6 @@ Global
 		{5D87344F-126F-44BB-9F60-95976DB4A78B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D87344F-126F-44BB-9F60-95976DB4A78B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D87344F-126F-44BB-9F60-95976DB4A78B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CACA3D0A-5ACA-4475-B20C-E4E2AB417578}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CACA3D0A-5ACA-4475-B20C-E4E2AB417578}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CACA3D0A-5ACA-4475-B20C-E4E2AB417578}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CACA3D0A-5ACA-4475-B20C-E4E2AB417578}.Release|Any CPU.Build.0 = Release|Any CPU
 		{157881D4-DD88-4936-AF3B-50A04006FFD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{157881D4-DD88-4936-AF3B-50A04006FFD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{157881D4-DD88-4936-AF3B-50A04006FFD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -60,6 +56,10 @@ Global
 		{526C718B-7548-4AE0-9E9E-5393EECE357E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{526C718B-7548-4AE0-9E9E-5393EECE357E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{526C718B-7548-4AE0-9E9E-5393EECE357E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5563B938-167D-42B7-A250-EBF5A9EE1EAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5563B938-167D-42B7-A250-EBF5A9EE1EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5563B938-167D-42B7-A250-EBF5A9EE1EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5563B938-167D-42B7-A250-EBF5A9EE1EAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

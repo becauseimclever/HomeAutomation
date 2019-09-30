@@ -21,9 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AutomationLogic\AutomationLogic.csproj" />
     <ProjectReference Include="..\AutomationModels\AutomationModels.csproj" />
     <ProjectReference Include="..\AutomationRepositories\AutomationRepositories.csproj" />
-    <ProjectReference Include="..\AutomationServices\AutomationLogic.csproj" />
     <ProjectReference Include="..\AutomationUI\AutomationUI.csproj" />
   </ItemGroup>
 

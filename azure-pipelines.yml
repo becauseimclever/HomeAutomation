@@ -26,8 +26,12 @@ steps:
     command: build
     projects: '**/*.csproj'
     arguments: '--configuration $(buildconfiguration)'
-
-- script: dotnet test AutomationUnitTests/AutomationUnitTests.csproj --logger trx --collect "Code Coverage"
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: 'AutomationUnitTests/AutomationUnitTests.csproj'
+    arguments: '--logger trx --collect "Code Coverage"'
+    testRunTitle: 'Unit Tests'
 - task: reportgenerator@4
   inputs:
     reports: 'coverage.xml'

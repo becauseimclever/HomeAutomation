@@ -30,19 +30,19 @@ namespace BecauseImClever.AutomationUI
         }
         public async Task LoadPlugins()
         {
-            try
-            {
-                var bytes = await Http.GetByteArrayAsync(@"api/Plugin/PowerStripPlugin");
+            //try
+            //{
+            //    var bytes = await Http.GetByteArrayAsync(@"api/Plugin/PowerStripPlugin");
                 
-                var assembly = System.Reflection.Assembly.Load(bytes);
-                var t = assembly.GetType("BecauseImClever.PowerStripPlugin.PowerStrip");
-                var m = t.GetMethod("RegisterDependencies");
-                Console.WriteLine($"BecauseImClever.PowerStripPlugin.PowerStrip.RegisterDependencies(): {m.Invoke(t.TypeInitializer.Invoke(null) , null)}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            //    var assembly = System.Reflection.Assembly.Load(bytes);
+            //    var t = assembly.GetType("BecauseImClever.PowerStripPlugin.PowerStrip");
+            //    var m = t.GetMethod("RegisterDependencies");
+            //    Console.WriteLine($"BecauseImClever.PowerStripPlugin.PowerStrip.RegisterDependencies(): {m.Invoke(t.TypeInitializer.Invoke(null) , null)}");
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //}
         }
     }
 }

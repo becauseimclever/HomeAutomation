@@ -1,4 +1,5 @@
-﻿//	HomeAutomation - Home Automation system in .NET Core and Blazor, focusing on rooms and devices.
+﻿
+//	HomeAutomation - Home Automation system in .NET Core and Blazor, focusing on rooms and devices.
 //	Copyright(C) 2019 Darren Swan
 //	This program is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -10,16 +11,17 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-using MongoDB.Driver;
 
-namespace BecauseImClever.AutomationRepositories.DataContext
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace BecauseImClever.AutomationModels
 {
-	public interface IMongoContext<T> where T : class
+	public class Plugin
 	{
-		IMongoCollection<T> MongoCollection { get; }
-	}
-	public interface IMongoContext
-	{
-		IMongoDatabase MongoDatabase { get; }
+		public Guid Id { get; set; }
+		public string Name { get; set; }
+		public string Path { get; set; }
 	}
 }

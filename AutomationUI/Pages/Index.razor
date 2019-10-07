@@ -1,6 +1,21 @@
 ﻿@page "/"
 @inherits BecauseImClever.AutomationUI.Pages.IndexBase
 <p>Available Rooms</p>
+<div class="row">
+    <div class="col-lg-6 col-md-12 mb-2">
+        <form>
+            <div class="card border-primary rounded-0">
+                <div class="card-body p-3">
+
+                    <div class="text-center">
+                        <h3>@RoomList.Count</h3>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <ul>
     @foreach (var room in RoomList)
     {

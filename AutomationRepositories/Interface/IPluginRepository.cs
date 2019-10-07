@@ -10,16 +10,19 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-using MongoDB.Driver;
+using BecauseImClever.AutomationModels;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace BecauseImClever.AutomationRepositories.DataContext
+namespace BecauseImClever.AutomationRepositories.Interface
 {
-	public interface IMongoContext<T> where T : class
+	public interface IPluginRepository
 	{
-		IMongoCollection<T> MongoCollection { get; }
-	}
-	public interface IMongoContext
-	{
-		IMongoDatabase MongoDatabase { get; }
+		ValueTask<Plugin> CreatePluginAsync(Plugin plugin);
+		ValueTask<Plugin> GetPluginAsync(Guid Id);
+		ValueTask<IEnumerable<Plugin>> GetPluginsAsync();
+		ValueTask<Plugin> UpdatePluginAsync(Plugin plugin);
+		ValueTask<bool> DetelePluginAsync(Guid Id);
 	}
 }

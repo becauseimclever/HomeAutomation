@@ -44,7 +44,7 @@ steps:
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/*.xml'
+    summaryFileLocation: '$(Build.SourcesDirectory)/coveragereport/Cobertura.xml'
     reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
     failIfCoverageEmpty: true
 - task: PublishTestResults@2

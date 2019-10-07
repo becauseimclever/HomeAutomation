@@ -35,11 +35,18 @@ steps:
  /p:CoverletOutputFormat=cobertura 
  /p:CoverletOutput=$(Build.SourcesDirectory)\TestResults\Coverage\'
     testRunTitle: 'Unit Tests'
+    
 - task: reportgenerator@4
   inputs:
     reports: '$(Build.SourcesDirectory)\TestResults\Coverage\*.xml'
     targetdir: '$(Build.SourcesDirectory)\coveragereport'
-    
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/*.xml'
+    reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
+    failIfCoverageEmpty: true
 - task: PublishTestResults@2
   inputs:
     testRunner: VSTest

@@ -39,4 +39,9 @@
     <ProjectReference Include="..\AutomationRepositories\AutomationRepositories.csproj" />
     <ProjectReference Include="..\PowerStripPlugin\PowerStripPlugin.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="BuildReports\Coverage\" />
+    <Folder Include="BuildReports\UnitTests\" />
+  </ItemGroup>
 </Project>

@@ -32,6 +32,9 @@ bld/
 # Visual Studio 2017 auto generated files
 Generated\ Files/
 
+# Cobertura results
+[Bb]uild[Rr]eports/*
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*

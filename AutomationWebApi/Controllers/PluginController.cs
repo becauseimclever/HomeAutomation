@@ -14,7 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BecauseImClever.AutomationLogic.Interfaces;
+using BecauseImClever.Abstractions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,16 +31,16 @@ namespace AutomationWebApi.Controllers
         }
         [HttpGet]
         [Route("")]
-        public async ValueTask<IActionResult> GetAllAsync()
+        public IActionResult GetAllAsync()
         {
-            var plugins = await _pluginService.GetAll();
+            var plugins = _pluginService.GetAll();
             return Ok(plugins);
         }
         [HttpGet]
         [Route("{PluginName}")]
-        public async ValueTask<IActionResult> GetPluginAsync(string PluginName)
+        public IActionResult GetPluginAsync(string PluginName)
         {
-            var plugin = await _pluginService.GetPluginAsync(PluginName);
+            var plugin = _pluginService.GetPlugin(PluginName);
             return File(plugin.dll, "application/octet-stream", plugin.fileName);
         }
     }

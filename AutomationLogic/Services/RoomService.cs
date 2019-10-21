@@ -14,9 +14,8 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using BecauseImClever.AutomationLogic.Interfaces;
 using BecauseImClever.AutomationModels;
-using BecauseImClever.AutomationRepositories.Interfaces;
+using BecauseImClever.Abstractions;
 
 namespace BecauseImClever.AutomationLogic.Services
 {
@@ -33,19 +32,19 @@ namespace BecauseImClever.AutomationLogic.Services
         }
         public async ValueTask<IEnumerable<Room>> GetAllAsync()
         {
-            return await _roomRepository.GetAllAsync();
+            return await _roomRepository.GetAllAsync().ConfigureAwait(false);
         }
         public async ValueTask<Room> GetByIdAsync(string Id)
         {
-            return await _roomRepository.GetByIdAsync(Guid.Parse(Id));
+            return await _roomRepository.GetByIdAsync(Guid.Parse(Id)).ConfigureAwait(false);
         }
         public async ValueTask<bool> UpdateAsync(Room room)
         {
-            return await _roomRepository.UpdateAsync(room);
+            return await _roomRepository.UpdateAsync(room).ConfigureAwait(false);
         }
         public async ValueTask<bool> DeleteAsync(string Id)
         {
-            return await _roomRepository.DeleteAsync(Id);
+            return await _roomRepository.DeleteAsync(Id).ConfigureAwait(false);
         }
     }
 }

@@ -10,16 +10,18 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
+
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
-
-namespace BecauseImClever.DeviceBase
+namespace BecauseImClever.Abstractions
 {
-	public class GenericDevice : Device
-	{
-	}
+    public interface IPluginService
+    {
+        IEnumerable<string> GetAll();
+        (Stream dll, string fileName) GetPlugin(string pluginName);
+    }
 }

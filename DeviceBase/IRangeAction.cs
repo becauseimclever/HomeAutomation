@@ -18,5 +18,6 @@ namespace BecauseImClever.DeviceBase
 {
     public interface IRangeAction : IDeviceAction
     {
+
     }
 }

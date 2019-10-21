@@ -12,9 +12,9 @@
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 using AutoFixture;
 using AutoFixture.Kernel;
+using BecauseImClever.Abstractions;
 using BecauseImClever.AutomationLogic.Services;
 using BecauseImClever.AutomationModels;
-using BecauseImClever.AutomationRepositories.Interfaces;
 using BecauseImClever.DeviceBase;
 using MongoDB.Bson;
 using Moq;
@@ -34,7 +34,6 @@ namespace BecauseImClever.AutomationUnitTests.Service
         {
             fixture = new Fixture();
             fixture.Register(() => Guid.NewGuid());
-            fixture.Customizations.Add(new TypeRelay(typeof(Device), typeof(GenericDevice)));
             _mockRoomRepo = new Mock<IRoomRepository>();
         }
         [Fact]

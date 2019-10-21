@@ -12,7 +12,7 @@
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 using AutoFixture;
 using AutomationWebApi.Controllers;
-using BecauseImClever.AutomationLogic.Interfaces;
+using BecauseImClever.Abstractions;
 using BecauseImClever.AutomationModels;
 using Microsoft.AspNetCore.Mvc;
 using Moq;

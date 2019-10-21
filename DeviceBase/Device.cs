@@ -15,7 +15,7 @@ using System.Collections.Generic;
 
 namespace BecauseImClever.DeviceBase
 {
-	public class Device
+	public abstract class Device
 	{
 		public Guid Id { get; set; }
 		public string Name { get; set; }

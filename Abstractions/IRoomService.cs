@@ -11,17 +11,19 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 
-using System;
+using BecauseImClever.AutomationModels;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace BecauseImClever.AutomationLogic.Interfaces
+namespace BecauseImClever.Abstractions
 {
-    public interface IPluginService
+    public interface IRoomService
     {
-        ValueTask<IEnumerable<string>> GetAll();
-        ValueTask<(Stream dll, string fileName)> GetPluginAsync(string pluginName);
+        ValueTask<Room> CreateAsync(Room room);
+        ValueTask<IEnumerable<Room>> GetAllAsync();
+        ValueTask<Room> GetByIdAsync(string Id);
+        ValueTask<bool> UpdateAsync(Room room);
+        ValueTask<bool> DeleteAsync(string id);
+
     }
 }

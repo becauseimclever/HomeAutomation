@@ -15,7 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BecauseImClever.AutomationRepositories.Interfaces
+namespace BecauseImClever.Abstractions
 {
     public interface IRoomRepository
     {

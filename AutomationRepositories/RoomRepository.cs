@@ -10,9 +10,9 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
+using BecauseImClever.Abstractions;
 using BecauseImClever.AutomationModels;
 using BecauseImClever.AutomationRepositories.DataContext;
-using BecauseImClever.AutomationRepositories.Interfaces;
 using BecauseImClever.DeviceBase;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
@@ -31,7 +31,6 @@ namespace BecauseImClever.AutomationRepositories
         {
             var _context = context ?? throw new ArgumentNullException(nameof(context));
             _roomCollection = context.MongoCollection;
-            if (!BsonClassMap.IsClassMapRegistered(typeof(GenericDevice))){ BsonClassMap.RegisterClassMap<GenericDevice>(); };
         }
 
         #region Create

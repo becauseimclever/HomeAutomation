@@ -16,6 +16,8 @@ namespace BecauseImClever.PowerStripPlugin.Models
 {
     public class PowerStrip : Device
     {
-
+        public PowerStrip()
+        {
+        }
     }
 }

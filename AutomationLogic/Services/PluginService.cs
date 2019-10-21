@@ -11,7 +11,7 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 
-using BecauseImClever.AutomationLogic.Interfaces;
+using BecauseImClever.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,7 +23,7 @@ namespace BecauseImClever.AutomationLogic.Services
 {
     public class PluginService : IPluginService
     {
-        public async ValueTask<IEnumerable<string>> GetAll()
+        public IEnumerable<string> GetAll()
         {
             var pluginFolder = Path.Combine(Directory.GetCurrentDirectory(), "Plugins");
             var pluginPaths = Directory.GetDirectories(pluginFolder);
@@ -39,7 +39,7 @@ namespace BecauseImClever.AutomationLogic.Services
             return dllNames;
         }
 
-        public async ValueTask<(Stream dll, string fileName)> GetPluginAsync(string pluginName)
+        public (Stream dll, string fileName) GetPlugin(string pluginName)
         {
             var pluginFolder = Path.Combine(Directory.GetCurrentDirectory(), "Plugins", pluginName);
             var dllPaths = Directory.GetFiles(pluginFolder, "*Plugin.dll");

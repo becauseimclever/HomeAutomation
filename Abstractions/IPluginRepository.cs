@@ -15,7 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BecauseImClever.AutomationRepositories.Interface
+namespace BecauseImClever.Abstractions
 {
 	public interface IPluginRepository
 	{

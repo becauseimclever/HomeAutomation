@@ -18,16 +18,23 @@ using System.Threading.Tasks;
 
 namespace PowerStripPlugin.Actions
 {
-	public class PowerStripActions : IBooleanAction
-	{
-		public async ValueTask<bool> CurrentState(Guid Id)
-		{
-			return true;
-		}
+    public class PowerStripActions : IBooleanAction
+    {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async ValueTask<bool> SetState(Guid Id, bool state)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            throw new NotImplementedException();
+        }
 
-		public async ValueTask<bool> SetState(Guid Id, bool state)
-		{
-			throw new NotImplementedException();
-		}
-	}
+        public ValueTask<bool> CurrentState(Guid Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DoSomething()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

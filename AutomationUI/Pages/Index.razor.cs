@@ -19,9 +19,14 @@ using System.Threading.Tasks;
 
 namespace BecauseImClever.AutomationUI.Pages
 {
-	public class IndexBase : ComponentBase
-	{
-		[CascadingParameter]
-		protected List<Room> RoomList { get; set; }
-	}
+    public class IndexBase : ComponentBase
+    {
+        [CascadingParameter]
+        protected List<Room> RoomList { get; set; }
+        protected Room room { get; set; }
+        protected override void OnInitialized()
+        {
+            room = RoomList.FirstOrDefault();
+        }
+    }
 }

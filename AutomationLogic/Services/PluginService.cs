@@ -12,12 +12,9 @@
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 
 using BecauseImClever.Abstractions;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BecauseImClever.AutomationLogic.Services
 {
@@ -42,7 +39,9 @@ namespace BecauseImClever.AutomationLogic.Services
         public (Stream dll, string fileName) GetPlugin(string pluginName)
         {
             var pluginFolder = Path.Combine(Directory.GetCurrentDirectory(), "Plugins", pluginName);
+            if (!Directory.Exists(pluginFolder)) return (null, null);
             var dllPaths = Directory.GetFiles(pluginFolder, "*Plugin.dll");
+            if (!dllPaths.Any()) return (null, null);
             return (new FileStream(dllPaths.First(), FileMode.Open, FileAccess.Read), Path.GetFileName(dllPaths.First()));
         }
     }

@@ -25,7 +25,7 @@ namespace BecauseImClever.AutomationUI.Components
 		[Inject] HttpClient HttpClient { get; set; }
 		[Parameter] public Device device { get; set; }
 
-		protected async override Task OnInitializedAsync()
+        protected override async Task OnInitializedAsync()
 		{
 			await base.OnInitializedAsync();
 		}

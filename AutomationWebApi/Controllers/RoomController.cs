@@ -12,10 +12,8 @@
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 using BecauseImClever.Abstractions;
 using BecauseImClever.AutomationModels;
-using BecauseImClever.DeviceBase;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AutomationWebApi.Controllers

@@ -19,15 +19,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BecauseImClever.AutomationModels
 {
-	public class Room
-	{
-		[Required]
-		public Guid Id { get; set; }
-		[Required]
-		public string Name { get; set; }
-		public bool Status { get; set; } = true;
-		public IEnumerable<Device> Devices { get; set; } = new List<Device>();
-		public DateTime CreatedDate { get; set; } = DateTime.Now;
-		public DateTime ModifiedDate { get; set; } = DateTime.Now;
-	}
+    public class Room
+    {
+        [Required]
+        public Guid Id { get; set; }
+        [Required]
+        public string Name { get; set; }
+        public bool Status { get; set; } = true;
+        public IEnumerable<Device> Devices { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime ModifiedDate { get; set; } = DateTime.Now;
+    }
 }

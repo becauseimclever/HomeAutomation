@@ -1,20 +1,22 @@
 ﻿@page "/"
 @inherits BecauseImClever.AutomationUI.Pages.IndexBase
-<p>Available Rooms</p>
-<div class="row">
-    <div class="col-lg-6 col-md-12 mb-2">
-        <form>
-            <div class="card border-primary rounded-0">
-                <div class="card-body p-3">
-
-                    <div class="text-center">
-                        <h3>@RoomList.Count</h3>
-                    </div>
-                </div>
-            </div>
-        </form>
+@if (RoomList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-6">
+            <RadzenGrid ColumnWidth="200px" AllowFiltering="true" AllowPaging="true" PageSize="3" AllowSorting="true" Data="@RoomList" >
+                <Columns>
+                    <RadzenGridColumn Width="100px" TItem="AutomationModels.Room" Property="Id" Title="RoomId" />
+                    <RadzenGridColumn Width="200px" TItem="AutomationModels.Room" Property="Name" Title="Name" />
+                </Columns>
+            </RadzenGrid>
+        </div>
     </div>
-</div>
+}
 
 <ul>
     @foreach (var room in RoomList)

@@ -24,16 +24,17 @@ namespace BecauseImClever.AutomationUI
     {
         [Inject] HttpClient Http { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
-            await LoadPlugins();
+            LoadPlugins();
         }
-        public async Task LoadPlugins()
+        public void LoadPlugins()
         {
+
             //try
             //{
             //    var bytes = await Http.GetByteArrayAsync(@"api/Plugin/PowerStripPlugin");
-                
+
             //    var assembly = System.Reflection.Assembly.Load(bytes);
             //    var t = assembly.GetType("BecauseImClever.PowerStripPlugin.PowerStrip");
             //    var m = t.GetMethod("RegisterDependencies");

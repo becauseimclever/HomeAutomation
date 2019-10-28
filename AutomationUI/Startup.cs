@@ -12,8 +12,6 @@
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Net.Http;
 
 namespace BecauseImClever.AutomationUI
 {
@@ -29,4 +27,5 @@ namespace BecauseImClever.AutomationUI
             app.AddComponent<App>("app");
         }
     }
+
 }

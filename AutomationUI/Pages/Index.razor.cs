@@ -12,10 +12,8 @@
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 using BecauseImClever.AutomationModels;
 using Microsoft.AspNetCore.Components;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace BecauseImClever.AutomationUI.Pages
 {
@@ -23,10 +21,15 @@ namespace BecauseImClever.AutomationUI.Pages
     {
         [CascadingParameter]
         protected List<Room> RoomList { get; set; }
-        protected Room room { get; set; }
+        protected Room room { get; set; } = new Room() { Devices = new List<DeviceBase.Device>() };
         protected override void OnInitialized()
         {
-            room = RoomList.FirstOrDefault();
+            if (RoomList.Any())
+                room = RoomList.FirstOrDefault();
+        }
+        protected void OnSelect(Room selected)
+        {
+            room = selected;
         }
     }
 }

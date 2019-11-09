@@ -24,26 +24,26 @@ namespace BecauseImClever.AutomationUI
     {
         [Inject] HttpClient Http { get; set; }
 
-        protected override void OnInitialized()
+        protected override async void OnInitialized()
         {
-            LoadPlugins();
+            await LoadPlugins();
         }
-        public void LoadPlugins()
+        public async ValueTask LoadPlugins()
         {
 
-            //try
-            //{
-            //    var bytes = await Http.GetByteArrayAsync(@"api/Plugin/PowerStripPlugin");
+            try
+            {
+                var bytes = await Http.GetByteArrayAsync(@"api/Plugin/PowerStripPlugin");
 
-            //    var assembly = System.Reflection.Assembly.Load(bytes);
-            //    var t = assembly.GetType("BecauseImClever.PowerStripPlugin.PowerStrip");
-            //    var m = t.GetMethod("RegisterDependencies");
-            //    Console.WriteLine($"BecauseImClever.PowerStripPlugin.PowerStrip.RegisterDependencies(): {m.Invoke(t.TypeInitializer.Invoke(null) , null)}");
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine(ex.Message);
-            //}
+                var assembly = System.Reflection.Assembly.Load(bytes);
+                var t = assembly.GetType("BecauseImClever.PowerStripPlugin.PowerStrip");
+                var m = t.GetMethod("RegisterDependencies");
+                Console.WriteLine($"BecauseImClever.PowerStripPlugin.PowerStrip.RegisterDependencies(): {m.Invoke(t.TypeInitializer.Invoke(null), null)}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

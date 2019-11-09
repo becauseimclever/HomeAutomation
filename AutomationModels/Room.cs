@@ -21,6 +21,15 @@ namespace BecauseImClever.AutomationModels
 {
     public class Room
     {
+        public Room() : this(Guid.NewGuid(), "New Room")
+        { }
+        public Room(Guid Id) : this(Id, "New Room")
+        { }
+        public Room(Guid Id, string Name)
+        {
+            this.Id = Id;
+            this.Name = Name;
+        }
         [Required]
         public Guid Id { get; set; }
         [Required]

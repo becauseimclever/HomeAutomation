@@ -20,9 +20,7 @@ namespace PowerStripPlugin.Actions
 {
     public class PowerStripActions : IBooleanAction
     {
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-        public async ValueTask<bool> SetState(Guid Id, bool state)
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        public  ValueTask<bool> SetState(Guid Id, bool state)
         {
             throw new NotImplementedException();
         }

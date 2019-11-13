@@ -24,6 +24,6 @@ namespace BecauseImClever.Abstractions
         ValueTask<Room> GetByIdAsync(string Id);
         ValueTask<bool> UpdateAsync(Room room);
         ValueTask<bool> DeleteAsync(string id);
-
+        //ValueTask<Room> AddDevice(Guid Id, Device device);
     }
 }

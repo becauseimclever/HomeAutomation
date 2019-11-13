@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BecauseImClever.AutomationModels;
 using BecauseImClever.Abstractions;
+using BecauseImClever.DeviceBase;
 
 namespace BecauseImClever.AutomationLogic.Services
 {
@@ -46,5 +47,11 @@ namespace BecauseImClever.AutomationLogic.Services
         {
             return await _roomRepository.DeleteAsync(Id).ConfigureAwait(false);
         }
+
+        //public async ValueTask<Room> AddDevice(Guid Id, Device device)
+        //{
+        //    var room = await _roomRepository.GetByIdAsync(Id).ConfigureAwait(false);
+        //    room.Devices
+        //}
     }
 }

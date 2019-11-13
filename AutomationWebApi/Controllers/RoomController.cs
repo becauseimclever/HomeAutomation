@@ -12,6 +12,7 @@
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 using BecauseImClever.Abstractions;
 using BecauseImClever.AutomationModels;
+using BecauseImClever.DeviceBase;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -36,6 +37,13 @@ namespace AutomationWebApi.Controllers
             var newRoom = await _roomService.CreateAsync(room);
             return Ok(newRoom);
         }
+        //[HttpPost]
+        //[Route("{roomId}/devices")]
+        //public async ValueTask<IActionResult> AddDevice(Guid roomId, Device device)
+        //{
+        //    var updatedRoom = await _roomService.AddDevice(roomId, device);
+        //    return Ok(updatedRoom);
+        //}
         #endregion
 
         [HttpGet]

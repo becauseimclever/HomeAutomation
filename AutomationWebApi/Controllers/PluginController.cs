@@ -41,6 +41,7 @@ namespace AutomationWebApi.Controllers
         public IActionResult GetPluginAsync(string PluginName)
         {
             var plugin = _pluginService.GetPlugin(PluginName);
+            if (plugin.dll == null) return NotFound();
             return File(plugin.dll, "application/octet-stream", plugin.fileName);
         }
     }

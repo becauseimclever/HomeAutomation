@@ -2,6 +2,9 @@
 
 Home Automation is a central server platform for automating your home.
 
+[![BCH compliance](https://bettercodehub.com/edge/badge/Fortinbra/HomeAutomation?branch=master)](https://bettercodehub.com/)
+[![Build Status](https://becauseimclever.visualstudio.com/HomeAutomation/_apis/build/status/Fortinbra.HomeAutomation?branchName=master)](https://becauseimclever.visualstudio.com/HomeAutomation/_build/latest?definitionId=2&branchName=master)
+
 ## Features
 
 * Blazor user interface
@@ -22,9 +25,9 @@ The current deployment server has 2 phyical NICs, one as a DHCP client on the ma
 
 A big thank you to all the libraries we depend on for this project.
 
-* AutoFixture - https://github.com/AutoFixture/AutoFixture
-* Moq - https://github.com/moq/moq4
-* xUnit - https://github.com/xunit/xunit
+* AutoFixture - <https://github.com/AutoFixture/AutoFixture>
+* Moq - <https://github.com/moq/moq4>
+* xUnit - <https://github.com/xunit/xunit>
 
 And a big thank you to the folks over at Studio 3T for providing me with a free license for their product.
 

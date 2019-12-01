@@ -48,10 +48,11 @@ namespace BecauseImClever.AutomationLogic.Services
             return await _roomRepository.DeleteAsync(Id).ConfigureAwait(false);
         }
 
-        //public async ValueTask<Room> AddDevice(Guid Id, Device device)
-        //{
-        //    var room = await _roomRepository.GetByIdAsync(Id).ConfigureAwait(false);
-        //    room.Devices
-        //}
+        public async ValueTask<Room> AddDevice(Guid Id, Device device)
+        {
+            var room = await _roomRepository.GetByIdAsync(Id).ConfigureAwait(false);
+            ((List<Device>)room.Devices).Add(device);
+            throw new NotImplementedException();
+        }
     }
 }

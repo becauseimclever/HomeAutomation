@@ -13,6 +13,7 @@
 using BecauseImClever.DeviceBase;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using MQTTnet.AspNetCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -35,7 +36,8 @@ namespace BecauseImClever.AutomationWebApi
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+            ;
         static void RegisterPlugins(IHostBuilder host)
         {
             var pluginFolder = Path.Combine(Directory.GetCurrentDirectory(), "Plugins");

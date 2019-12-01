@@ -12,6 +12,8 @@
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 
 using BecauseImClever.AutomationModels;
+using BecauseImClever.DeviceBase;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -24,6 +26,6 @@ namespace BecauseImClever.Abstractions
         ValueTask<Room> GetByIdAsync(string Id);
         ValueTask<bool> UpdateAsync(Room room);
         ValueTask<bool> DeleteAsync(string id);
-        //ValueTask<Room> AddDevice(Guid Id, Device device);
+        ValueTask<Room> AddDevice(Guid Id, Device device);
     }
 }

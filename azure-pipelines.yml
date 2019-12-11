@@ -13,10 +13,10 @@ pool:
 variables:
   buildConfiguration: 'Release'
 steps:
-- task: DotNetCoreInstaller@0
+- task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '3.1.100-preview1-014459'
+    version: '3.1.100'
 
 - script: dotnet restore
 

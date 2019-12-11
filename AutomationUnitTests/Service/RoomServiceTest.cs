@@ -11,6 +11,7 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 using AutoFixture;
+using AutoFixture.AutoMoq;
 using AutoFixture.Kernel;
 using BecauseImClever.Abstractions;
 using BecauseImClever.AutomationLogic.Services;
@@ -33,6 +34,7 @@ namespace BecauseImClever.AutomationUnitTests.Service
         public RoomsServiceTest()
         {
             fixture = new Fixture();
+            fixture.Customize(new AutoMoqCustomization());
             fixture.Register(() => Guid.NewGuid());
             _mockRoomRepo = new Mock<IRoomRepository>();
         }

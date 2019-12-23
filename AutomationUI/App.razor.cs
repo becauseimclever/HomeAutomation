@@ -10,40 +10,38 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 
-namespace BecauseImClever.AutomationUI
+
+namespace BecauseImClever.HomeAutomation.AutomationUI
 {
-    public class AppBase : ComponentBase
-    {
-        [Inject] HttpClient Http { get; set; }
+	using Microsoft.AspNetCore.Components;
+	using System;
+	using System.Net.Http;
+	using System.Threading.Tasks;
+	public class AppBase : ComponentBase
+	{
+		[Inject] HttpClient Http { get; set; }
 
-        protected override async void OnInitialized()
-        {
-            await LoadPlugins();
-        }
-        public async ValueTask LoadPlugins()
-        {
+		protected override async void OnInitialized()
+		{
+			await LoadPlugins();
+		}
+		public async ValueTask LoadPlugins()
+		{
 
-            try
-            {
-                var bytes = await Http.GetByteArrayAsync(@"api/Plugin/PowerStripPlugin");
+			try
+			{
+				var bytes = await Http.GetByteArrayAsync(@"api/Plugin/PowerStripPlugin");
 
-                var assembly = System.Reflection.Assembly.Load(bytes);
-                var t = assembly.GetType("BecauseImClever.PowerStripPlugin.PowerStrip");
-                var m = t.GetMethod("RegisterDependencies");
-                Console.WriteLine($"BecauseImClever.PowerStripPlugin.PowerStrip.RegisterDependencies(): {m.Invoke(t.TypeInitializer.Invoke(null), null)}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-    }
+				var assembly = System.Reflection.Assembly.Load(bytes);
+				var t = assembly.GetType("BecauseImClever.PowerStripPlugin.PowerStrip");
+				var m = t.GetMethod("RegisterDependencies");
+				Console.WriteLine($"BecauseImClever.PowerStripPlugin.PowerStrip.RegisterDependencies(): {m.Invoke(t.TypeInitializer.Invoke(null), null)}");
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
+		}
+	}
 }

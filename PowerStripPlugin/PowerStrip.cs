@@ -10,36 +10,39 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-using System;
-using System.Collections.Generic;
-using BecauseImClever.DeviceBase;
-using Microsoft.Extensions.DependencyInjection;
-using PowerStripPlugin.Actions;
 
-namespace BecauseImClever.PowerStripPlugin
+
+namespace BecauseImClever.HomeAutomation.PowerStripPlugin
 {
-    public class PowerStrip : IDevicePlugin
-    {
+	using DeviceBase.Abstractions;
+	using PowerStripPlugin.Actions;
+	using Microsoft.Extensions.DependencyInjection;
+	using System;
+	using System.Collections.Generic;
 
-        public string Name => "PowerStrip";
+	public class PowerStrip : IDevicePlugin
+	{
 
-        public string Description => "Represents the Powerstrip Plugin";
+		public string Name => "PowerStrip";
 
-        public IEnumerable<IDeviceAction> Actions => new List<IDeviceAction>
-        {
-            new PowerStripActions(),
-            new PowerStripActions(),
-            new PowerStripActions(),
-            new PowerStripActions(),
-            new PowerStripActions(),
-            new PowerStripActions(),
-            new PowerStripActions(),
-            new PowerStripActions()
-        };
+		public string Description => "Represents the Powerstrip Plugin";
 
-        public void RegisterDependencies(IServiceCollection services)
-        {
-            Console.WriteLine("PowerStrip Register Dependencies");
-        }
-    }
+		public IEnumerable<IDeviceAction> DeviceActions => new List<IDeviceAction>
+		{
+			new PowerStripActions(),
+			new PowerStripActions(),
+			new PowerStripActions(),
+			new PowerStripActions(),
+			new PowerStripActions(),
+			new PowerStripActions(),
+			new PowerStripActions(),
+			new PowerStripActions()
+		};
+
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "<Pending>")]
+		public void RegisterDependencies(IServiceCollection services)
+		{
+			Console.WriteLine("PowerStrip Register Dependencies");
+		}
+	}
 }

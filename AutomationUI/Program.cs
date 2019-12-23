@@ -10,19 +10,20 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-using Microsoft.AspNetCore.Blazor.Hosting;
 
-namespace BecauseImClever.AutomationUI
+namespace BecauseImClever.HomeAutomation.AutomationUI
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+	using Microsoft.AspNetCore.Blazor.Hosting;
 
-        public static IWebAssemblyHostBuilder CreateHostBuilder(string[] args) =>
-            BlazorWebAssemblyHost.CreateDefaultBuilder()
-                .UseBlazorStartup<Startup>();
-    }
+	public class Program
+	{
+		public static void Main(string[] args)
+		{
+			CreateHostBuilder(args).Build().Run();
+		}
+
+		public static IWebAssemblyHostBuilder CreateHostBuilder(string[] args) =>
+			BlazorWebAssemblyHost.CreateDefaultBuilder()
+				.UseBlazorStartup<Startup>();
+	}
 }

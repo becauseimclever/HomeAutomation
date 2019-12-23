@@ -10,22 +10,22 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-
-using BecauseImClever.AutomationModels;
-using BecauseImClever.DeviceBase;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace BecauseImClever.Abstractions
+namespace BecauseImClever.HomeAutomation.Abstractions
 {
-    public interface IRoomService
-    {
-        ValueTask<Room> CreateAsync(Room room);
-        ValueTask<IEnumerable<Room>> GetAllAsync();
-        ValueTask<Room> GetByIdAsync(string Id);
-        ValueTask<bool> UpdateAsync(Room room);
-        ValueTask<bool> DeleteAsync(string id);
-        ValueTask<Room> AddDevice(Guid Id, Device device);
-    }
+	using AutomationModels;
+	using DeviceBase;
+	using System;
+	using System.Collections.Generic;
+	using System.Threading.Tasks;
+
+
+	public interface IRoomService
+	{
+		ValueTask<Room> CreateAsync(Room room);
+		ValueTask<IEnumerable<Room>> GetAllAsync();
+		ValueTask<Room> GetByIdAsync(string Id);
+		ValueTask<bool> UpdateAsync(Room room);
+		ValueTask<bool> DeleteAsync(string id);
+		ValueTask<Room> AddDevice(Guid Id, Device device);
+	}
 }

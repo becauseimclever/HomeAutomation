@@ -10,22 +10,23 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-using Microsoft.AspNetCore.Components.Builder;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace BecauseImClever.AutomationUI
+namespace BecauseImClever.HomeAutomation.AutomationUI
 {
-    public class Startup
-    {
-        public void ConfigureServices(IServiceCollection services)
-        {
+    using Microsoft.AspNetCore.Components.Builder;
+	using Microsoft.Extensions.DependencyInjection;
 
-        }
+	public class Startup
+	{
+		public void ConfigureServices(IServiceCollection services)
+		{
 
-        public void Configure(IComponentsApplicationBuilder app)
-        {
-            app.AddComponent<App>("app");
-        }
-    }
+		}
+
+		public void Configure(IComponentsApplicationBuilder app)
+		{
+			app.AddComponent<App>("app");
+		}
+	}
 
 }

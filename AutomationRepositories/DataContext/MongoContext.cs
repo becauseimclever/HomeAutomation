@@ -10,15 +10,15 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-using Microsoft.Extensions.Options;
-using MongoDB.Driver;
-using System;
-using System.Diagnostics.CodeAnalysis;
 
-namespace BecauseImClever.AutomationRepositories.DataContext
+namespace BecauseImClever.HomeAutomation.AutomationRepositories.DataContext
 {
-	[ExcludeFromCodeCoverage]
+	using Microsoft.Extensions.Options;
+	using MongoDB.Driver;
+	using System;
+	using System.Diagnostics.CodeAnalysis;
 
+	[ExcludeFromCodeCoverage]
 	public class MongoContext<T> : IMongoContext<T> where T : class
 	{
 		private readonly IMongoDatabase _mongoDatabase;

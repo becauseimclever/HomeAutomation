@@ -10,41 +10,41 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-using System;
-using System.Reflection;
-using System.Runtime.Loader;
 
-namespace BecauseImClever.AutomationWebApi
-
+namespace BecauseImClever.HomeAutomation.AutomationWebApi
 {
-    public class PluginLoadContext : AssemblyLoadContext
-    {
-        private AssemblyDependencyResolver _resolver;
-        public PluginLoadContext(string pluginPath)
-        {
-            _resolver = new AssemblyDependencyResolver(pluginPath);
-        }
-        protected override Assembly Load(AssemblyName assemblyName)
-        {
-            string assemblyPath = _resolver.ResolveAssemblyToPath(assemblyName);
+	using System;
+	using System.Reflection;
+	using System.Runtime.Loader;
+
+	public class PluginLoadContext : AssemblyLoadContext
+	{
+		private AssemblyDependencyResolver _resolver;
+		public PluginLoadContext(string pluginPath)
+		{
+			_resolver = new AssemblyDependencyResolver(pluginPath);
+		}
+		protected override Assembly Load(AssemblyName assemblyName)
+		{
+			string assemblyPath = _resolver.ResolveAssemblyToPath(assemblyName);
 
 #pragma warning disable CA1307 // Specify StringComparison
-            if (assemblyPath != null && assemblyPath.Contains("\\Plugins\\"))
+			if (assemblyPath != null && assemblyPath.Contains("\\Plugins\\"))
 #pragma warning restore CA1307 // Specify StringComparison
-            {
-                return LoadFromAssemblyPath(assemblyPath);
-            }
-            else if (AssemblyLoadContext.Default.LoadFromAssemblyName(assemblyName) != null)
-            {
-                return null;
-            }
-            return null;
-        }
-        protected override IntPtr LoadUnmanagedDll(string unmanagedDllName)
-        {
-            string libraryPath = _resolver.ResolveUnmanagedDllToPath(unmanagedDllName);
-            if (libraryPath != null) { return LoadUnmanagedDllFromPath(libraryPath); }
-            return IntPtr.Zero;
-        }
-    }
+			{
+				return LoadFromAssemblyPath(assemblyPath);
+			}
+			else if (AssemblyLoadContext.Default.LoadFromAssemblyName(assemblyName) != null)
+			{
+				return null;
+			}
+			return null;
+		}
+		protected override IntPtr LoadUnmanagedDll(string unmanagedDllName)
+		{
+			string libraryPath = _resolver.ResolveUnmanagedDllToPath(unmanagedDllName);
+			if (libraryPath != null) { return LoadUnmanagedDllFromPath(libraryPath); }
+			return IntPtr.Zero;
+		}
+	}
 }

@@ -36,7 +36,6 @@
   <ItemGroup>
     <ProjectReference Include="..\AutomationModels\AutomationModels.csproj" />
     <ProjectReference Include="..\AutomationWebApi\AutomationWebApi.csproj" />
-    <ProjectReference Include="..\DeviceBase\DeviceBase.csproj" />
     <ProjectReference Include="..\AutomationRepositories\AutomationRepositories.csproj" />
     <ProjectReference Include="..\PowerStripPlugin\PowerStripPlugin.csproj" />
   </ItemGroup>

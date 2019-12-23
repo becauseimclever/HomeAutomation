@@ -2,20 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <RootNamespace>BecauseImClever.AutomationModels</RootNamespace>
+    <RootNamespace>BecauseImClever.HomeAutomation.AutomationModels</RootNamespace>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="BecauseImClever.HomeAutomation.DeviceBase" Version="1.0.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\DeviceBase\DeviceBase.csproj" />
   </ItemGroup>
 
 </Project>

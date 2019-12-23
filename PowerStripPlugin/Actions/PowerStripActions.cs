@@ -10,29 +10,43 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-using BecauseImClever.DeviceBase;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PowerStripPlugin.Actions
+
+namespace BecauseImClever.HomeAutomation.PowerStripPlugin.Actions
 {
-    public class PowerStripActions : IBooleanAction
-    {
-        public  ValueTask<bool> SetState(Guid Id, bool state)
-        {
-            throw new NotImplementedException();
-        }
+	using BecauseImClever.HomeAutomation.DeviceBase.Abstractions;
+	using System;
+	using System.Threading.Tasks;
+	public class PowerStripActions : IDeviceAction<bool>
+	{
+		public bool GetValue()
+		{
+			throw new NotImplementedException();
+		}
 
-        public ValueTask<bool> CurrentState(Guid Id)
-        {
-            throw new NotImplementedException();
-        }
+		public Task<bool> GetValueAsync()
+		{
+			throw new NotImplementedException();
+		}
 
-        public void DoSomething()
-        {
-            throw new NotImplementedException();
-        }
-    }
+		public void Invoke(bool value)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void Invoke()
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool SetValue(bool value)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<bool> SetValueAsync(bool value)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

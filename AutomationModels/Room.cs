@@ -11,32 +11,32 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-
-using BecauseImClever.DeviceBase;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace BecauseImClever.AutomationModels
+namespace BecauseImClever.HomeAutomation.AutomationModels
 {
-    public class Room
-    {
-        public Room() : this(Guid.NewGuid(), "New Room")
-        { }
-        public Room(Guid Id) : this(Id, "New Room")
-        { }
-        public Room(Guid Id, string Name)
-        {
-            this.Id = Id;
-            this.Name = Name;
-        }
-        [Required]
-        public Guid Id { get; set; }
-        [Required]
-        public string Name { get; set; }
-        public bool Status { get; set; } = true;
-        public IEnumerable<Device> Devices { get; set; }
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
-        public DateTime ModifiedDate { get; set; } = DateTime.Now;
-    }
+
+	using DeviceBase;
+	using System;
+	using System.Collections.Generic;
+	using System.ComponentModel.DataAnnotations;
+
+	public class Room
+	{
+		public Room() : this(Guid.NewGuid(), "New Room")
+		{ }
+		public Room(Guid Id) : this(Id, "New Room")
+		{ }
+		public Room(Guid Id, string Name)
+		{
+			this.Id = Id;
+			this.Name = Name;
+		}
+		[Required]
+		public Guid Id { get; set; }
+		[Required]
+		public string Name { get; set; }
+		public bool Status { get; set; } = true;
+		public IEnumerable<Device> Devices { get; set; }
+		public DateTime CreatedDate { get; set; } = DateTime.Now;
+		public DateTime ModifiedDate { get; set; } = DateTime.Now;
+	}
 }

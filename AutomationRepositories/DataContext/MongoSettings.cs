@@ -10,11 +10,11 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-namespace BecauseImClever.AutomationRepositories.DataContext
+namespace BecauseImClever.HomeAutomation.AutomationRepositories.DataContext
 {
-    public class MongoSettings
-    {
-        public string ConnectionString { get; set; }
-        public string Database { get; set; }
-    }
+	public class MongoSettings
+	{
+		public string ConnectionString { get; set; }
+		public string Database { get; set; }
+	}
 }

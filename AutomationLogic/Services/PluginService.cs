@@ -11,38 +11,39 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 
-using BecauseImClever.Abstractions;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
-namespace BecauseImClever.AutomationLogic.Services
+namespace BecauseImClever.HomeAutomation.AutomationLogic.Services
 {
-    public class PluginService : IPluginService
-    {
-        public IEnumerable<string> GetAll()
-        {
-            var pluginFolder = Path.Combine(Directory.GetCurrentDirectory(), "Plugins");
-            var pluginPaths = Directory.GetDirectories(pluginFolder);
-            var dllPaths = pluginPaths.SelectMany(path =>
-            {
-                return Directory.GetFiles(path, "*Plugin.dll");
-            });
-            List<string> dllNames = new List<string>();
-            foreach (var path in dllPaths)
-            {
-                dllNames.Add(Directory.GetParent(path).Name);
-            }
-            return dllNames;
-        }
+	using Abstractions;
+	using System.Collections.Generic;
+	using System.IO;
+	using System.Linq;
 
-        public (Stream dll, string fileName) GetPlugin(string pluginName)
-        {
-            var pluginFolder = Path.Combine(Directory.GetCurrentDirectory(), "Plugins", pluginName);
-            if (!Directory.Exists(pluginFolder)) return (null, null);
-            var dllPaths = Directory.GetFiles(pluginFolder, "*Plugin.dll");
-            if (!dllPaths.Any()) return (null, null);
-            return (new FileStream(dllPaths.First(), FileMode.Open, FileAccess.Read), Path.GetFileName(dllPaths.First()));
-        }
-    }
+
+	public class PluginService : IPluginService
+	{
+		public IEnumerable<string> GetAll()
+		{
+			var pluginFolder = Path.Combine(Directory.GetCurrentDirectory(), "Plugins");
+			var pluginPaths = Directory.GetDirectories(pluginFolder);
+			var dllPaths = pluginPaths.SelectMany(path =>
+			{
+				return Directory.GetFiles(path, "*Plugin.dll");
+			});
+			List<string> dllNames = new List<string>();
+			foreach (var path in dllPaths)
+			{
+				dllNames.Add(Directory.GetParent(path).Name);
+			}
+			return dllNames;
+		}
+
+		public (Stream dll, string fileName) GetPlugin(string pluginName)
+		{
+			var pluginFolder = Path.Combine(Directory.GetCurrentDirectory(), "Plugins", pluginName);
+			if (!Directory.Exists(pluginFolder)) return (null, null);
+			var dllPaths = Directory.GetFiles(pluginFolder, "*Plugin.dll");
+			if (!dllPaths.Any()) return (null, null);
+			return (new FileStream(dllPaths.First(), FileMode.Open, FileAccess.Read), Path.GetFileName(dllPaths.First()));
+		}
+	}
 }

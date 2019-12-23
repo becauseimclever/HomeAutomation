@@ -10,22 +10,20 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-using BecauseImClever.DeviceBase;
-using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 
-namespace BecauseImClever.AutomationUI.Components
+namespace BecauseImClever.HomeAutomation.AutomationUI.Components
 {
+    using DeviceBase;
+    using Microsoft.AspNetCore.Components;
+	using System.Net.Http;
+	using System.Threading.Tasks;
+
 	public class DeviceComponentBase : ComponentBase
 	{
 		[Inject] HttpClient HttpClient { get; set; }
 		[Parameter] public Device device { get; set; }
 
-        protected override async Task OnInitializedAsync()
+		protected override async Task OnInitializedAsync()
 		{
 			await base.OnInitializedAsync();
 		}

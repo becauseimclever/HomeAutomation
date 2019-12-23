@@ -10,13 +10,14 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-using BecauseImClever.AutomationModels;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace BecauseImClever.Abstractions
+namespace BecauseImClever.HomeAutomation.Abstractions
 {
+	using AutomationModels;
+	using System;
+	using System.Collections.Generic;
+	using System.Threading.Tasks;
+
+
 	public interface IPluginRepository
 	{
 		ValueTask<Plugin> CreatePluginAsync(Plugin plugin);

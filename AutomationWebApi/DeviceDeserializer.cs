@@ -10,40 +10,41 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Concurrent;
-using System.Linq;
-using System.Text.RegularExpressions;
 
-namespace AutomationWebApi
+namespace BecauseImClever.HomeAutomation.AutomationWebApi
 {
-    public class DeviceDeserializer : DefaultSerializationBinder
-    {
-        private static readonly Regex regex = new Regex(
-       @"System\.Private\.CoreLib(, Version=[\d\.]+)?(, Culture=[\w-]+)(, PublicKeyToken=[\w\d]+)?");
-        private static readonly ConcurrentDictionary<Type, (string assembly, string type)> cache =
-        new ConcurrentDictionary<Type, (string, string)>();
-        public override void BindToName(Type serializedType, out string assemblyName, out string typeName)
-        {
-            base.BindToName(serializedType, out assemblyName, out typeName);
+	using Newtonsoft.Json.Serialization;
+	using System;
+	using System.Collections.Concurrent;
+	using System.Linq;
+	using System.Text.RegularExpressions;
 
-            if (cache.TryGetValue(serializedType, out var name))
-            {
-                assemblyName = name.assembly;
-                typeName = name.type;
-            }
-            else
-            {
-                if (assemblyName.AsSpan().Contains("System.Private.CoreLib".AsSpan(), StringComparison.OrdinalIgnoreCase))
-                    assemblyName = regex.Replace(assemblyName, "mscorlib");
+	public class DeviceDeserializer : DefaultSerializationBinder
+	{
+		private static readonly Regex regex = new Regex(
+	   @"System\.Private\.CoreLib(, Version=[\d\.]+)?(, Culture=[\w-]+)(, PublicKeyToken=[\w\d]+)?");
+		private static readonly ConcurrentDictionary<Type, (string assembly, string type)> cache =
+		new ConcurrentDictionary<Type, (string, string)>();
+		public override void BindToName(Type serializedType, out string assemblyName, out string typeName)
+		{
+			base.BindToName(serializedType, out assemblyName, out typeName);
 
-                if (typeName.AsSpan().Contains("System.Private.CoreLib".AsSpan(), StringComparison.OrdinalIgnoreCase))
-                    typeName = regex.Replace(typeName, "mscorlib");
+			if (cache.TryGetValue(serializedType, out var name))
+			{
+				assemblyName = name.assembly;
+				typeName = name.type;
+			}
+			else
+			{
+				if (assemblyName.AsSpan().Contains("System.Private.CoreLib".AsSpan(), StringComparison.OrdinalIgnoreCase))
+					assemblyName = regex.Replace(assemblyName, "mscorlib");
 
-                cache.TryAdd(serializedType, (assemblyName, typeName));
-            }
-        }
+				if (typeName.AsSpan().Contains("System.Private.CoreLib".AsSpan(), StringComparison.OrdinalIgnoreCase))
+					typeName = regex.Replace(typeName, "mscorlib");
 
-    }
+				cache.TryAdd(serializedType, (assemblyName, typeName));
+			}
+		}
+
+	}
 }

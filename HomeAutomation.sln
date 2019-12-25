@@ -28,6 +28,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationLogic.Tests", "Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationRepositories.Tests", "Tests\AutomationRepositories.Tests\AutomationRepositories.Tests.csproj", "{0E9A65F1-532F-4146-A45A-11F059F6D444}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0C0F546E-044F-402F-A399-7F21FF4AB7B2}"
+	ProjectSection(SolutionItems) = preProject
+		InstallPlugins.ps1 = InstallPlugins.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

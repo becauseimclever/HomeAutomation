@@ -2,21 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AssemblyName>BecauseImClever.PowerStripPlugin</AssemblyName>
+    <AssemblyName>BecauseImClever.HomeAutomation.PowerStripPlugin</AssemblyName>
     <IsPackable>True</IsPackable>
   </PropertyGroup>
 
 
   <ItemGroup>
+    <PackageReference Include="BecauseImClever.HomeAutomation.DeviceBase" Version="1.0.2-beta" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\DeviceBase\DeviceBase.csproj" />
   </ItemGroup>
 
 </Project>

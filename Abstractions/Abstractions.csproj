@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <RootNamespace>BecauseImClever.Abstractions</RootNamespace>
+    <RootNamespace>BecauseImClever.HomeAutomation.Abstractions</RootNamespace>
     <LangVersion>8.0</LangVersion>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>

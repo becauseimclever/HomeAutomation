@@ -10,26 +10,27 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-using BecauseImClever.AutomationModels;
-using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace BecauseImClever.AutomationUI.Pages
+
+namespace BecauseImClever.HomeAutomation.AutomationUI.Pages
 {
-    public class IndexBase : ComponentBase
-    {
-        [CascadingParameter]
-        protected List<Room> RoomList { get; set; }
-        protected Room room { get; set; } = new Room() { Devices = new List<DeviceBase.Device>() };
-        protected override void OnInitialized()
-        {
-            if (RoomList.Any())
-                room = RoomList.FirstOrDefault();
-        }
-        protected void OnSelect(Room selected)
-        {
-            room = selected;
-        }
-    }
+	using AutomationModels;
+	using Microsoft.AspNetCore.Components;
+	using System.Collections.Generic;
+	using System.Linq;
+	public class IndexBase : ComponentBase
+	{
+		[CascadingParameter]
+		protected List<Room> RoomList { get; set; }
+		protected Room room { get; set; } = new Room() { Devices = new List<DeviceBase.Device>() };
+		protected override void OnInitialized()
+		{
+			if (RoomList.Any())
+				room = RoomList.FirstOrDefault();
+		}
+		protected void OnSelect(Room selected)
+		{
+			room = selected;
+		}
+	}
 }

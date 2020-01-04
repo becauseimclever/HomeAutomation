@@ -10,16 +10,17 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-using BecauseImClever.Abstractions;
-using BecauseImClever.AutomationModels;
-using BecauseImClever.AutomationRepositories.DataContext;
-using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
-namespace BecauseImClever.AutomationRepositories
+
+namespace BecauseImClever.HomeAutomation.AutomationRepositories
 {
+	using Abstractions;
+	using AutomationModels;
+	using DataContext;
+	using MongoDB.Driver;
+	using System;
+	using System.Collections.Generic;
+	using System.Threading.Tasks;
 	public class PluginRepository : IPluginRepository
 	{
 		private IMongoCollection<Plugin> _pluginCollection;

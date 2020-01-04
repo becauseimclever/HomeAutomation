@@ -10,39 +10,35 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BecauseImClever.Abstractions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
-namespace AutomationWebApi.Controllers
+namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class PluginController : ControllerBase
-    {
-        private IPluginService _pluginService;
-        public PluginController(IPluginService pluginService)
-        {
-            _pluginService = pluginService;
-        }
-        [HttpGet]
-        [Route("")]
-        public IActionResult GetAllAsync()
-        {
-            var plugins = _pluginService.GetAll();
-            return Ok(plugins);
-        }
-        [HttpGet]
-        [Route("{PluginName}")]
-        public IActionResult GetPluginAsync(string PluginName)
-        {
-            var plugin = _pluginService.GetPlugin(PluginName);
-            if (plugin.dll == null) return NotFound();
-            return File(plugin.dll, "application/octet-stream", plugin.fileName);
-        }
-    }
+	using Abstractions;
+	using Microsoft.AspNetCore.Mvc;
+
+	[Route("api/[controller]")]
+	[ApiController]
+	public class PluginController : ControllerBase
+	{
+		private IPluginService _pluginService;
+		public PluginController(IPluginService pluginService)
+		{
+			_pluginService = pluginService;
+		}
+		[HttpGet]
+		[Route("")]
+		public IActionResult GetAllAsync()
+		{
+			var plugins = _pluginService.GetAll();
+			return Ok(plugins);
+		}
+		[HttpGet]
+		[Route("{PluginName}")]
+		public IActionResult GetPluginAsync(string PluginName)
+		{
+			var plugin = _pluginService.GetPlugin(PluginName);
+			if (plugin.dll == null) return NotFound();
+			return File(plugin.dll, "application/octet-stream", plugin.fileName);
+		}
+	}
 }

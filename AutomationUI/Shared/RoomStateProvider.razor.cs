@@ -10,20 +10,17 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-using BecauseImClever.AutomationModels;
-using BecauseImClever.AutomationUI.Pages;
-using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace BecauseImClever.AutomationUI.Shared
+
+namespace BecauseImClever.HomeAutomation.AutomationUI.Shared
 {
-    public class RoomStateProviderBase : ComponentBase
-    {
-        [Parameter] public RenderFragment ChildContent { get; set; }
-        public List<Room> RoomList { get; set; }
+	using AutomationModels;
+	using Microsoft.AspNetCore.Components;
+	using System.Collections.Generic;
+	public class RoomStateProviderBase : ComponentBase
+	{
+		[Parameter] public RenderFragment ChildContent { get; set; }
+		public List<Room> RoomList { get; set; }
 
-    }
+	}
 }

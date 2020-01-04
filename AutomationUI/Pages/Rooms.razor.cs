@@ -10,19 +10,18 @@
 //	GNU General Public License for more details.
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
-using BecauseImClever.AutomationModels;
-using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using BecauseImClever.AutomationUI.Components;
-using Newtonsoft.Json;
-using BecauseImClever.DeviceBase;
 
-namespace BecauseImClever.AutomationUI.Pages
+
+namespace BecauseImClever.HomeAutomation.AutomationUI.Pages
 {
+	using AutomationModels;
+	using Microsoft.AspNetCore.Components;
+	using Newtonsoft.Json;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Net.Http;
+	using System.Threading.Tasks;
 	public class RoomsBase : ComponentBase
 	{
 		[CascadingParameter]

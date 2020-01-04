@@ -11,24 +11,20 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BecauseImClever.PowerStripPlugin
+namespace BecauseImClever.HomeAutomation.PowerStripPlugin
 {
-    [Route("api/[controller]")]
-    [ApiController]
+	[Route("api/[controller]")]
+	[ApiController]
 
-    public class PowerStripController: ControllerBase
-    {
-        [HttpGet]
-        [Route("")]
-        public async ValueTask<IActionResult> GetAllAsync()
-        {
-           
-            return Ok("Hello!");
-        }
-    }
+	public class PowerStripController : ControllerBase
+	{
+		[HttpGet]
+		[Route("")]
+		public IActionResult GetAll()
+		{
+
+			return Ok("Hello!");
+		}
+	}
 }

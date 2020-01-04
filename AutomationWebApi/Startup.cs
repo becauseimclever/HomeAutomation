@@ -53,9 +53,9 @@ namespace BecauseImClever.AutomationWebApi
             RegisterOptions(services);
 
             services.AddHostedMqttServer(builder => builder.WithDefaultEndpointPort(1883));
-            //services.AddSingleton<MqttTcpServerAdapter>();
-            //services.AddSingleton<IMqttServerAdapter>(s => s.GetService<MqttTcpServerAdapter>());
-            //services.AddMqttWebSocketServerAdapter();
+            services.AddSingleton<MqttTcpServerAdapter>();
+            services.AddSingleton<IMqttServerAdapter>(s => s.GetService<MqttTcpServerAdapter>());
+            services.AddMqttWebSocketServerAdapter();
             services.AddControllers().ConfigureApplicationPartManager(apm =>
             {
                 var types = AppDomain.CurrentDomain.GetAssemblies()

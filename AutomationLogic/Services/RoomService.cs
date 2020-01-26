@@ -13,46 +13,46 @@
 namespace BecauseImClever.HomeAutomation.AutomationLogic.Services
 {
 
-	using System;
-	using System.Collections.Generic;
-	using System.Threading.Tasks;
-	using AutomationModels;
-	using Abstractions;
-	using DeviceBase;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using AutomationModels;
+    using Abstractions;
+    using DeviceBase;
 
-	public class RoomService : IRoomService
-	{
-		private readonly IRoomRepository _roomRepository;
-		public RoomService(IRoomRepository roomRepository)
-		{
-			_roomRepository = roomRepository ?? throw new ArgumentNullException(nameof(roomRepository));
-		}
-		public async ValueTask<Room> CreateAsync(Room room)
-		{
-			return await _roomRepository.CreateRoomAsync(room);
-		}
-		public async ValueTask<IEnumerable<Room>> GetAllAsync()
-		{
-			return await _roomRepository.GetAllAsync().ConfigureAwait(false);
-		}
-		public async ValueTask<Room> GetByIdAsync(string Id)
-		{
-			return await _roomRepository.GetByIdAsync(Guid.Parse(Id)).ConfigureAwait(false);
-		}
-		public async ValueTask<bool> UpdateAsync(Room room)
-		{
-			return await _roomRepository.UpdateAsync(room).ConfigureAwait(false);
-		}
-		public async ValueTask<bool> DeleteAsync(string Id)
-		{
-			return await _roomRepository.DeleteAsync(Id).ConfigureAwait(false);
-		}
+    public class RoomService : IRoomService
+    {
+        private readonly IRoomRepository _roomRepository;
+        public RoomService(IRoomRepository roomRepository)
+        {
+            _roomRepository = roomRepository ?? throw new ArgumentNullException(nameof(roomRepository));
+        }
+        public async ValueTask<Room> CreateAsync(Room room)
+        {
+            return await _roomRepository.CreateAsync(room);
+        }
+        public async ValueTask<IEnumerable<Room>> GetAllAsync()
+        {
+            return await _roomRepository.GetAllAsync().ConfigureAwait(false);
+        }
+        public async ValueTask<Room> GetByIdAsync(string Id)
+        {
+            return await _roomRepository.GetByIdAsync(Guid.Parse(Id)).ConfigureAwait(false);
+        }
+        public async ValueTask<bool> UpdateAsync(Room room)
+        {
+            return await _roomRepository.UpdateAsync(room).ConfigureAwait(false);
+        }
+        public async ValueTask<bool> DeleteAsync(string Id)
+        {
+            return await _roomRepository.DeleteAsync(Guid.Parse(Id)).ConfigureAwait(false);
+        }
 
-		public async ValueTask<Room> AddDevice(Guid Id, Device device)
-		{
-			var room = await _roomRepository.GetByIdAsync(Id).ConfigureAwait(false);
-			((List<Device>)room.Devices).Add(device);
-			throw new NotImplementedException();
-		}
-	}
+        public async ValueTask<Room> AddDevice(Guid Id, Device device)
+        {
+            var room = await _roomRepository.GetByIdAsync(Id).ConfigureAwait(false);
+            ((List<Device>)room.Devices).Add(device);
+            throw new NotImplementedException();
+        }
+    }
 }

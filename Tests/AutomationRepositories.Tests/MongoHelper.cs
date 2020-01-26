@@ -1,7 +1,5 @@
-﻿using BecauseImClever.AutomationModels;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using Moq;
-using System;
 using System.Collections.Generic;
 using System.Threading;
 

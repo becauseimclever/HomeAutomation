@@ -1,8 +1,8 @@
 using AutoFixture;
 using AutoFixture.AutoMoq;
-using BecauseImClever.Abstractions;
-using BecauseImClever.AutomationLogic.Services;
-using BecauseImClever.AutomationModels;
+using BecauseImClever.HomeAutomation.Abstractions;
+using BecauseImClever.HomeAutomation.AutomationLogic.Services;
+using BecauseImClever.HomeAutomation.AutomationModels;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -33,7 +33,7 @@ namespace AutomationLogic.Tests
         {
             var room = fixture.Create<Room>();
             room.Id = Guid.NewGuid();
-            _mockRoomRepo.Setup(x => x.CreateRoomAsync(It.IsAny<Room>())).ReturnsAsync(room);
+            _mockRoomRepo.Setup(x => x.CreateAsync(It.IsAny<Room>())).ReturnsAsync(room);
             var roomService = new RoomService(_mockRoomRepo.Object);
             var result = await roomService.CreateAsync(room).ConfigureAwait(true);
 
@@ -81,10 +81,10 @@ namespace AutomationLogic.Tests
         [Fact]
         public async Task DeleteReturnsTrue()
         {
-            _mockRoomRepo.Setup(x => x.DeleteAsync(It.IsAny<string>())).ReturnsAsync(true);
+            _mockRoomRepo.Setup(x => x.DeleteAsync(It.IsAny<Guid>())).ReturnsAsync(true);
 
             var roomService = new RoomService(_mockRoomRepo.Object);
-            var result = await roomService.DeleteAsync("IDSTRING").ConfigureAwait(true);
+            var result = await roomService.DeleteAsync(Guid.NewGuid().ToString()).ConfigureAwait(true);
 
             Assert.True(result);
 

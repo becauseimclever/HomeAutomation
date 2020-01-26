@@ -14,75 +14,84 @@
 
 namespace BecauseImClever.HomeAutomation.AutomationRepositories
 {
-	using Abstractions;
-	using AutomationModels;
-	using DataContext;
-	using MongoDB.Driver;
-	using System;
-	using System.Collections.Generic;
-	using System.Threading.Tasks;
-	public class RoomRepository : IRoomRepository
-	{
+    using Abstractions;
+    using AutomationModels;
+    using MongoDB.Driver;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    public class RoomRepository : IRoomRepository
+    {
 
-		private IMongoCollection<Room> _roomCollection;
+        private IMongoCollection<Room> _roomCollection;
 
-		public RoomRepository(IMongoContext<Room> context)
-		{
-			var _context = context ?? throw new ArgumentNullException(nameof(context));
-			_roomCollection = context.MongoCollection;
-		}
+        public RoomRepository(IMongoDatabase mongoDatabase)
+        {
+            var _mongoDatabase = mongoDatabase ?? throw new ArgumentNullException(nameof(mongoDatabase));
+            _roomCollection = mongoDatabase.GetCollection<Room>(typeof(Room).Name);
+        }
 
-		#region Create
-		public async ValueTask<Room> CreateRoomAsync(Room room)
-		{
-			var _room = room ?? throw new ArgumentNullException(nameof(room));
-			await _roomCollection.InsertOneAsync(_room).ConfigureAwait(true);
-			return _room;
-		}
+        #region Create
+        public async ValueTask<Room> CreateAsync(Room room)
+        {
+            var _room = room ?? throw new ArgumentNullException(nameof(room));
+            await _roomCollection.InsertOneAsync(_room).ConfigureAwait(false);
+            return _room;
+        }
+        public async ValueTask<IEnumerable<Room>> CreateManyAsync(IEnumerable<Room> rooms)
+        {
+            await _roomCollection.InsertManyAsync(rooms).ConfigureAwait(false);
+            return rooms;
+        }
+        #endregion
+        #region Read
+        public async ValueTask<List<Room>> GetAllAsync()
+        {
+            var filter = Builders<Room>.Filter.Empty;
+            var results = await _roomCollection.FindAsync(filter).ConfigureAwait(true);
 
-		#endregion
-		#region Read
-		public async Task<List<Room>> GetAllAsync()
-		{
-			var filter = Builders<Room>.Filter.Empty;
-			var results = await _roomCollection.FindAsync(filter).ConfigureAwait(true);
+            return await results.ToListAsync().ConfigureAwait(true);
+        }
+        public async ValueTask<Room> GetByIdAsync(Guid Id)
+        {
+            var builder = Builders<Room>.Filter;
+            var filter = builder.Eq(x => x.Id, Id);
 
-			return await results.ToListAsync().ConfigureAwait(true);
-		}
-		public async Task<Room> GetByIdAsync(Guid Id)
-		{
-			var builder = Builders<Room>.Filter;
-			var filter = builder.Eq(x => x.Id, Id);
+            return await _roomCollection.Find(filter).FirstOrDefaultAsync().ConfigureAwait(true);
+        }
 
-			return await _roomCollection.Find(filter).FirstOrDefaultAsync().ConfigureAwait(true);
-		}
+        #endregion
+        #region Update
 
-		#endregion
-		#region Update
+        public async ValueTask<bool> UpdateAsync(Room room)
+        {
+            var builder = Builders<Room>.Filter;
+            var filter = builder.Eq(x => x.Id, room?.Id);
 
-		public async Task<bool> UpdateAsync(Room roomEntity)
-		{
-			var builder = Builders<Room>.Filter;
-			var filter = builder.Eq(x => x.Id, roomEntity?.Id);
+            var update = Builders<Room>.Update
+                .Set(x => x.Name, room?.Name)
+                .Set(x => x.Devices, room?.Devices);
+            var updateOptions = new UpdateOptions() { IsUpsert = false };
+            var returnValue = await _roomCollection.UpdateOneAsync(filter, update, updateOptions).ConfigureAwait(true);
+            return returnValue.IsAcknowledged;
 
-			var update = Builders<Room>.Update
-				.Set(x => x.Name, roomEntity?.Name)
-				.Set(x => x.Devices, roomEntity?.Devices);
-			var updateOptions = new UpdateOptions() { IsUpsert = false };
-			var returnValue = await _roomCollection.UpdateOneAsync(filter, update, updateOptions).ConfigureAwait(true);
-			return returnValue.IsAcknowledged;
+        }
 
-		}
+        #endregion
+        #region Delete
+        public async ValueTask<bool> DeleteAsync(Guid id)
+        {
+            var returnValue = await _roomCollection.DeleteOneAsync(x => x.Id == id).ConfigureAwait(true);
 
-		#endregion
-		#region Delete
-		public async Task<bool> DeleteAsync(string id)
-		{
-			var returnValue = await _roomCollection.DeleteOneAsync(x => x.Id == Guid.Parse(id)).ConfigureAwait(true);
-
-			return returnValue.IsAcknowledged;
-		}
-
-		#endregion
-	}
+            return returnValue.IsAcknowledged;
+        }
+        public async ValueTask<(bool, long)> DeleteManyAsync(IEnumerable<Guid> ids)
+        {
+            var builder = Builders<Room>.Filter;
+            var filter = builder.In(x => x.Id, ids);
+            var returnValue = await _roomCollection.DeleteManyAsync(filter).ConfigureAwait(false);
+            return (returnValue.IsAcknowledged, returnValue.DeletedCount);
+        }
+        #endregion
+    }
 }

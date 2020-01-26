@@ -4,6 +4,7 @@ using MongoDB.Driver;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -55,6 +56,20 @@ namespace AutomationRepositories.Tests
             var repo = new RoomRepository(_mockDatabase.Object);
             var result = await repo.CreateAsync(_roomEntity).ConfigureAwait(true);
             Assert.NotNull(result);
+        }
+        [Fact]
+        public async Task CreateManyReturnsRooms()
+        {
+            _mockCollection.Setup(x => x.InsertManyAsync(
+                It.IsAny<IEnumerable<Room>>(),
+                It.IsAny<InsertManyOptions>(),
+                It.IsAny<CancellationToken>()
+                )).Returns(Task.FromResult(MongoHelper.BuildMockAsyncCursor((ICollection<Room>)_roomList)));
+            _mockDatabase.Setup(x => x.GetCollection<Room>(It.IsAny<string>(), It.IsAny<MongoCollectionSettings>())).Returns(_mockCollection.Object);
+            var repo = new RoomRepository(_mockDatabase.Object);
+            var result = await repo.CreateManyAsync(_roomList).ConfigureAwait(false);
+            Assert.NotNull(result);
+            Assert.NotEmpty(result);
         }
         #endregion
         #region Read
@@ -124,6 +139,23 @@ namespace AutomationRepositories.Tests
             var repo = new RoomRepository(_mockDatabase.Object);
             var result = await repo.DeleteAsync(_roomEntity.Id).ConfigureAwait(true);
             Assert.True(result);
+        }
+        [Fact]
+        public async Task DeleteManyReturnsTrue()
+        {
+            var ids = _roomList.Select(x => x.Id);
+            Mock<DeleteResult> mockResult = new Mock<DeleteResult>();
+            mockResult.SetupGet(x => x.IsAcknowledged).Returns(true);
+            mockResult.SetupGet(x => x.DeletedCount).Returns(1);
+            _mockCollection.Setup(x => x.DeleteManyAsync(
+                It.IsAny<FilterDefinition<Room>>(),
+                It.IsAny<CancellationToken>()
+                )).ReturnsAsync(mockResult.Object);
+            _mockDatabase.Setup(x => x.GetCollection<Room>(It.IsAny<string>(), It.IsAny<MongoCollectionSettings>())).Returns(_mockCollection.Object);
+            var repo = new RoomRepository(_mockDatabase.Object);
+            (bool, long) result = await repo.DeleteManyAsync(ids).ConfigureAwait(true);
+            Assert.True(result.Item1);
+            Assert.Equal(1, result.Item2);
         }
         #endregion
     }

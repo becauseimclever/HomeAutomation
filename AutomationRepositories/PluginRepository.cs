@@ -1,4 +1,4 @@
-﻿//	HomeAutomation - Home Automation system in .NET Core and Blazor, focusing on rooms and devices.
+﻿//	HomeAutomation - Home Automation system in .NET Core and Blazor, focusing on plugins and devices.
 //	Copyright(C) 2019 Darren Swan
 //	This program is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -29,22 +29,27 @@ namespace BecauseImClever.HomeAutomation.AutomationRepositories
             _pluginCollection = mongoDatabase.GetCollection<Plugin>($"{nameof(Plugin)}s", new MongoCollectionSettings() { GuidRepresentation = MongoDB.Bson.GuidRepresentation.Standard });
         }
         #region Create   
-        public async ValueTask<Plugin> CreatePluginAsync(Plugin plugin)
+        public async ValueTask<Plugin> CreateAsync(Plugin plugin)
         {
             var _plugin = plugin ?? throw new ArgumentNullException(nameof(plugin));
             await _pluginCollection.InsertOneAsync(_plugin).ConfigureAwait(true);
             return _plugin;
         }
+        public async ValueTask<IEnumerable<Plugin>> CreateManyAsync(IEnumerable<Plugin> plugins)
+        {
+            await _pluginCollection.InsertManyAsync(plugins).ConfigureAwait(false);
+            return plugins;
+        }
         #endregion
 
         #region Read
-        public async ValueTask<Plugin> GetPluginAsync(Guid Id)
+        public async ValueTask<Plugin> GetByIdAsync(Guid Id)
         {
             var builder = Builders<Plugin>.Filter;
             var filter = builder.Eq(x => x.Id, Id);
             return await _pluginCollection.Find(filter).FirstOrDefaultAsync().ConfigureAwait(true);
         }
-        public async ValueTask<IEnumerable<Plugin>> GetPluginsAsync()
+        public async ValueTask<IEnumerable<Plugin>> GetAllAsync()
         {
             var filter = Builders<Plugin>.Filter.Empty;
             var results = await _pluginCollection.FindAsync(filter).ConfigureAwait(true);
@@ -53,15 +58,33 @@ namespace BecauseImClever.HomeAutomation.AutomationRepositories
         }
         #endregion
         #region Update
-        public ValueTask<Plugin> UpdatePluginAsync(Plugin plugin)
+        public async ValueTask<bool> UpdateAsync(Plugin plugin)
         {
-            throw new NotImplementedException();
+            var builder = Builders<Plugin>.Filter;
+            var filter = builder.Eq(x => x.Id, plugin?.Id);
+
+            var update = Builders<Plugin>.Update
+                .Set(x => x.Name, plugin?.Name)
+                .Set(x => x.Path, plugin?.Path);
+            var updateOptions = new UpdateOptions() { IsUpsert = false };
+            var returnValue = await _pluginCollection.UpdateOneAsync(filter, update, updateOptions).ConfigureAwait(false);
+            return returnValue.IsAcknowledged;
         }
         #endregion
         #region Delete
-        public ValueTask<bool> DetelePluginAsync(Guid Id)
+        public async ValueTask<bool> DeleteAsync(Guid Id)
         {
-            throw new NotImplementedException();
+            var returnValue = await _pluginCollection.DeleteOneAsync(x => x.Id == Id).ConfigureAwait(true);
+
+            return returnValue.IsAcknowledged;
+        }
+
+        public async ValueTask<(bool, long)> DeleteManyAsync(IEnumerable<Guid> Ids)
+        {
+            var builder = Builders<Plugin>.Filter;
+            var filter = builder.In(x => x.Id, Ids);
+            var returnValue = await _pluginCollection.DeleteManyAsync(filter).ConfigureAwait(false);
+            return (returnValue.IsAcknowledged, returnValue.DeletedCount);
         }
         #endregion
     }

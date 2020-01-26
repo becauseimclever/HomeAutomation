@@ -12,18 +12,21 @@
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 namespace BecauseImClever.HomeAutomation.Abstractions
 {
-	using AutomationModels;
-	using System;
-	using System.Collections.Generic;
-	using System.Threading.Tasks;
+    using AutomationModels;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
 
-	public interface IPluginRepository
-	{
-		ValueTask<Plugin> CreatePluginAsync(Plugin plugin);
-		ValueTask<Plugin> GetPluginAsync(Guid Id);
-		ValueTask<IEnumerable<Plugin>> GetPluginsAsync();
-		ValueTask<Plugin> UpdatePluginAsync(Plugin plugin);
-		ValueTask<bool> DetelePluginAsync(Guid Id);
-	}
+    public interface IPluginRepository
+    {
+        ValueTask<Plugin> CreateAsync(Plugin plugin);
+        ValueTask<IEnumerable<Plugin>> CreateManyAsync(IEnumerable<Plugin> plugins);
+        ValueTask<Plugin> GetByIdAsync(Guid Id);
+        ValueTask<IEnumerable<Plugin>> GetAllAsync();
+        ValueTask<bool> UpdateAsync(Plugin plugin);
+        ValueTask<bool> DeleteAsync(Guid Id);
+        ValueTask<(bool, long)> DeleteManyAsync(IEnumerable<Guid> Ids);
+
+    }
 }

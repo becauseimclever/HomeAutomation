@@ -38,7 +38,7 @@ steps:
     
 - task: reportgenerator@4
   inputs:
-    reports: '$(Build.SourcesDirectory)\*.xml'
+    reports: '$(Build.SourcesDirectory)\'
     targetdir: '$(Build.SourcesDirectory)\coveragereport'
 
 - task: PublishCodeCoverageResults@1

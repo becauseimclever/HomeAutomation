@@ -18,14 +18,14 @@
   <ItemGroup>
     <PackageReference Include="BecauseImClever.HomeAutomation.DeviceBase" Version="1.0.2-beta" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="3.1.0-preview4.19579.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
     <PackageReference Include="MQTTnet" Version="3.0.9-rc1" />
     <PackageReference Include="MQTTnet.AspNetCore" Version="3.0.9-rc1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.0.0-rc5" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.0.0-rc5" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="5.0.0-rc5" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

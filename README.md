@@ -7,6 +7,7 @@ Home Automation is a central server platform for automating your home.
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Fortinbra_HomeAutomation&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=Fortinbra_HomeAutomation)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Fortinbra_HomeAutomation&metric=security_rating)](https://sonarcloud.io/dashboard?id=Fortinbra_HomeAutomation)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Fortinbra_HomeAutomation&metric=coverage)](https://sonarcloud.io/dashboard?id=Fortinbra_HomeAutomation)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Fortinbra_HomeAutomation&metric=alert_status)](https://sonarcloud.io/dashboard?id=Fortinbra_HomeAutomation)
 
 ## Features
 

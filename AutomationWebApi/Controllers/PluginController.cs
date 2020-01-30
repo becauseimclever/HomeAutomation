@@ -13,32 +13,33 @@
 
 namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
 {
-	using Abstractions;
-	using Microsoft.AspNetCore.Mvc;
+    using Abstractions;
+    using Microsoft.AspNetCore.Mvc;
+    using System;
 
-	[Route("api/[controller]")]
-	[ApiController]
-	public class PluginController : ControllerBase
-	{
-		private IPluginService _pluginService;
-		public PluginController(IPluginService pluginService)
-		{
-			_pluginService = pluginService;
-		}
-		[HttpGet]
-		[Route("")]
-		public IActionResult GetAllAsync()
-		{
-			var plugins = _pluginService.GetAll();
-			return Ok(plugins);
-		}
-		[HttpGet]
-		[Route("{PluginName}")]
-		public IActionResult GetPluginAsync(string PluginName)
-		{
-			var plugin = _pluginService.GetPlugin(PluginName);
-			if (plugin.dll == null) return NotFound();
-			return File(plugin.dll, "application/octet-stream", plugin.fileName);
-		}
-	}
+    [Route("api/[controller]")]
+    [ApiController]
+    public class PluginController : ControllerBase
+    {
+        private readonly IPluginService _pluginService;
+        public PluginController(IPluginService pluginService)
+        {
+            _pluginService = pluginService ?? throw new ArgumentNullException(nameof(pluginService));
+        }
+        [HttpGet]
+        [Route("")]
+        public IActionResult GetAllAsync()
+        {
+            var plugins = _pluginService.GetAll();
+            return Ok(plugins);
+        }
+        [HttpGet]
+        [Route("{PluginName}")]
+        public IActionResult GetPluginAsync(string PluginName)
+        {
+            var plugin = _pluginService.GetPlugin(PluginName);
+            if (plugin.dll == null) return NotFound();
+            return File(plugin.dll, "application/octet-stream", plugin.fileName);
+        }
+    }
 }

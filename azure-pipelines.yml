@@ -29,34 +29,6 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    projects: 'Tests/AutomationLogic.Tests/AutomationLogic.Tests.csproj'
-    arguments: '--configuration $(BuildConfiguration)
- /p:CollectCoverage=true
- /p:CoverletOutputFormat=cobertura 
- /p:CoverletOutput=$(Build.SourcesDirectory)\TestResults\Coverage\'
+    projects: 'Tests/*/*.csproj'
+    arguments: '--configuration $(BuildConfiguration) --collect "Code coverage"'
     testRunTitle: 'Unit Tests'
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'test'
-    projects: 'Tests/AutomationRepositories.Test/AutomationRepositories.Tests.csproj'
-    arguments: '--configuration $(BuildConfiguration) 
- /p:CollectCoverage=true
- /p:CoverletOutputFormat=cobertura
- /p:CoverletOutput=$(Build.SourcesDirectory)\TestResults\Coverage\'
-    testRunTitle: 'RepositoryTests'
-    
-- task: reportgenerator@4
-  inputs:
-    reports: '$(Build.SourcesDirectory)\TestResults\Coverage\*.xml'
-    targetdir: '$(Build.SourcesDirectory)\coveragereport'
-
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Build.SourcesDirectory)/coveragereport/Cobertura.xml'
-    reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
-    failIfCoverageEmpty: true
-- task: PublishTestResults@2
-  inputs:
-    testRunner: VSTest
-    testResultsFiles: '**/*.trx'

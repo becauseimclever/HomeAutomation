@@ -36,7 +36,7 @@ steps:
   inputs:
     command: 'test'
     projects: 'Tests/*/*.csproj'
-    arguments: '--configuration $(BuildConfiguration) --collect "Code coverage"'
+    arguments: '--configuration $(BuildConfiguration) --collect "Code coverage" --logger trx'
     testRunTitle: 'Unit Tests'
 - task: SonarCloudAnalyze@1
 - task: SonarCloudPublish@1

@@ -62,6 +62,8 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
                     options.SerializerSettings.SerializationBinder = new DeviceDeserializer();
                 });
             services
+                .AddAutomationServices()
+                .AddAutomationRespositories()
                 .AddSwaggerGen(c =>
                 {
                     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Home Automation", Version = "v1" });

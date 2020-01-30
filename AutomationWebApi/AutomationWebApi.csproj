@@ -5,6 +5,7 @@
     <LangVersion>8.0</LangVersion>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <RootNamespace>BecauseImClever.HomeAutomation.AutomationWebApi</RootNamespace>
+    <ProjectGuid>962e8e5c-0907-4767-96c0-263a540f129a</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>

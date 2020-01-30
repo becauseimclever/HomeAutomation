@@ -5,7 +5,6 @@ using BecauseImClever.HomeAutomation.AutomationModels;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -39,7 +38,22 @@ namespace AutomationLogic.Tests
             _mockPluginRepository.Setup(x => x.CreateAsync(It.IsAny<Plugin>())).ReturnsAsync(plugin);
             var service = new PluginService(_mockPluginRepository.Object);
             var result = await service.CreateAsync(new Plugin()).ConfigureAwait(false);
+            Assert.NotNull(result);
+            Assert.IsType<Plugin>(result);
         }
         #endregion
+        #region Read
+        [Fact]
+        public async Task GetAllPlugins()
+        {
+            var plugins = _fixture.CreateMany<Plugin>(25);
+            _mockPluginRepository.Setup(x => x.GetAllAsync()).ReturnsAsync(plugins);
+            var service = new PluginService(_mockPluginRepository.Object);
+            var result = await service.GetAllAsync().ConfigureAwait(false);
+            Assert.NotEmpty(result);
+            Assert.IsAssignableFrom<IEnumerable<Plugin>>(result);
+        }
+        #endregion
+
     }
 }

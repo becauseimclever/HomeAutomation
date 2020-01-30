@@ -60,7 +60,7 @@ namespace BecauseImClever.HomeAutomation.AutomationLogic.Services
 
         public ValueTask<IEnumerable<Plugin>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return _pluginRepository.GetAllAsync();
         }
 
         public ValueTask<Plugin> GetAsync(Guid pluginId)

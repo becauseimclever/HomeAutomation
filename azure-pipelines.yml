@@ -17,7 +17,13 @@ steps:
   inputs:
     packageType: 'sdk'
     version: '3.1.100'
-
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: 'becauseimclever'
+    scannerMode: 'MSBuild'
+    projectKey: 'Fortinbra_HomeAutomation'
+    projectName: 'HomeAutomation'
 - script: dotnet restore
 
 - task: DotNetCoreCLI@2
@@ -30,24 +36,9 @@ steps:
   inputs:
     command: 'test'
     projects: 'Tests/*/*.csproj'
-    arguments: '--configuration $(BuildConfiguration)
- /p:CollectCoverage=true
- /p:CoverletOutputFormat=cobertura 
- /p:CoverletOutput=$(Build.SourcesDirectory)\TestResults\Coverage\'
+    arguments: '--configuration $(BuildConfiguration) --collect "Code coverage"'
     testRunTitle: 'Unit Tests'
-    
-- task: reportgenerator@4
+- task: SonarCloudAnalyze@1
+- task: SonarCloudPublish@1
   inputs:
-    reports: '$(Build.SourcesDirectory)\TestResults\Coverage\*.xml'
-    targetdir: '$(Build.SourcesDirectory)\coveragereport'
-
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Build.SourcesDirectory)/coveragereport/Cobertura.xml'
-    reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
-    failIfCoverageEmpty: true
-- task: PublishTestResults@2
-  inputs:
-    testRunner: VSTest
-    testResultsFiles: '**/*.trx'
+    pollingTimeoutSec: '300'

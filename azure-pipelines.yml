@@ -17,7 +17,13 @@ steps:
   inputs:
     packageType: 'sdk'
     version: '3.1.100'
-
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: 'becauseimclever'
+    scannerMode: 'MSBuild'
+    projectKey: 'Fortinbra_HomeAutomation'
+    projectName: 'HomeAutomation'
 - script: dotnet restore
 
 - task: DotNetCoreCLI@2
@@ -32,3 +38,7 @@ steps:
     projects: 'Tests/*/*.csproj'
     arguments: '--configuration $(BuildConfiguration) --collect "Code coverage"'
     testRunTitle: 'Unit Tests'
+- task: SonarCloudAnalyze@1
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'

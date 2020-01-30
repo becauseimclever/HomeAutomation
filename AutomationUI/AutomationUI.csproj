@@ -7,6 +7,7 @@
     <RazorLangVersion>3.0</RazorLangVersion>
     <AssemblyName>BecauseImClever.HomeAutomation.AutomationUI</AssemblyName>
     <RootNamespace>BecauseImClever.HomeAutomation.AutomationUI</RootNamespace>
+    <ProjectGuid>99ac78a0-0bd4-4d49-a301-4a48c430e438</ProjectGuid>
   </PropertyGroup>
  
   <ItemGroup>

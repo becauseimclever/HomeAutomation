@@ -5,6 +5,7 @@
     <RootNamespace>BecauseImClever.HomeAutomation.AutomationLogic</RootNamespace>
     <LangVersion>8.0</LangVersion>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <ProjectGuid>fdae94b3-e08b-40d2-a1b1-67d966f6b3df</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>

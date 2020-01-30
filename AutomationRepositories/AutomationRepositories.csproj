@@ -5,6 +5,7 @@
     <RootNamespace>BecauseImClever.HomeAutomation.AutomationRepositories</RootNamespace>
     <LangVersion>8.0</LangVersion>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <ProjectGuid>0e33226b-3a94-42a5-9c49-ac7792e7d06d</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>

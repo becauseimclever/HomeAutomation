@@ -5,6 +5,7 @@
     <RootNamespace>BecauseImClever.HomeAutomation.Abstractions</RootNamespace>
     <LangVersion>8.0</LangVersion>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <ProjectGuid>5db9b019-eff3-4b2b-8b9f-fe5243e41ee3</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>

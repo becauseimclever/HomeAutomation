@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>BecauseImClever.HomeAutomation.AutomationModels</RootNamespace>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <ProjectGuid>88a16a37-11ac-4a65-9748-234be5f75df2</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>

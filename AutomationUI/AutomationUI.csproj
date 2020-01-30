@@ -9,6 +9,14 @@
     <RootNamespace>BecauseImClever.HomeAutomation.AutomationUI</RootNamespace>
     <ProjectGuid>99ac78a0-0bd4-4d49-a301-4a48c430e438</ProjectGuid>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CodeAnalysisRuleSet>AutomationUI.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CodeAnalysisRuleSet>AutomationUI.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
  
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.1.0-preview4.19579.2" />

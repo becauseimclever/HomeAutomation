@@ -7,6 +7,14 @@
     <ProjectGuid>88a16a37-11ac-4a65-9748-234be5f75df2</ProjectGuid>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CodeAnalysisRuleSet>AutomationModels.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CodeAnalysisRuleSet>AutomationModels.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="BecauseImClever.HomeAutomation.DeviceBase" Version="1.0.2-beta" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />

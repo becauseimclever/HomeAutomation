@@ -7,6 +7,14 @@
     <ProjectGuid>a93e1a45-8370-4461-bc11-506d5c707b97</ProjectGuid>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CodeAnalysisRuleSet>PowerStripPlugin.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CodeAnalysisRuleSet>PowerStripPlugin.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
 
   <ItemGroup>
     <PackageReference Include="BecauseImClever.HomeAutomation.DeviceBase" Version="1.0.2-beta" />

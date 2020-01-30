@@ -1,0 +1,15 @@
+{
+  "ServerUri": "https://sonarcloud.io/",
+  "Organization": {
+    "Key": "becauseimclever",
+    "Name": "BecauseImClever"
+  },
+  "ProjectKey": "Fortinbra_HomeAutomation",
+  "ProjectName": "HomeAutomation",
+  "Profiles": {
+    "CSharp": {
+      "ProfileKey": "AW_0fDqiJNnqMxBAU5Hf",
+      "ProfileTimestamp": "2020-01-10T04:36:33-06:00"
+    }
+  }
+}

@@ -27,14 +27,15 @@ namespace BecauseImClever.HomeAutomation.AutomationUI.Pages
 		[CascadingParameter]
 		public List<Room> RoomList { get; set; }
 		[Inject] HttpClient httpClient { get; set; }
-		public bool isLoading = false;
+        public bool IsLoading { get; set; } = false;
+
 		protected override async Task OnInitializedAsync()
 		{
 			await LoadRooms();
 		}
 		public async Task LoadRooms()
 		{
-			isLoading = true;
+			IsLoading = true;
 			if (!RoomList.Any())
 			{
 				var temp = await httpClient.GetAsync(@"api/room");
@@ -47,7 +48,7 @@ namespace BecauseImClever.HomeAutomation.AutomationUI.Pages
 					Console.WriteLine(room.Id);
 				}
 			}
-			isLoading = false;
+			IsLoading = false;
 		}
 		public async Task CreateRoom()
 		{

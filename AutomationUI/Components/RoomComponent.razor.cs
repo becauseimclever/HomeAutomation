@@ -32,7 +32,7 @@ namespace BecauseImClever.HomeAutomation.AutomationUI.Components
 
         public async Task UpdateRoom()
         {
-            var updatedRoom = await httpClient.PutAsync(@"api/room",
+            _ = await httpClient.PutAsync(@"api/room",
                 new StringContent(JsonConvert.SerializeObject(room,
                 new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All }),
                 Encoding.UTF8, "application/Json"));

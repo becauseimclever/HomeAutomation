@@ -25,7 +25,9 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
     using Microsoft.OpenApi.Models;
     using MQTTnet.AspNetCore;
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         public Startup(IConfiguration configuration)

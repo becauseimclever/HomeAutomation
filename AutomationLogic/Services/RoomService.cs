@@ -13,12 +13,11 @@
 namespace BecauseImClever.HomeAutomation.AutomationLogic.Services
 {
 
+    using Abstractions;
+    using AutomationModels;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using AutomationModels;
-    using Abstractions;
-    using DeviceBase;
 
     public class RoomService : IRoomService
     {

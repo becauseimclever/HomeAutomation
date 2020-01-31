@@ -26,20 +26,6 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
         {
             _pluginService = pluginService ?? throw new ArgumentNullException(nameof(pluginService));
         }
-        [HttpGet]
-        [Route("")]
-        public IActionResult GetAllAsync()
-        {
-            var plugins = _pluginService.GetAll();
-            return Ok(plugins);
-        }
-        [HttpGet]
-        [Route("{PluginName}")]
-        public IActionResult GetPluginAsync(string PluginName)
-        {
-            var plugin = _pluginService.GetPlugin(PluginName);
-            if (plugin.dll == null) return NotFound();
-            return File(plugin.dll, "application/octet-stream", plugin.fileName);
-        }
+       
     }
 }

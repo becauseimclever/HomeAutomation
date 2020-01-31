@@ -26,11 +26,6 @@ namespace AutomationWebApi.Tests.Controller
         {
             Assert.Throws<ArgumentNullException>(() => { new PluginController(null); });
         }
-        [Fact(Skip = "Work in progress")]
-        public void GetAllPluginsReturnsPluginsList()
-        {
-            _mockPluignService.Setup(x => x.GetAll()).Returns(new List<string>());
-            var controller = new PluginController(_mockPluignService.Object);
-        }
+       
     }
 }

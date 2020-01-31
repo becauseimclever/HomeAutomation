@@ -24,8 +24,11 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: 'Fortinbra_HomeAutomation'
     projectName: 'HomeAutomation'
-- script: dotnet restore
-
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    feedsToUse: 'select'
+    vstsFeed: 'c64eac06-a5dc-4837-b121-13429513d7a1/5f95ea8c-eff7-41ff-83aa-d52760b08d27'
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:

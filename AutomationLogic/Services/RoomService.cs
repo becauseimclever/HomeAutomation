@@ -43,9 +43,9 @@ namespace BecauseImClever.HomeAutomation.AutomationLogic.Services
         {
             return await _roomRepository.UpdateAsync(room).ConfigureAwait(false);
         }
-        public async ValueTask<bool> DeleteAsync(string Id)
+        public async ValueTask<bool> DeleteAsync(string id)
         {
-            return await _roomRepository.DeleteAsync(Guid.Parse(Id)).ConfigureAwait(false);
+            return await _roomRepository.DeleteAsync(Guid.Parse(id)).ConfigureAwait(false);
         }
 
         public async ValueTask<Room> AddDevice(Guid Id, Device device)

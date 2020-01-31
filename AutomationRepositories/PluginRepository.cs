@@ -22,11 +22,11 @@ namespace BecauseImClever.HomeAutomation.AutomationRepositories
     using System.Threading.Tasks;
     public class PluginRepository : IPluginRepository
     {
-        private IMongoCollection<Plugin> _pluginCollection;
+        private readonly IMongoCollection<Plugin> _pluginCollection;
         public PluginRepository(IMongoDatabase mongoDatabase)
         {
-            var _mongoDatabase = mongoDatabase ?? throw new ArgumentNullException(nameof(mongoDatabase));
-            _pluginCollection = mongoDatabase.GetCollection<Plugin>($"{nameof(Plugin)}s", new MongoCollectionSettings() { GuidRepresentation = MongoDB.Bson.GuidRepresentation.Standard });
+            _pluginCollection = (mongoDatabase ?? throw new ArgumentNullException(nameof(mongoDatabase)))
+                .GetCollection<Plugin>($"{nameof(Plugin)}s", new MongoCollectionSettings() { GuidRepresentation = MongoDB.Bson.GuidRepresentation.Standard });
         }
         #region Create   
         public async ValueTask<Plugin> CreateAsync(Plugin plugin)

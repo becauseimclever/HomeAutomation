@@ -19,10 +19,10 @@ namespace BecauseImClever.HomeAutomation.Abstractions
 
 	public interface IRoomRepository
 	{
-		ValueTask<Room> CreateAsync(Room roomEntity);
+		ValueTask<Room> CreateAsync(Room room);
 		ValueTask<List<Room>> GetAllAsync();
 		ValueTask<Room> GetByIdAsync(Guid Id);
-		ValueTask<bool> UpdateAsync(Room roomEntity);
+		ValueTask<bool> UpdateAsync(Room room);
 		ValueTask<bool> DeleteAsync(Guid id);
 	}
 }

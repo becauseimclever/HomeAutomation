@@ -23,12 +23,11 @@ namespace BecauseImClever.HomeAutomation.AutomationRepositories
     public class RoomRepository : IRoomRepository
     {
 
-        private IMongoCollection<Room> _roomCollection;
+        private readonly IMongoCollection<Room> _roomCollection;
 
         public RoomRepository(IMongoDatabase mongoDatabase)
         {
-            var _mongoDatabase = mongoDatabase ?? throw new ArgumentNullException(nameof(mongoDatabase));
-            _roomCollection = mongoDatabase.GetCollection<Room>(typeof(Room).Name);
+            _roomCollection = (mongoDatabase ?? throw new ArgumentNullException(nameof(mongoDatabase))).GetCollection<Room>(typeof(Room).Name);
         }
 
         #region Create

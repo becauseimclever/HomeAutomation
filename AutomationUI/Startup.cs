@@ -20,7 +20,8 @@ namespace BecauseImClever.HomeAutomation.AutomationUI
 	{
 		public void ConfigureServices(IServiceCollection services)
 		{
-
+			//Intentionally empty
+			//Until I have something to put here
 		}
 
 		public void Configure(IComponentsApplicationBuilder app)

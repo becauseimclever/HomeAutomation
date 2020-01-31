@@ -12,20 +12,17 @@
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 namespace BecauseImClever.HomeAutomation.Abstractions
 {
-	using AutomationModels;
-	using DeviceBase;
-	using System;
-	using System.Collections.Generic;
-	using System.Threading.Tasks;
+    using AutomationModels;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
 
-	public interface IRoomService
-	{
-		ValueTask<Room> CreateAsync(Room room);
-		ValueTask<IEnumerable<Room>> GetAllAsync();
-		ValueTask<Room> GetByIdAsync(string Id);
-		ValueTask<bool> UpdateAsync(Room room);
-		ValueTask<bool> DeleteAsync(string id);
-		ValueTask<Room> AddDevice(Guid Id, Device device);
-	}
+    public interface IRoomService
+    {
+        ValueTask<Room> CreateAsync(Room room);
+        ValueTask<IEnumerable<Room>> GetAllAsync();
+        ValueTask<Room> GetByIdAsync(string Id);
+        ValueTask<bool> UpdateAsync(Room room);
+        ValueTask<bool> DeleteAsync(string id);
+    }
 }

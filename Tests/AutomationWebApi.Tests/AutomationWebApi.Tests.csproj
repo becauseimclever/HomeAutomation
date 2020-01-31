@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>BecauseImClever.HomeAutomation.AutomationWebApi.Tests</RootNamespace>
-
+    <ProjectGuid>50465d6b-d58f-41d1-a303-677995d44839</ProjectGuid>
     <IsPackable>false</IsPackable>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>

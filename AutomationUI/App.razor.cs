@@ -14,34 +14,35 @@
 
 namespace BecauseImClever.HomeAutomation.AutomationUI
 {
-	using Microsoft.AspNetCore.Components;
-	using System;
-	using System.Net.Http;
-	using System.Threading.Tasks;
-	public class AppBase : ComponentBase
-	{
-		[Inject] HttpClient Http { get; set; }
+    using Microsoft.AspNetCore.Components;
+    using System;
+    using System.IO;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    public class AppBase : ComponentBase
+    {
+        [Inject] HttpClient Http { get; set; }
 
-		protected override async void OnInitialized()
-		{
-			await LoadPlugins();
-		}
-		public async ValueTask LoadPlugins()
-		{
+        protected override async void OnInitialized()
+        {
+            await LoadPlugins();
+        }
+        public async ValueTask LoadPlugins()
+        {
 
-			try
-			{
-				var bytes = await Http.GetByteArrayAsync(@"api/Plugin/PowerStripPlugin");
+            try
+            {
+                var bytes = await Http.GetByteArrayAsync(@"api/Plugin/PowerStripPlugin").ConfigureAwait(false);
 
-				var assembly = System.Reflection.Assembly.Load(bytes);
-				var t = assembly.GetType("BecauseImClever.PowerStripPlugin.PowerStrip");
-				var m = t.GetMethod("RegisterDependencies");
-				Console.WriteLine($"BecauseImClever.PowerStripPlugin.PowerStrip.RegisterDependencies(): {m.Invoke(t.TypeInitializer.Invoke(null), null)}");
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.Message);
-			}
-		}
-	}
+                var assembly = System.Reflection.Assembly.Load(bytes);
+                var t = assembly.GetType("BecauseImClever.PowerStripPlugin.PowerStrip");
+                var m = t.GetMethod("RegisterDependencies");
+                Console.WriteLine($"BecauseImClever.PowerStripPlugin.PowerStrip.RegisterDependencies(): {m.Invoke(t.TypeInitializer.Invoke(null), null)}");
+            }
+            catch (FileNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+    }
 }

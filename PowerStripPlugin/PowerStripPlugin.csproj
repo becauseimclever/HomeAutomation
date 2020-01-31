@@ -5,6 +5,7 @@
     <AssemblyName>BecauseImClever.HomeAutomation.PowerStripPlugin</AssemblyName>
     <IsPackable>True</IsPackable>
     <ProjectGuid>a93e1a45-8370-4461-bc11-506d5c707b97</ProjectGuid>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

@@ -5,6 +5,7 @@
     <RootNamespace>BecauseImClever.HomeAutomation.AutomationWebApi.Tests</RootNamespace>
 
     <IsPackable>false</IsPackable>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>

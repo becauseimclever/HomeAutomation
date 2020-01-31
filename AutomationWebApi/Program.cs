@@ -19,9 +19,11 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
     using Microsoft.Extensions.Hosting;
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    [ExcludeFromCodeCoverage]
     public static class Program
     {
         public static void Main()

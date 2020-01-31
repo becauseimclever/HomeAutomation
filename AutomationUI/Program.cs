@@ -14,7 +14,9 @@
 namespace BecauseImClever.HomeAutomation.AutomationUI
 {
     using Microsoft.AspNetCore.Blazor.Hosting;
+    using System.Diagnostics.CodeAnalysis;
 
+    [ExcludeFromCodeCoverage]
     public static class Program
     {
         public static void Main()

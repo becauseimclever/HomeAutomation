@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>8.0</LangVersion>
-    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <RootNamespace>BecauseImClever.HomeAutomation.AutomationWebApi</RootNamespace>
     <ProjectGuid>962e8e5c-0907-4767-96c0-263a540f129a</ProjectGuid>
   </PropertyGroup>

@@ -8,6 +8,7 @@
     <AssemblyName>BecauseImClever.HomeAutomation.AutomationUI</AssemblyName>
     <RootNamespace>BecauseImClever.HomeAutomation.AutomationUI</RootNamespace>
     <ProjectGuid>99ac78a0-0bd4-4d49-a301-4a48c430e438</ProjectGuid>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

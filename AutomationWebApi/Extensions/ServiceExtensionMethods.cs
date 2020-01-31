@@ -45,6 +45,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Extensions
         public static IServiceCollection AddAutomationRespositories(this IServiceCollection services)
         {
             services.AddTransient<IRoomRepository, RoomRepository>();
+            services.AddTransient<IPluginRepository, PluginRepository>();
             return services;
         }
     }

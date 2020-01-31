@@ -3,7 +3,7 @@
 Home Automation is a central server platform for automating your home.
 
 [![BCH compliance](https://bettercodehub.com/edge/badge/Fortinbra/HomeAutomation?branch=master)](https://bettercodehub.com/)
-[![Build Status](https://becauseimclever.visualstudio.com/HomeAutomation/_apis/build/status/Fortinbra.HomeAutomation?branchName=master)](https://becauseimclever.visualstudio.com/HomeAutomation/_build/latest?definitionId=2&branchName=master)
+[![Build Status](https://becauseimclever.visualstudio.com/HomeAutomation/_apis/build/status/becauseimclever.HomeAutomation?branchName=master)](https://becauseimclever.visualstudio.com/HomeAutomation/_build/latest?definitionId=5&branchName=master)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Fortinbra_HomeAutomation&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=Fortinbra_HomeAutomation)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Fortinbra_HomeAutomation&metric=security_rating)](https://sonarcloud.io/dashboard?id=Fortinbra_HomeAutomation)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Fortinbra_HomeAutomation&metric=coverage)](https://sonarcloud.io/dashboard?id=Fortinbra_HomeAutomation)

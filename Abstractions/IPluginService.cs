@@ -15,7 +15,6 @@ namespace BecauseImClever.HomeAutomation.Abstractions
     using BecauseImClever.HomeAutomation.AutomationModels;
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Threading.Tasks;
 
     public interface IPluginService
@@ -26,7 +25,6 @@ namespace BecauseImClever.HomeAutomation.Abstractions
         ValueTask<bool> UpdatePluginAsync(Plugin plugin);
         ValueTask<bool> DeleteAsync(Guid pluginId);
         ValueTask<(bool, long)> DeleteManyAsync(IEnumerable<Guid> pluginIds);
-        IEnumerable<string> GetAll();
-        (Stream dll, string fileName) GetPlugin(string pluginName);
+
     }
 }

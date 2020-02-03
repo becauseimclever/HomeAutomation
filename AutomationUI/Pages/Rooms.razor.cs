@@ -25,24 +25,23 @@ namespace BecauseImClever.HomeAutomation.AutomationUI.Pages
 	public class RoomsBase : ComponentBase
 	{
 		[CascadingParameter]
-		public List<Room> RoomList { get; set; }
+		public List<Room> RoomList { get;  }
 		[Inject] HttpClient httpClient { get; set; }
         public bool IsLoading { get; set; } = false;
 
 		protected override async Task OnInitializedAsync()
 		{
-			await LoadRooms();
+			await LoadRooms().ConfigureAwait(false);
 		}
 		public async Task LoadRooms()
 		{
 			IsLoading = true;
 			if (!RoomList.Any())
 			{
-				var temp = await httpClient.GetAsync(@"api/room");
-				Console.WriteLine(await temp.Content.ReadAsStringAsync());
-				var temp2 = JsonConvert.DeserializeObject<List<Room>>(await temp.Content.ReadAsStringAsync(), new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All });
+				var temp = await httpClient.GetAsync(@"api/room").ConfigureAwait(false);
+				Console.WriteLine(await temp.Content.ReadAsStringAsync().ConfigureAwait(false));
+				var temp2 = JsonConvert.DeserializeObject<List<Room>>(await temp.Content.ReadAsStringAsync().ConfigureAwait(false), new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All });
 				Console.WriteLine(temp2);
-				RoomList = temp2;
 				foreach (var room in RoomList)
 				{
 					Console.WriteLine(room.Id);
@@ -52,7 +51,7 @@ namespace BecauseImClever.HomeAutomation.AutomationUI.Pages
 		}
 		public async Task CreateRoom()
 		{
-			var room = await httpClient.PostJsonAsync<Room>(@"api/room", new Room());
+			var room = await httpClient.PostJsonAsync<Room>(@"api/room", new Room()).ConfigureAwait(false);
 			RoomList.Add(room);
 		}
 	}

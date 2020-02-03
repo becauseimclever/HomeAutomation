@@ -14,13 +14,12 @@
 namespace BecauseImClever.HomeAutomation.AutomationUI
 {
     using Microsoft.AspNetCore.Components.Builder;
-    using Microsoft.Extensions.DependencyInjection;
     using System.Diagnostics.CodeAnalysis;
 
     [ExcludeFromCodeCoverage]
     public class Startup
     {
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices()
         {
             //Intentionally empty
             //Until I have something to put here

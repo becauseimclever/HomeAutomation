@@ -44,7 +44,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
             services
                 .AddKestrel(Configuration)
                 .AddMongoDatabase(Configuration)
-                .AddMQTTServer(Configuration)
+                .AddMQTTServer()
                 .AddControllers()
                 .ConfigureApplicationPartManager(apm =>
                 {
@@ -92,14 +92,12 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Home Automation V1");
                 })
                 .UseStaticFiles()
-                .UseClientSideBlazorFiles<AutomationUI.Startup>()
                 .UseRouting()
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllerRoute(
                         name: "default",
                         pattern: "{controller}/{action=Index}/{id?}");
-                    endpoints.MapFallbackToClientSideBlazor<AutomationUI.Startup>("index.html");
                 });
 
         }

@@ -30,22 +30,23 @@ namespace BecauseImClever.HomeAutomation.AutomationUI.Components
         [Parameter] public Room room { get; set; }
         [Parameter] public EventCallback Delete { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "<Pending>")]
         public async Task UpdateRoom()
         {
             _ = await httpClient.PutAsync(@"api/room",
                 new StringContent(JsonConvert.SerializeObject(room,
                 new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All }),
-                Encoding.UTF8, "application/Json"));
+                Encoding.UTF8, "application/Json")).ConfigureAwait(false);
             Console.WriteLine(room.Name + " was updated.");
         }
         public async Task DeleteRoom(Room room)
         {
-            await httpClient.DeleteAsync($"api/room/{room.Id}");
+            _ = await httpClient.DeleteAsync($"api/room/{room?.Id}").ConfigureAwait(false);
             try
             {
-                await Delete.InvokeAsync(room);
+                await Delete.InvokeAsync(room).ConfigureAwait(false);
             }
-            catch (Exception ex)
+            catch (HttpRequestException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -57,7 +58,7 @@ namespace BecauseImClever.HomeAutomation.AutomationUI.Components
 
             var list = room.Devices.ToList();
             room.Devices = list;
-            await UpdateRoom();
+            await UpdateRoom().ConfigureAwait(false);
         }
     }
 }

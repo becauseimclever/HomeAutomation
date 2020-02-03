@@ -25,7 +25,7 @@ namespace BecauseImClever.HomeAutomation.AutomationUI.Components
 
 		protected override async Task OnInitializedAsync()
 		{
-			await base.OnInitializedAsync();
+			await base.OnInitializedAsync().ConfigureAwait(false);
 		}
 	}
 }

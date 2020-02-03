@@ -24,6 +24,8 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
        @"System\.Private\.CoreLib(, Version=[\d\.]+)?(, Culture=[\w-]+)(, PublicKeyToken=[\w\d]+)?");
         private static readonly ConcurrentDictionary<Type, (string assembly, string type)> cache =
         new ConcurrentDictionary<Type, (string, string)>();
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "<Pending>")]
         public override void BindToName(Type serializedType, out string assemblyName, out string typeName)
         {
             base.BindToName(serializedType, out assemblyName, out typeName);

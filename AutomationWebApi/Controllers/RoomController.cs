@@ -38,13 +38,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
             var newRoom = await _roomService.CreateAsync(room);
             return Ok(newRoom);
         }
-        [HttpPost]
-        [Route("{roomId}/devices")]
-        public async ValueTask<IActionResult> AddDevice(Guid roomId, Device device)
-        {
-            var updatedRoom = await _roomService.AddDevice(roomId, device);
-            return Ok(updatedRoom);
-        }
+       
         #endregion
 
         [HttpGet]

@@ -13,6 +13,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Extensions
 {
     public static class ServiceExtensionMethods
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>")]
         public static IServiceCollection AddKestrel(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<KestrelServerOptions>(configuration.GetSection("Kestrel"));
@@ -28,7 +29,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Extensions
             });
             return services;
         }
-        public static IServiceCollection AddMQTTServer(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddMQTTServer(this IServiceCollection services)
         {
             services.AddHostedMqttServer(builder => builder.WithDefaultEndpointPort(1883));
             services.AddSingleton<MqttTcpServerAdapter>();

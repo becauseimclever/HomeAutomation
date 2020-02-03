@@ -34,7 +34,7 @@ steps:
   displayName: Build
   inputs:
     command: build
-    projects: '**/*.csproj'
+    projects: 'HomeAutomation.sln'
     arguments: '--configuration $(buildconfiguration)'
 - task: DotNetCoreCLI@2
   inputs:

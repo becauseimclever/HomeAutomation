@@ -19,6 +19,7 @@ steps:
     packageType: 'sdk'
     version: '3.1.100'
 - task: SonarCloudPrepare@1
+  displayName: Sonar Start
   inputs:
     SonarCloud: 'SonarCloud'
     organization: 'becauseimclever'
@@ -26,6 +27,7 @@ steps:
     projectKey: 'Fortinbra_HomeAutomation'
     projectName: 'HomeAutomation'
 - task: DotNetCoreCLI@2
+  displayName: Restore
   inputs:
     command: 'restore'
     feedsToUse: 'select'
@@ -37,12 +39,15 @@ steps:
     projects: 'HomeAutomation.sln'
     arguments: '--configuration $(buildconfiguration)'
 - task: DotNetCoreCLI@2
+  displayName: Test
   inputs:
     command: 'test'
     projects: 'Tests/*/*.csproj'
     arguments: '--configuration $(BuildConfiguration) --collect "Code coverage" --logger trx'
     testRunTitle: 'Unit Tests'
 - task: SonarCloudAnalyze@1
+  displayName: Sonar Analyze
 - task: SonarCloudPublish@1
+  displayName: Sonar Publish
   inputs:
     pollingTimeoutSec: '300'

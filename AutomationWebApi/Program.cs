@@ -17,6 +17,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
     using DeviceBase.Abstractions;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;
+    using MQTTnet.AspNetCore;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
@@ -35,6 +36,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
 
         public static IHostBuilder CreateHostBuilder() =>
             Host.CreateDefaultBuilder()
+
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

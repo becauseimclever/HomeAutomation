@@ -11,10 +11,21 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 
+
 namespace BecauseImClever.HomeAutomation.PowerStripPlugin.Services
 {
-	public class PowerStripService
-	{
+    using MQTTnet;
+    using MQTTnet.Client;
+    using System;
 
-	}
+    public class PowerStripService
+    {
+        private readonly IMqttClient _mqttClient;
+
+        public PowerStripService(IMqttClient mqttClient)
+        {
+            _mqttClient = mqttClient ?? throw new ArgumentNullException(nameof(mqttClient));
+        }
+
+    }
 }

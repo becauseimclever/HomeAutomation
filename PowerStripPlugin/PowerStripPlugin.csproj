@@ -24,6 +24,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="MQTTnet" Version="3.0.9-rc1" />
   </ItemGroup>
 
 </Project>

@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
+using MQTTnet;
 using MQTTnet.Adapter;
 using MQTTnet.AspNetCore;
+using MQTTnet.Client;
 using MQTTnet.Implementations;
 
 namespace BecauseImClever.HomeAutomation.AutomationWebApi.Extensions
@@ -32,9 +34,9 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Extensions
         public static IServiceCollection AddMQTTServer(this IServiceCollection services)
         {
             services.AddHostedMqttServer(builder => builder.WithDefaultEndpointPort(1883));
-            services.AddSingleton<MqttTcpServerAdapter>();
-            services.AddSingleton<IMqttServerAdapter>(s => s.GetService<MqttTcpServerAdapter>());
+            services.AddMqttConnectionHandler();
             services.AddMqttWebSocketServerAdapter();
+            services.AddScoped(sp => sp.GetRequiredService<IMqttFactory>().CreateMqttClient());
             return services;
         }
         public static IServiceCollection AddAutomationServices(this IServiceCollection services)

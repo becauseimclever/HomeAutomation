@@ -14,35 +14,37 @@
 
 namespace BecauseImClever.HomeAutomation.PowerStripPlugin
 {
-	using DeviceBase.Abstractions;
-	using PowerStripPlugin.Actions;
-	using Microsoft.Extensions.DependencyInjection;
-	using System;
-	using System.Collections.Generic;
+    using DeviceBase.Abstractions;
+    using PowerStripPlugin.Actions;
+    using Microsoft.Extensions.DependencyInjection;
+    using System;
+    using System.Collections.Generic;
+    using BecauseImClever.HomeAutomation.PowerStripPlugin.Services;
 
-	public class PowerStrip : IDevicePlugin
-	{
+    public class PowerStrip : IDevicePlugin
+    {
 
-		public string Name => "PowerStrip";
+        public string Name => "PowerStrip";
 
-		public string Description => "Represents the Powerstrip Plugin";
+        public string Description => "Represents the Powerstrip Plugin";
 
-		public IEnumerable<IDeviceAction> DeviceActions => new List<IDeviceAction>
-		{
-			new PowerStripActions(),
-			new PowerStripActions(),
-			new PowerStripActions(),
-			new PowerStripActions(),
-			new PowerStripActions(),
-			new PowerStripActions(),
-			new PowerStripActions(),
-			new PowerStripActions()
-		};
+        public IEnumerable<IDeviceAction> DeviceActions => new List<IDeviceAction>
+        {
+            new PowerStripActions(),
+            new PowerStripActions(),
+            new PowerStripActions(),
+            new PowerStripActions(),
+            new PowerStripActions(),
+            new PowerStripActions(),
+            new PowerStripActions(),
+            new PowerStripActions()
+        };
 
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "<Pending>")]
-		public void RegisterDependencies(IServiceCollection services)
-		{
-			Console.WriteLine("PowerStrip Register Dependencies");
-		}
-	}
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "<Pending>")]
+        public void RegisterDependencies(IServiceCollection services)
+        {
+            services.AddHostedService<PowerStripService>();
+
+        }
+    }
 }

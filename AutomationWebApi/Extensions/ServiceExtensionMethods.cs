@@ -34,9 +34,10 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Extensions
         public static IServiceCollection AddMQTTServer(this IServiceCollection services)
         {
             services.AddHostedMqttServer(builder => builder.WithDefaultEndpointPort(1883));
-            services.AddMqttConnectionHandler();
+            services.AddSingleton<MqttTcpServerAdapter>();
+            services.AddSingleton<IMqttServerAdapter>(s => s.GetService<MqttTcpServerAdapter>());
             services.AddMqttWebSocketServerAdapter();
-            services.AddScoped(sp => sp.GetRequiredService<IMqttFactory>().CreateMqttClient());
+            services.AddSingleton<IMqttFactory, MqttFactory>();
             return services;
         }
         public static IServiceCollection AddAutomationServices(this IServiceCollection services)

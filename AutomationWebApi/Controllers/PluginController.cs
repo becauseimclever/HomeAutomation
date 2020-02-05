@@ -16,16 +16,23 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
     using Abstractions;
     using Microsoft.AspNetCore.Mvc;
     using System;
+    using System.Threading.Tasks;
 
     [Route("api/[controller]")]
     [ApiController]
     public class PluginController : ControllerBase
     {
         private readonly IPluginService _pluginService;
+
         public PluginController(IPluginService pluginService)
         {
             _pluginService = pluginService ?? throw new ArgumentNullException(nameof(pluginService));
         }
-       
+        [HttpGet]
+        [Route("")]
+        public async ValueTask<IActionResult> GetAsync()
+        {
+            return Ok(await _pluginService.GetAllAsync().ConfigureAwait(false));
+        }
     }
 }

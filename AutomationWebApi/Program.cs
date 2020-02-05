@@ -17,7 +17,6 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
     using DeviceBase.Abstractions;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;
-    using MQTTnet.AspNetCore;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;

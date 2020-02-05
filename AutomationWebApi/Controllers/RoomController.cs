@@ -16,7 +16,6 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
 {
     using Abstractions;
     using AutomationModels;
-    using DeviceBase;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Threading.Tasks;
@@ -38,7 +37,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
             var newRoom = await _roomService.CreateAsync(room);
             return Ok(newRoom);
         }
-       
+
         #endregion
 
         [HttpGet]

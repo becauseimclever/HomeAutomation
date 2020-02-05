@@ -16,8 +16,9 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
     using Newtonsoft.Json.Serialization;
     using System;
     using System.Collections.Concurrent;
+    using System.Diagnostics.CodeAnalysis;
     using System.Text.RegularExpressions;
-
+    [ExcludeFromCodeCoverage]
     public class DeviceDeserializer : DefaultSerializationBinder
     {
         private static readonly Regex regex = new Regex(

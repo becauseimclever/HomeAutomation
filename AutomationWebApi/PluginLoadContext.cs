@@ -14,9 +14,10 @@
 namespace BecauseImClever.HomeAutomation.AutomationWebApi
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
     using System.Runtime.Loader;
-
+    [ExcludeFromCodeCoverage]
     public class PluginLoadContext : AssemblyLoadContext
     {
         private readonly AssemblyDependencyResolver _resolver;

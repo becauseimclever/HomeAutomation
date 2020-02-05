@@ -8,14 +8,15 @@ using MongoDB.Driver;
 using MQTTnet;
 using MQTTnet.Adapter;
 using MQTTnet.AspNetCore;
-using MQTTnet.Client;
 using MQTTnet.Implementations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BecauseImClever.HomeAutomation.AutomationWebApi.Extensions
 {
+    [ExcludeFromCodeCoverage]
     public static class ServiceExtensionMethods
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>")]
+        [SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>")]
         public static IServiceCollection AddKestrel(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<KestrelServerOptions>(configuration.GetSection("Kestrel"));

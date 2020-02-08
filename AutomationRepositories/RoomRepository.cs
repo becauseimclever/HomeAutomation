@@ -88,7 +88,9 @@ namespace BecauseImClever.HomeAutomation.AutomationRepositories
         {
             var builder = Builders<Room>.Filter;
             var filter = builder.In(x => x.Id, ids);
+#pragma warning disable S1854 // Unused assignments should be removed
             var returnValue = await _roomCollection.DeleteManyAsync(filter).ConfigureAwait(false);
+#pragma warning restore S1854 // Unused assignments should be removed
             return (returnValue.IsAcknowledged, returnValue.DeletedCount);
         }
         #endregion

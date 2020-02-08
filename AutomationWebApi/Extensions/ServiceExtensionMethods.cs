@@ -1,4 +1,5 @@
 ﻿using BecauseImClever.HomeAutomation.Abstractions;
+using BecauseImClever.HomeAutomation.AutomationLogic.BackgroundServices;
 using BecauseImClever.HomeAutomation.AutomationLogic.Services;
 using BecauseImClever.HomeAutomation.AutomationRepositories;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
@@ -34,7 +35,11 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Extensions
         }
         public static IServiceCollection AddMQTTServer(this IServiceCollection services)
         {
-            services.AddHostedMqttServer(builder => builder.WithDefaultEndpointPort(1883));
+            services.AddHostedMqttServer(builder =>
+            {
+                builder.WithDefaultEndpointPort(1883);
+                builder.WithApplicationMessageInterceptor(new MessageIntercepter());
+            });
             services.AddSingleton<MqttTcpServerAdapter>();
             services.AddSingleton<IMqttServerAdapter>(s => s.GetService<MqttTcpServerAdapter>());
             services.AddMqttWebSocketServerAdapter();

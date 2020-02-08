@@ -4,9 +4,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using BecauseImClever.HomeAutomation.DeviceBase.Abstractions;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BecauseImClever.HomeAutomation.AutomationLogic.BackgroundServices
 {
+    //Excluding until I figure out how I want to handle the message routing
+    [ExcludeFromCodeCoverage]
     public class MessageIntercepter : IMqttServerApplicationMessageInterceptor
     {
         public Task InterceptApplicationMessagePublishAsync(MqttApplicationMessageInterceptorContext context)

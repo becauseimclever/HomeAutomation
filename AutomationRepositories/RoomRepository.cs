@@ -68,8 +68,7 @@ namespace BecauseImClever.HomeAutomation.AutomationRepositories
             var filter = builder.Eq(x => x.Id, room?.Id);
 
             var update = Builders<Room>.Update
-                .Set(x => x.Name, room?.Name)
-                .Set(x => x.Devices, room?.Devices);
+                .Set(x => x.Name, room?.Name);
             var updateOptions = new UpdateOptions() { IsUpsert = false };
             var returnValue = await _roomCollection.UpdateOneAsync(filter, update, updateOptions).ConfigureAwait(true);
             return returnValue.IsAcknowledged;

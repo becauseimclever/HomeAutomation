@@ -13,12 +13,11 @@
 
 namespace BecauseImClever.HomeAutomation.PowerStripPlugin.Models
 {
-	using BecauseImClever.HomeAutomation.DeviceBase;
+    public class PowerStrip
+    {
+        public PowerStrip()
+        {
+        }
 
-	public class PowerStrip : Device
-	{
-		public PowerStrip()
-		{
-		}
-	}
+    }
 }

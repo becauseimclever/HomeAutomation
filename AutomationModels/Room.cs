@@ -13,30 +13,26 @@
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 namespace BecauseImClever.HomeAutomation.AutomationModels
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
 
-	using DeviceBase;
-	using System;
-	using System.Collections.Generic;
-	using System.ComponentModel.DataAnnotations;
-
-	public class Room
-	{
-		public Room() : this(Guid.NewGuid(), "New Room")
-		{ }
-		public Room(Guid Id) : this(Id, "New Room")
-		{ }
-		public Room(Guid Id, string Name)
-		{
-			this.Id = Id;
-			this.Name = Name;
-		}
-		[Required]
-		public Guid Id { get; set; }
-		[Required]
-		public string Name { get; set; }
-		public bool Status { get; set; } = true;
-		public IEnumerable<Device> Devices { get; set; }
-		public DateTime CreatedDate { get; set; } = DateTime.Now;
-		public DateTime ModifiedDate { get; set; } = DateTime.Now;
-	}
+    public class Room
+    {
+        public Room() : this(Guid.NewGuid(), "New Room")
+        { }
+        public Room(Guid Id) : this(Id, "New Room")
+        { }
+        public Room(Guid Id, string Name)
+        {
+            this.Id = Id;
+            this.Name = Name;
+        }
+        [Required]
+        public Guid Id { get; set; }
+        [Required]
+        public string Name { get; set; }
+        public bool Status { get; set; } = true;
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime ModifiedDate { get; set; } = DateTime.Now;
+    }
 }

@@ -18,6 +18,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
     using AutomationModels;
     using Microsoft.AspNetCore.Mvc;
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     [Route("api/[controller]")]
     [ApiController]
@@ -32,7 +33,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
         #region Create
         [HttpPost]
         [Route("")]
-        public async ValueTask<IActionResult> CreateAsync(Room room)
+        public async ValueTask<IActionResult> CreateAsync([Required]Room room)
         {
             var newRoom = await _roomService.CreateAsync(room);
             return Ok(newRoom);

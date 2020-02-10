@@ -11,20 +11,22 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BecauseImClever.HomeAutomation.PowerStripPlugin
-{
-	[Route("api/[controller]")]
-	[ApiController]
+{    //Excluding until I know how I want to deal with this
+    [ExcludeFromCodeCoverage]
+    [Route("api/[controller]")]
+    [ApiController]
 
-	public class PowerStripController : ControllerBase
-	{
-		[HttpGet]
-		[Route("")]
-		public IActionResult GetAll()
-		{
+    public class PowerStripController : ControllerBase
+    {
+        [HttpGet]
+        [Route("")]
+        public IActionResult GetAll()
+        {
 
-			return Ok("Hello!");
-		}
-	}
+            return Ok("Hello!");
+        }
+    }
 }

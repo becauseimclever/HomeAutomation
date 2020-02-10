@@ -24,6 +24,7 @@ namespace BecauseImClever.HomeAutomation.PowerStripPlugin.Services
     using System.Threading;
     using System.Threading.Tasks;
 
+    //Excluding until I know how I want to deal with this
     [ExcludeFromCodeCoverage]
     public class PowerStripService : BackgroundService
     {

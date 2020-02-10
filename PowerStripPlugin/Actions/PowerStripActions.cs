@@ -14,39 +14,43 @@
 
 namespace BecauseImClever.HomeAutomation.PowerStripPlugin.Actions
 {
-	using BecauseImClever.HomeAutomation.DeviceBase.Abstractions;
-	using System;
-	using System.Threading.Tasks;
-	public class PowerStripActions : IDeviceAction<bool>
-	{
-		public bool GetValue()
-		{
-			throw new NotImplementedException();
-		}
+    using BecauseImClever.HomeAutomation.DeviceBase.Abstractions;
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Threading.Tasks;
 
-		public Task<bool> GetValueAsync()
-		{
-			throw new NotImplementedException();
-		}
+    //Excluding until I know how I want to deal with this
+    [ExcludeFromCodeCoverage]
+    public class PowerStripActions : IDeviceAction<bool>
+    {
+        public bool GetValue()
+        {
+            throw new NotImplementedException();
+        }
 
-		public void Invoke(bool value)
-		{
-			throw new NotImplementedException();
-		}
+        public Task<bool> GetValueAsync()
+        {
+            throw new NotImplementedException();
+        }
 
-		public void Invoke()
-		{
-			throw new NotImplementedException();
-		}
+        public void Invoke(bool value)
+        {
+            throw new NotImplementedException();
+        }
 
-		public bool SetValue(bool value)
-		{
-			throw new NotImplementedException();
-		}
+        public void Invoke()
+        {
+            throw new NotImplementedException();
+        }
 
-		public Task<bool> SetValueAsync(bool value)
-		{
-			throw new NotImplementedException();
-		}
-	}
+        public bool SetValue(bool value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> SetValueAsync(bool value)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

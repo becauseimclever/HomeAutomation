@@ -18,7 +18,10 @@ namespace BecauseImClever.HomeAutomation.PowerStripPlugin
     using Microsoft.Extensions.DependencyInjection;
     using PowerStripPlugin.Actions;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 
+    //Excluding until I know how I want to deal with this
+    [ExcludeFromCodeCoverage]
     public class PowerStrip : IDevicePlugin
     {
 

@@ -55,5 +55,43 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Tests.Controller
             var resultList = Assert.IsAssignableFrom<IEnumerable<Room>>(okObjectResult.Value);
             Assert.NotEmpty(resultList);
         }
+        [Fact]
+        public async Task GetByIdAsyncReturnsSingle()
+        {
+            var room = _fixture.Create<Room>();
+            _mockRoomService.Setup(x => x.GetByIdAsync(It.IsAny<string>())).ReturnsAsync(room);
+            var controller = new RoomController(_mockRoomService.Object);
+            var result = await controller.GetByIdAsync("anyString").ConfigureAwait(false);
+            Assert.NotNull(result);
+            var okObjectResult = Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<Room>(okObjectResult.Value);
+        }
+        [Fact]
+        public async Task UpdateAsyncReturnsBoolean()
+        {
+            var room = _fixture.Create<Room>();
+            _mockRoomService.Setup(x => x.UpdateAsync(It.IsAny<Room>())).ReturnsAsync(true);
+            var controller = new RoomController(_mockRoomService.Object);
+            var result = await controller.UpdateAsync(room).ConfigureAwait(false);
+            Assert.NotNull(result);
+            var okObjectResult = Assert.IsType<OkObjectResult>(result);
+            Assert.True((bool)okObjectResult.Value);
+        }
+        [Fact]
+        public async Task DeleteAsyncReturnsNoContent()
+        {
+            _mockRoomService.Setup(x => x.DeleteAsync(It.IsAny<string>())).ReturnsAsync(true);
+            var controller = new RoomController(_mockRoomService.Object);
+            var result = await controller.DeleteAsync("anyString").ConfigureAwait(false);
+            Assert.IsType<NoContentResult>(result);
+        }
+        [Fact]
+        public async Task DeleteAsyncReturnsBadRequest()
+        {
+            _mockRoomService.Setup(x => x.DeleteAsync(It.IsAny<string>())).ReturnsAsync(false);
+            var controller = new RoomController(_mockRoomService.Object);
+            var result = await controller.DeleteAsync("anyString").ConfigureAwait(false);
+            Assert.IsType<BadRequestResult>(result);
+        }
     }
 }

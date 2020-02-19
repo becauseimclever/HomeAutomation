@@ -29,9 +29,9 @@ namespace BecauseImClever.HomeAutomation.PowerStripPlugin.Services
     public class PowerStripService : BackgroundService
     {
         private readonly IMqttFactory _mqttFactory;
-        public PowerStripService(IMqttFactory mqttFactory)
+        public PowerStripService()
         {
-            _mqttFactory = mqttFactory ?? throw new ArgumentNullException(nameof(mqttFactory));
+            _mqttFactory = new MqttFactory();
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {

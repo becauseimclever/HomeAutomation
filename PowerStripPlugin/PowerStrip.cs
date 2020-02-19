@@ -14,6 +14,7 @@
 
 namespace BecauseImClever.HomeAutomation.PowerStripPlugin
 {
+    using BecauseImClever.HomeAutomation.PowerStripPlugin.Services;
     using DeviceBase.Abstractions;
     using Microsoft.Extensions.DependencyInjection;
     using PowerStripPlugin.Actions;
@@ -44,7 +45,7 @@ namespace BecauseImClever.HomeAutomation.PowerStripPlugin
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "<Pending>")]
         public void RegisterDependencies(IServiceCollection services)
         {
-            // Method intentionally left empty.
+            services.AddHostedService<PowerStripService>();
         }
     }
 }

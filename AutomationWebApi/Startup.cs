@@ -44,7 +44,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
             services
                 .AddKestrel(Configuration)
                 .AddMongoDatabase(Configuration)
-                //.AddMQTTServer()
+                .AddMessageQueue()
                 .AddControllers()
                 .ConfigureApplicationPartManager(apm =>
                 {

@@ -92,12 +92,14 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Home Automation V1");
                 })
                 .UseStaticFiles()
+                .UseClientSideBlazorFiles<AutomationBlazorUI.Client.Program>()
                 .UseRouting()
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllerRoute(
                         name: "default",
                         pattern: "{controller}/{action=Index}/{id?}");
+                    endpoints.MapFallbackToClientSideBlazor<AutomationBlazorUI.Client.Program>("index.html");
                 });
 
         }

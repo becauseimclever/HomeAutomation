@@ -8,19 +8,19 @@ else
 {
     <div class="row">
         <div class="col-md-6">
-            <RadzenGrid ColumnWidth="200px" AllowFiltering="true" AllowPaging="true" PageSize="3" AllowSorting="true" Data="@RoomList" Value="@room" RowSelect="(args => room = args)" TItem="AutomationModels.Room">
+            @*<RadzenGrid ColumnWidth="200px" AllowFiltering="true" AllowPaging="true" PageSize="3" AllowSorting="true" Data="@RoomList" Value="@room" RowSelect="(args => room = args)" TItem="AutomationModels.Room">
                 <Columns>
                     <RadzenGridColumn Width="100px" TItem="AutomationModels.Room" Property="Id" Title="RoomId" />
                     <RadzenGridColumn Width="200px" TItem="AutomationModels.Room" Property="Name" Title="Name" />
                     <RadzenGridColumn Width="100px" TItem="AutomationModels.Room" Property="Status" Title="Status" />
                 </Columns>
-            </RadzenGrid>
+            </RadzenGrid>*@
         </div>
         <div class="col-md-6">
-            <RadzenCard Style="margin-bottom:20px">
+            @*<RadzenCard Style="margin-bottom:20px">
                 @room.Name
-            </RadzenCard>
-            <RadzenTabs>
+            </RadzenCard>*@
+            @*<RadzenTabs>
                 <Tabs>
                     <RadzenTabsItem Text="Devices">
                         <RadzenDataList Data="@room.Devices" TItem="DeviceBase.Device" AllowPaging=" false">
@@ -31,7 +31,7 @@ else
                         </RadzenDataList>
                     </RadzenTabsItem>
                 </Tabs>
-            </RadzenTabs>
+            </RadzenTabs>*@
         </div>
     </div>
 }

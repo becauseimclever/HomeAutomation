@@ -45,6 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AutomationBlazorUI\Client\AutomationBlazorUI.Client.csproj" />
     <ProjectReference Include="..\AutomationLogic\AutomationLogic.csproj" />
     <ProjectReference Include="..\AutomationModels\AutomationModels.csproj" />
     <ProjectReference Include="..\AutomationRepositories\AutomationRepositories.csproj" />

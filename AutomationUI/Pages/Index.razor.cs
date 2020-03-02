@@ -17,20 +17,11 @@ namespace BecauseImClever.HomeAutomation.AutomationUI.Pages
     using AutomationModels;
     using Microsoft.AspNetCore.Components;
     using System.Collections.Generic;
-    using System.Linq;
     public class IndexBase : ComponentBase
     {
         [CascadingParameter]
         protected List<Room> RoomList { get; }
-        protected Room room { get; set; } = new Room() { Devices = new List<DeviceBase.Device>() };
-        protected override void OnInitialized()
-        {
-            if (RoomList.Any())
-                room = RoomList.FirstOrDefault();
-        }
-        protected void OnSelect(Room selected)
-        {
-            room = selected;
-        }
+
+
     }
 }

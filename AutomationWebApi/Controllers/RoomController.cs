@@ -16,7 +16,6 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
 {
     using Abstractions;
     using AutomationModels;
-    using MassTransit;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -26,22 +25,20 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
     public class RoomController : ControllerBase
     {
         private readonly IRoomService _roomService;
-        private readonly IBus _bus;
-
-        public RoomController(IRoomService roomService, IBus bus)
+        private readonly IMessageService _messageService;
+        public RoomController(IRoomService roomService, IMessageService messageService)
         {
             _roomService = roomService ?? throw new ArgumentNullException(nameof(roomService));
-            _bus = bus ?? throw new ArgumentNullException(nameof(bus));
+            _messageService = messageService ?? throw new ArgumentNullException(nameof(messageService));
         }
         #region Create
         [HttpPost]
         [Route("")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "<Pending>")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>")]
         public async ValueTask<IActionResult> CreateAsync([Required]Room room)
         {
-            var addRoomEndpoint = await _bus.GetSendEndpoint(new Uri("rabbitmq://localhost/AddRoom1")).ConfigureAwait(false);
-            await addRoomEndpoint.Send(room).ConfigureAwait(false);
             var newRoom = await _roomService.CreateAsync(room);
+            _ = _messageService.Enqueue($"{room.Name} - {room.Id} was created");
             return Ok(newRoom);
         }
 

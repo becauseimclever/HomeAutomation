@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerStripPluginTests", "Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationIntegrationTests", "Tests\AutomationIntegrationTests\AutomationIntegrationTests.csproj", "{9590FE77-1882-47C9-98B9-9E0798EA84AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomationBlazorUI.Client", "AutomationBlazorUI\Client\AutomationBlazorUI.Client.csproj", "{D1ACECFE-FEF8-4487-B4FB-E1557C3378CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationBlazorUI.Client", "AutomationBlazorUI\Client\AutomationBlazorUI.Client.csproj", "{D1ACECFE-FEF8-4487-B4FB-E1557C3378CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

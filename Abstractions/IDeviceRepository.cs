@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace BecauseImClever.HomeAutomation.Abstractions
 {
-    public interface IDeviceService
+    public interface IDeviceRepository
     {
         ValueTask<Device> CreateAsync(Device device);
         ValueTask<IEnumerable<Device>> GetAllAsync();
         ValueTask<Device> GetByIdAsync(Guid Id);
-        ValueTask<bool> Update(Device device);
+        ValueTask<bool> UpdateAsync(Device device);
         ValueTask<bool> DeleteAsync(Guid Id);
     }
 }

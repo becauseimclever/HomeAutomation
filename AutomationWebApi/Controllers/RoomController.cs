@@ -75,5 +75,6 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
                 return BadRequest();
 
         }
+        
     }
 }

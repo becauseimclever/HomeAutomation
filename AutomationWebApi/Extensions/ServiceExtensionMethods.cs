@@ -30,12 +30,14 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Extensions
         }
         public static IServiceCollection AddAutomationServices(this IServiceCollection services)
         {
+            services.AddTransient<IDeviceService, DeviceService>();
             services.AddTransient<IRoomService, RoomService>();
             services.AddSingleton<IPluginService, PluginService>();
             return services;
         }
         public static IServiceCollection AddAutomationRespositories(this IServiceCollection services)
         {
+
             services.AddTransient<IRoomRepository, RoomRepository>();
             services.AddTransient<IPluginRepository, PluginRepository>();
             return services;

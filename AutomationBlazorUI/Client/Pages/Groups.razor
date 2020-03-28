@@ -1,0 +1,13 @@
+﻿@page "/Groups"
+@using System.Net.Http
+@inject HttpClient Http
+<h3>Rooms</h3>
+
+
+@code {
+    private List<Group> roomList;
+    protected override async Task OnInitializedAsync()
+    {
+        var rooms = await Http.GetAsync("api/Group").ConfigureAwait(false);
+    }
+}

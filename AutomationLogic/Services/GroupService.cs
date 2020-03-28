@@ -19,28 +19,28 @@ namespace BecauseImClever.HomeAutomation.AutomationLogic.Services
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    public class RoomService : IRoomService
+    public class GroupService : IGroupService
     {
-        private readonly IRoomRepository _roomRepository;
-        public RoomService(IRoomRepository roomRepository)
+        private readonly IGroupRepository _roomRepository;
+        public GroupService(IGroupRepository roomRepository)
         {
             _roomRepository = roomRepository ?? throw new ArgumentNullException(nameof(roomRepository));
         }
-        public async ValueTask<Room> CreateAsync(Room room)
+        public async ValueTask<Group> CreateAsync(Group group)
         {
-            return await _roomRepository.CreateAsync(room);
+            return await _roomRepository.CreateAsync(group);
         }
-        public async ValueTask<IEnumerable<Room>> GetAllAsync()
+        public async ValueTask<IEnumerable<Group>> GetAllAsync()
         {
             return await _roomRepository.GetAllAsync().ConfigureAwait(false);
         }
-        public async ValueTask<Room> GetByIdAsync(string Id)
+        public async ValueTask<Group> GetByIdAsync(string Id)
         {
             return await _roomRepository.GetByIdAsync(Guid.Parse(Id)).ConfigureAwait(false);
         }
-        public async ValueTask<bool> UpdateAsync(Room room)
+        public async ValueTask<bool> UpdateAsync(Group group)
         {
-            return await _roomRepository.UpdateAsync(room).ConfigureAwait(false);
+            return await _roomRepository.UpdateAsync(group).ConfigureAwait(false);
         }
         public async ValueTask<bool> DeleteAsync(string id)
         {

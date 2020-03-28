@@ -12,78 +12,78 @@ using Xunit;
 
 namespace AutomationLogic.Tests
 {
-    public class RoomsServiceTest
+    public class GroupServiceTest
     {
-        private readonly Mock<IRoomRepository> _mockRoomRepo;
-        private Fixture fixture;
-        public RoomsServiceTest()
+        private readonly Mock<IGroupRepository> _mockGroupRepo;
+        private readonly Fixture fixture;
+        public GroupServiceTest()
         {
             fixture = new Fixture();
             fixture.Customize(new AutoMoqCustomization());
             fixture.Register(() => Guid.NewGuid());
-            _mockRoomRepo = new Mock<IRoomRepository>();
+            _mockGroupRepo = new Mock<IGroupRepository>();
         }
         [Fact]
         public void ConstuctorThrowArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new RoomService(null));
+            Assert.Throws<ArgumentNullException>(() => new GroupService(null));
         }
         [Fact]
-        public async Task CreateRoomReturnsRoom()
+        public async Task CreateGroupReturnsGroup()
         {
-            var room = fixture.Create<Room>();
+            var room = fixture.Create<Group>();
             room.Id = Guid.NewGuid();
-            _mockRoomRepo.Setup(x => x.CreateAsync(It.IsAny<Room>())).ReturnsAsync(room);
-            var roomService = new RoomService(_mockRoomRepo.Object);
+            _mockGroupRepo.Setup(x => x.CreateAsync(It.IsAny<Group>())).ReturnsAsync(room);
+            var roomService = new GroupService(_mockGroupRepo.Object);
             var result = await roomService.CreateAsync(room).ConfigureAwait(true);
 
             Assert.NotNull(result);
-            Assert.IsType<Room>(result);
+            Assert.IsType<Group>(result);
             Assert.Equal(room.Id, result.Id);
             Assert.Equal(room.Name, result.Name);
         }
         [Fact]
-        public async Task GetAllReturnsListOfRooms()
+        public async Task GetAllReturnsListOfGroups()
         {
-            var rooms = fixture.Create<List<Room>>();
-            _mockRoomRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(rooms);
+            var rooms = fixture.Create<List<Group>>();
+            _mockGroupRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(rooms);
 
-            var roomService = new RoomService(_mockRoomRepo.Object);
+            var roomService = new GroupService(_mockGroupRepo.Object);
             var results = await roomService.GetAllAsync().ConfigureAwait(true);
 
-            Assert.IsType<List<Room>>(results);
+            Assert.IsType<List<Group>>(results);
             Assert.NotEmpty(results);
             Assert.Equal(rooms.Count, results.Count());
         }
         [Fact]
-        public async Task GetByIdReturnsRoom()
+        public async Task GetByIdReturnsGroup()
         {
-            var room = fixture.Create<Room>();
-            _mockRoomRepo.Setup(x => x.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(room);
+            var room = fixture.Create<Group>();
+            _mockGroupRepo.Setup(x => x.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(room);
 
-            var roomsService = new RoomService(_mockRoomRepo.Object);
+            var roomsService = new GroupService(_mockGroupRepo.Object);
             var result = await roomsService.GetByIdAsync(room.Id.ToString()).ConfigureAwait(true);
 
             Assert.NotNull(result);
-            Assert.IsType<Room>(result);
+            Assert.IsType<Group>(result);
             Assert.Equal(room.Id, result.Id);
         }
         [Fact]
         public async Task UpdateReturnsTrue()
         {
-            var room = fixture.Create<Room>();
+            var room = fixture.Create<Group>();
             room.Id = Guid.NewGuid();
 
-            _mockRoomRepo.Setup(x => x.UpdateAsync(It.IsAny<Room>())).ReturnsAsync(true);
-            var roomService = new RoomService(_mockRoomRepo.Object);
+            _mockGroupRepo.Setup(x => x.UpdateAsync(It.IsAny<Group>())).ReturnsAsync(true);
+            var roomService = new GroupService(_mockGroupRepo.Object);
             var result = await roomService.UpdateAsync(room).ConfigureAwait(true);
         }
         [Fact]
         public async Task DeleteReturnsTrue()
         {
-            _mockRoomRepo.Setup(x => x.DeleteAsync(It.IsAny<Guid>())).ReturnsAsync(true);
+            _mockGroupRepo.Setup(x => x.DeleteAsync(It.IsAny<Guid>())).ReturnsAsync(true);
 
-            var roomService = new RoomService(_mockRoomRepo.Object);
+            var roomService = new GroupService(_mockGroupRepo.Object);
             var result = await roomService.DeleteAsync(Guid.NewGuid().ToString()).ConfigureAwait(true);
 
             Assert.True(result);

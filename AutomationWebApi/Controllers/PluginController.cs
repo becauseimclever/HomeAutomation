@@ -16,7 +16,6 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
     using Abstractions;
     using BecauseImClever.HomeAutomation.AutomationModels;
     using BecauseImClever.HomeAutomation.DeviceBase.Abstractions;
-    using MassTransit;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Threading.Tasks;
@@ -26,12 +25,10 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
     public class PluginController : ControllerBase
     {
         private readonly IPluginService _pluginService;
-        private readonly IPublishEndpoint _publishEndpoint;
 
-        public PluginController(IPluginService pluginService, IPublishEndpoint publishEndpoint)
+        public PluginController(IPluginService pluginService)
         {
             _pluginService = pluginService ?? throw new ArgumentNullException(nameof(pluginService));
-            _publishEndpoint = publishEndpoint ?? throw new ArgumentNullException(nameof(publishEndpoint));
         }
         [HttpGet]
         [Route("")]
@@ -41,9 +38,10 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
         }
         [HttpPost]
         [Route("")]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async ValueTask<IActionResult> PostAsync()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-            await _publishEndpoint.Publish<IDeviceEvent>(new DeviceEvent()).ConfigureAwait(false);
             return Ok("Success");
         }
     }

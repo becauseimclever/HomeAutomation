@@ -22,11 +22,11 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
     using System.Threading.Tasks;
     [Route("api/[controller]")]
     [ApiController]
-    public class RoomController : ControllerBase
+    public class GroupController : ControllerBase
     {
-        private readonly IRoomService _roomService;
+        private readonly IGroupService _roomService;
         private readonly IMessageService _messageService;
-        public RoomController(IRoomService roomService, IMessageService messageService)
+        public GroupController(IGroupService roomService, IMessageService messageService)
         {
             _roomService = roomService ?? throw new ArgumentNullException(nameof(roomService));
             _messageService = messageService ?? throw new ArgumentNullException(nameof(messageService));
@@ -35,10 +35,10 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
         [HttpPost]
         [Route("")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>")]
-        public async ValueTask<IActionResult> CreateAsync([Required]Room room)
+        public async ValueTask<IActionResult> CreateAsync([Required]Group room)
         {
+            _ = _messageService.Enqueue(message: $"{room.Name} - {room.Id} was created", routingKey: $"{room.Id}//on");
             var newRoom = await _roomService.CreateAsync(room);
-            _ = _messageService.Enqueue($"{room.Name} - {room.Id} was created");
             return Ok(newRoom);
         }
 
@@ -59,7 +59,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
         }
         [HttpPut]
         [Route("")]
-        public async ValueTask<IActionResult> UpdateAsync(Room room)
+        public async ValueTask<IActionResult> UpdateAsync(Group room)
         {
             var updateRoom = await _roomService.UpdateAsync(room);
             return Ok(updateRoom);
@@ -75,6 +75,6 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
                 return BadRequest();
 
         }
-        
+
     }
 }

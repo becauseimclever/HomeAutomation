@@ -14,8 +14,7 @@
 
 namespace BecauseImClever.HomeAutomation.PowerStripPlugin
 {
-    using BecauseImClever.HomeAutomation.PowerStripPlugin.Services;
-    using DeviceBase.Abstractions;
+    using BecauseImClever.HomeAutomation.DeviceBase.Abstractions;
     using Microsoft.Extensions.DependencyInjection;
     using PowerStripPlugin.Actions;
     using System.Collections.Generic;
@@ -42,10 +41,11 @@ namespace BecauseImClever.HomeAutomation.PowerStripPlugin
             new PowerStripActions()
         };
 
+        public IEnumerable<IDevice> Devices => throw new System.NotImplementedException();
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "<Pending>")]
         public void RegisterDependencies(IServiceCollection services)
         {
-            services.AddHostedService<PowerStripService>();
         }
     }
 }

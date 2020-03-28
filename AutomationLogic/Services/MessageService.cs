@@ -1,6 +1,5 @@
 ﻿using BecauseImClever.HomeAutomation.Abstractions;
-using RabbitMQ.Client;
-using System;
+using RabbitMQ.Client;using System;
 using System.Text;
 
 namespace BecauseImClever.HomeAutomation.AutomationLogic.Services
@@ -16,7 +15,7 @@ namespace BecauseImClever.HomeAutomation.AutomationLogic.Services
         public MessageService()
         {
             Console.WriteLine("About to write to rabbitMQ");
-            _factory = new ConnectionFactory() { HostName = "localhost", Port = 5672, UserName = "guest", Password = "guest" };
+            _factory = new ConnectionFactory() { HostName = "192.168.1.201", Port = 5672, UserName = "full_access", Password = "s3crEt" };
             _conn = _factory.CreateConnection();
             _channel = _conn.CreateModel();
             _channel.QueueDeclare(queue: "hello",
@@ -26,10 +25,10 @@ namespace BecauseImClever.HomeAutomation.AutomationLogic.Services
                 arguments: null);
         }
 
-        public bool Enqueue(string message)
+        public bool Enqueue(string message, string routingKey)
         {
             var body = Encoding.UTF8.GetBytes("Server Processed " + message);
-            _channel.BasicPublish(exchange: "", routingKey: "hello",
+            _channel.BasicPublish(exchange: "amq.topic", routingKey: routingKey,
                 basicProperties: null,
                 body: body);
             Console.WriteLine(" [x] Published {0} to RabbitMQ", message);

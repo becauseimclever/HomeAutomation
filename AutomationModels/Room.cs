@@ -13,8 +13,11 @@
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 namespace BecauseImClever.HomeAutomation.AutomationModels
 {
+    using BecauseImClever.HomeAutomation.DeviceBase.Abstractions;
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
 
     public class Room
     {
@@ -34,5 +37,11 @@ namespace BecauseImClever.HomeAutomation.AutomationModels
         public bool Status { get; set; } = true;
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime ModifiedDate { get; set; } = DateTime.Now;
+        public IEnumerable<IDevice> Devices { get; }
+        public IEnumerable<IDevice> AddDevice(IDevice device)
+        {
+            Devices.ToList().Add(device);
+            return Devices;
+        }
     }
 }

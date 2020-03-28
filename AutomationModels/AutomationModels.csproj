@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BecauseImClever.HomeAutomation.DeviceBase" Version="1.0.2-CI-20200219-030157" />
+    <PackageReference Include="BecauseImClever.HomeAutomation.DeviceBase" Version="1.0.3-beta" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

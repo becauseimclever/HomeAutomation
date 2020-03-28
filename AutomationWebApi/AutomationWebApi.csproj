@@ -24,10 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BecauseImClever.HomeAutomation.DeviceBase" Version="1.0.2-CI-20200219-030157" />
-    <PackageReference Include="MassTransit" Version="6.1.0" />
-    <PackageReference Include="MassTransit.AspNetCore" Version="6.1.0" />
-    <PackageReference Include="MassTransit.RabbitMQ" Version="6.1.0" />
+    <PackageReference Include="BecauseImClever.HomeAutomation.DeviceBase" Version="1.0.3-beta" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="3.2.0-preview1.20073.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.2" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
@@ -39,9 +36,9 @@
     <PackageReference Include="MQTTnet" Version="3.0.9-rc1" />
     <PackageReference Include="MQTTnet.AspNetCore" Version="3.0.9-rc1" />
     <PackageReference Include="RabbitMQ.Client" Version="5.1.2" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="5.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="5.2.0" />
   </ItemGroup>
 
   <ItemGroup>

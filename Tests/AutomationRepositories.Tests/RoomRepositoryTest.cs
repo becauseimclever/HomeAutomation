@@ -13,61 +13,61 @@ namespace AutomationRepositories.Tests
 {
     public class RoomRepositoryTest
     {
-        private readonly Mock<IMongoCollection<Room>> _mockCollection;
+        private readonly Mock<IMongoCollection<Group>> _mockCollection;
         private readonly Mock<IMongoDatabase> _mockDatabase;
-        private readonly List<Room> _roomList;
-        private readonly Room _roomEntity;
+        private readonly List<Group> _groupList;
+        private readonly Group _groupEntity;
         public RoomRepositoryTest()
         {
-            _mockCollection = new Mock<IMongoCollection<Room>>();
+            _mockCollection = new Mock<IMongoCollection<Group>>();
             _mockDatabase = new Mock<IMongoDatabase>();
-            _roomEntity = new Room()
+            _groupEntity = new Group()
             {
                 Id = Guid.NewGuid(),
                 Name = "TestDevice",
 
             };
-            _roomList = new List<Room>()
+            _groupList = new List<Group>()
             {
-                _roomEntity
+                _groupEntity
             };
         }
         [Fact]
         public void CreateRoomRepository()
         {
-            var repo = new RoomRepository(_mockDatabase.Object);
+            var repo = new GroupRepository(_mockDatabase.Object);
             Assert.NotNull(repo);
         }
         [Fact]
         public void ConstructorThrowsNullArgumentException()
         {
-            Assert.Throws<ArgumentNullException>(() => new RoomRepository(null));
+            Assert.Throws<ArgumentNullException>(() => new GroupRepository(null));
         }
         #region Create
         [Fact]
         public async Task CreateRoomReturnsRoom()
         {
             _mockCollection.Setup(x => x.InsertOneAsync(
-                It.IsAny<Room>(),
+                It.IsAny<Group>(),
                 It.IsAny<InsertOneOptions>(),
                 It.IsAny<CancellationToken>()
-                )).Returns(Task.FromResult(MongoHelper.BuildMockAsyncCursor((ICollection<Room>)_roomList)));
-            _mockDatabase.Setup(x => x.GetCollection<Room>(It.IsAny<string>(), It.IsAny<MongoCollectionSettings>())).Returns(_mockCollection.Object);
-            var repo = new RoomRepository(_mockDatabase.Object);
-            var result = await repo.CreateAsync(_roomEntity).ConfigureAwait(true);
+                )).Returns(Task.FromResult(MongoHelper.BuildMockAsyncCursor((ICollection<Group>)_groupList)));
+            _mockDatabase.Setup(x => x.GetCollection<Group>(It.IsAny<string>(), It.IsAny<MongoCollectionSettings>())).Returns(_mockCollection.Object);
+            var repo = new GroupRepository(_mockDatabase.Object);
+            var result = await repo.CreateAsync(_groupEntity).ConfigureAwait(true);
             Assert.NotNull(result);
         }
         [Fact]
         public async Task CreateManyReturnsRooms()
         {
             _mockCollection.Setup(x => x.InsertManyAsync(
-                It.IsAny<IEnumerable<Room>>(),
+                It.IsAny<IEnumerable<Group>>(),
                 It.IsAny<InsertManyOptions>(),
                 It.IsAny<CancellationToken>()
-                )).Returns(Task.FromResult(MongoHelper.BuildMockAsyncCursor((ICollection<Room>)_roomList)));
-            _mockDatabase.Setup(x => x.GetCollection<Room>(It.IsAny<string>(), It.IsAny<MongoCollectionSettings>())).Returns(_mockCollection.Object);
-            var repo = new RoomRepository(_mockDatabase.Object);
-            var result = await repo.CreateManyAsync(_roomList).ConfigureAwait(false);
+                )).Returns(Task.FromResult(MongoHelper.BuildMockAsyncCursor((ICollection<Group>)_groupList)));
+            _mockDatabase.Setup(x => x.GetCollection<Group>(It.IsAny<string>(), It.IsAny<MongoCollectionSettings>())).Returns(_mockCollection.Object);
+            var repo = new GroupRepository(_mockDatabase.Object);
+            var result = await repo.CreateManyAsync(_groupList).ConfigureAwait(false);
             Assert.NotNull(result);
             Assert.NotEmpty(result);
         }
@@ -78,16 +78,16 @@ namespace AutomationRepositories.Tests
         {
             _mockCollection
                 .Setup(x => x.FindAsync(
-                    It.IsAny<FilterDefinition<Room>>(),
-                    It.IsAny<FindOptions<Room>>(),
+                    It.IsAny<FilterDefinition<Group>>(),
+                    It.IsAny<FindOptions<Group>>(),
                     It.IsAny<CancellationToken>()
-                )).ReturnsAsync(MongoHelper.BuildMockAsyncCursor((ICollection<Room>)_roomList));
-            _mockDatabase.Setup(x => x.GetCollection<Room>(It.IsAny<string>(), It.IsAny<MongoCollectionSettings>())).Returns(_mockCollection.Object);
+                )).ReturnsAsync(MongoHelper.BuildMockAsyncCursor((ICollection<Group>)_groupList));
+            _mockDatabase.Setup(x => x.GetCollection<Group>(It.IsAny<string>(), It.IsAny<MongoCollectionSettings>())).Returns(_mockCollection.Object);
 
-            var repo = new RoomRepository(_mockDatabase.Object);
+            var repo = new GroupRepository(_mockDatabase.Object);
             var result = await repo.GetAllAsync().ConfigureAwait(true);
 
-            Assert.IsType<List<Room>>(result);
+            Assert.IsType<List<Group>>(result);
             Assert.NotEmpty(result);
         }
         [Fact]
@@ -95,16 +95,16 @@ namespace AutomationRepositories.Tests
         {
             _mockCollection
                 .Setup(x => x.FindAsync(
-                    It.IsAny<FilterDefinition<Room>>(),
-                    It.IsAny<FindOptions<Room>>(),
+                    It.IsAny<FilterDefinition<Group>>(),
+                    It.IsAny<FindOptions<Group>>(),
                     It.IsAny<CancellationToken>()
-                    )).ReturnsAsync(MongoHelper.BuildMockAsyncCursor(_roomEntity));
-            _mockDatabase.Setup(x => x.GetCollection<Room>(It.IsAny<string>(), It.IsAny<MongoCollectionSettings>())).Returns(_mockCollection.Object);
-            var repo = new RoomRepository(_mockDatabase.Object);
+                    )).ReturnsAsync(MongoHelper.BuildMockAsyncCursor(_groupEntity));
+            _mockDatabase.Setup(x => x.GetCollection<Group>(It.IsAny<string>(), It.IsAny<MongoCollectionSettings>())).Returns(_mockCollection.Object);
+            var repo = new GroupRepository(_mockDatabase.Object);
             var result = await repo.GetByIdAsync(Guid.NewGuid()).ConfigureAwait(true);
 
-            Assert.IsType<Room>(result);
-            Assert.Equal(_roomEntity.Id, result.Id);
+            Assert.IsType<Group>(result);
+            Assert.Equal(_groupEntity.Id, result.Id);
         }
         #endregion
         #region Update
@@ -114,14 +114,14 @@ namespace AutomationRepositories.Tests
             Mock<UpdateResult> mockResult = new Mock<UpdateResult>();
             mockResult.SetupGet(x => x.IsAcknowledged).Returns(true);
             _mockCollection.Setup(x => x.UpdateOneAsync(
-                It.IsAny<FilterDefinition<Room>>(),
-               It.IsAny<UpdateDefinition<Room>>(),
+                It.IsAny<FilterDefinition<Group>>(),
+               It.IsAny<UpdateDefinition<Group>>(),
                It.IsAny<UpdateOptions>(),
                It.IsAny<CancellationToken>()
                )).ReturnsAsync(mockResult.Object);
-            _mockDatabase.Setup(x => x.GetCollection<Room>(It.IsAny<string>(), It.IsAny<MongoCollectionSettings>())).Returns(_mockCollection.Object);
-            var repo = new RoomRepository(_mockDatabase.Object);
-            var result = await repo.UpdateAsync(_roomEntity).ConfigureAwait(true);
+            _mockDatabase.Setup(x => x.GetCollection<Group>(It.IsAny<string>(), It.IsAny<MongoCollectionSettings>())).Returns(_mockCollection.Object);
+            var repo = new GroupRepository(_mockDatabase.Object);
+            var result = await repo.UpdateAsync(_groupEntity).ConfigureAwait(true);
             Assert.True(result);
         }
         #endregion
@@ -132,27 +132,27 @@ namespace AutomationRepositories.Tests
             Mock<DeleteResult> mockResult = new Mock<DeleteResult>();
             mockResult.SetupGet(x => x.IsAcknowledged).Returns(true);
             _mockCollection.Setup(x => x.DeleteOneAsync(
-                It.IsAny<FilterDefinition<Room>>(),
+                It.IsAny<FilterDefinition<Group>>(),
                 It.IsAny<CancellationToken>()
                 )).ReturnsAsync(mockResult.Object);
-            _mockDatabase.Setup(x => x.GetCollection<Room>(It.IsAny<string>(), It.IsAny<MongoCollectionSettings>())).Returns(_mockCollection.Object);
-            var repo = new RoomRepository(_mockDatabase.Object);
-            var result = await repo.DeleteAsync(_roomEntity.Id).ConfigureAwait(true);
+            _mockDatabase.Setup(x => x.GetCollection<Group>(It.IsAny<string>(), It.IsAny<MongoCollectionSettings>())).Returns(_mockCollection.Object);
+            var repo = new GroupRepository(_mockDatabase.Object);
+            var result = await repo.DeleteAsync(_groupEntity.Id).ConfigureAwait(true);
             Assert.True(result);
         }
         [Fact]
         public async Task DeleteManyReturnsTrue()
         {
-            var ids = _roomList.Select(x => x.Id);
+            var ids = _groupList.Select(x => x.Id);
             Mock<DeleteResult> mockResult = new Mock<DeleteResult>();
             mockResult.SetupGet(x => x.IsAcknowledged).Returns(true);
             mockResult.SetupGet(x => x.DeletedCount).Returns(1);
             _mockCollection.Setup(x => x.DeleteManyAsync(
-                It.IsAny<FilterDefinition<Room>>(),
+                It.IsAny<FilterDefinition<Group>>(),
                 It.IsAny<CancellationToken>()
                 )).ReturnsAsync(mockResult.Object);
-            _mockDatabase.Setup(x => x.GetCollection<Room>(It.IsAny<string>(), It.IsAny<MongoCollectionSettings>())).Returns(_mockCollection.Object);
-            var repo = new RoomRepository(_mockDatabase.Object);
+            _mockDatabase.Setup(x => x.GetCollection<Group>(It.IsAny<string>(), It.IsAny<MongoCollectionSettings>())).Returns(_mockCollection.Object);
+            var repo = new GroupRepository(_mockDatabase.Object);
             (bool, long) result = await repo.DeleteManyAsync(ids).ConfigureAwait(true);
             Assert.True(result.Item1);
             Assert.Equal(1, result.Item2);

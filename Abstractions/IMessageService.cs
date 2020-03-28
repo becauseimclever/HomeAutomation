@@ -2,6 +2,6 @@
 {
     public interface IMessageService
     {
-        bool Enqueue(string message);
+        bool Enqueue(string message, string routingKey);
     }
 }

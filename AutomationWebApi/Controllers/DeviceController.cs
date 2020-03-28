@@ -1,5 +1,6 @@
 ﻿using BecauseImClever.HomeAutomation.Abstractions;
 using BecauseImClever.HomeAutomation.DeviceBase;
+using BecauseImClever.HomeAutomation.DeviceBase.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -18,7 +19,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
         }
         [HttpPost]
         [Route("")]
-        public async ValueTask<IActionResult> CreateAsync([Required]Device device)
+        public async ValueTask<IActionResult> CreateAsync([Required]IDevice device)
         {
             var newDevice = await _deviceService.CreateAsync(device);
             return Ok(newDevice);

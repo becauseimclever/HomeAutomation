@@ -17,12 +17,12 @@ namespace BecauseImClever.HomeAutomation.Abstractions
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
 
-	public interface IRoomRepository
+	public interface IGroupRepository
 	{
-		ValueTask<Room> CreateAsync(Room room);
-		ValueTask<List<Room>> GetAllAsync();
-		ValueTask<Room> GetByIdAsync(Guid Id);
-		ValueTask<bool> UpdateAsync(Room room);
+		ValueTask<Group> CreateAsync(Group group);
+		ValueTask<List<Group>> GetAllAsync();
+		ValueTask<Group> GetByIdAsync(Guid Id);
+		ValueTask<bool> UpdateAsync(Group group);
 		ValueTask<bool> DeleteAsync(Guid id);
 	}
 }

@@ -16,6 +16,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
 {
     using Abstractions;
     using AutomationModels;
+    using BecauseImClever.HomeAutomation.DeviceBase.Abstractions;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -38,9 +39,8 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
             var newRoom = await _groupService.CreateAsync(group).ConfigureAwait(false);
             return Ok(newRoom);
         }
-
         #endregion
-
+        #region Read
         [HttpGet]
         [Route("")]
         public async ValueTask<IActionResult> GetAllAsync()
@@ -54,6 +54,8 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
         {
             return Ok(await _groupService.GetByIdAsync(Id).ConfigureAwait(false));
         }
+        #endregion
+        #region Update
         [HttpPut]
         [Route("")]
         public async ValueTask<IActionResult> UpdateAsync(Group group)
@@ -61,6 +63,15 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
             var updateGroup = await _groupService.UpdateAsync(group).ConfigureAwait(false);
             return Ok(updateGroup);
         }
+        [HttpPut]
+        [Route("{Id}")]
+        public async ValueTask<IActionResult> AddDeviceAsync(string Id, IDevice device)
+        {
+            var group = await _groupService.AddDeviceAsync(Id, device).ConfigureAwait(false);
+            return Ok(group);
+        }
+        #endregion
+        #region Delete
         [HttpDelete]
         [Route("{Id}")]
         public async ValueTask<IActionResult> DeleteAsync(string Id)
@@ -72,6 +83,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
                 return BadRequest();
 
         }
+        #endregion
 
     }
 }

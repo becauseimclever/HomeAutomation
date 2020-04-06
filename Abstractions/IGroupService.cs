@@ -13,6 +13,7 @@
 namespace BecauseImClever.HomeAutomation.Abstractions
 {
     using AutomationModels;
+    using BecauseImClever.HomeAutomation.DeviceBase.Abstractions;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -24,5 +25,6 @@ namespace BecauseImClever.HomeAutomation.Abstractions
         ValueTask<Group> GetByIdAsync(string Id);
         ValueTask<bool> UpdateAsync(Group group);
         ValueTask<bool> DeleteAsync(string id);
+        ValueTask<Group> AddDeviceAsync(string id, IDevice device);
     }
 }

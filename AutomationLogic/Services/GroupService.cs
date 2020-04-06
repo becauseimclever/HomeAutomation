@@ -15,36 +15,47 @@ namespace BecauseImClever.HomeAutomation.AutomationLogic.Services
 
     using Abstractions;
     using AutomationModels;
+    using BecauseImClever.HomeAutomation.DeviceBase.Abstractions;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public class GroupService : IGroupService
     {
-        private readonly IGroupRepository _roomRepository;
-        public GroupService(IGroupRepository roomRepository)
+        private readonly IGroupRepository _groupRepository;
+        public GroupService(IGroupRepository groupRepository)
         {
-            _roomRepository = roomRepository ?? throw new ArgumentNullException(nameof(roomRepository));
+            _groupRepository = groupRepository ?? throw new ArgumentNullException(nameof(groupRepository));
         }
         public async ValueTask<Group> CreateAsync(Group group)
         {
-            return await _roomRepository.CreateAsync(group);
+            return await _groupRepository.CreateAsync(group);
         }
         public async ValueTask<IEnumerable<Group>> GetAllAsync()
         {
-            return await _roomRepository.GetAllAsync().ConfigureAwait(false);
+            return await _groupRepository.GetAllAsync().ConfigureAwait(false);
         }
         public async ValueTask<Group> GetByIdAsync(string Id)
         {
-            return await _roomRepository.GetByIdAsync(Guid.Parse(Id)).ConfigureAwait(false);
+            return await _groupRepository.GetByIdAsync(Guid.Parse(Id)).ConfigureAwait(false);
         }
         public async ValueTask<bool> UpdateAsync(Group group)
         {
-            return await _roomRepository.UpdateAsync(group).ConfigureAwait(false);
+            return await _groupRepository.UpdateAsync(group).ConfigureAwait(false);
         }
         public async ValueTask<bool> DeleteAsync(string id)
         {
-            return await _roomRepository.DeleteAsync(Guid.Parse(id)).ConfigureAwait(false);
+            return await _groupRepository.DeleteAsync(Guid.Parse(id)).ConfigureAwait(false);
+        }
+
+        public async ValueTask<Group> AddDeviceAsync(string id, IDevice device)
+        {
+            var group = await _groupRepository.GetByIdAsync(Guid.Parse(id)).ConfigureAwait(false);
+            group.AddDevice(device);
+            if (await _groupRepository.UpdateAsync(group).ConfigureAwait(false))
+                return group;
+            else
+                return null;
         }
     }
 }

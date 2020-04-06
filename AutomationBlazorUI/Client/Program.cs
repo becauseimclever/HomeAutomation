@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 
 namespace BecauseImClever.HomeAutomation.AutomationBlazorUI.Client
 {
-    public class Program
+    public static class Program
     {
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
-            var builder = WebAssemblyHostBuilder.CreateDefault(args);
+            var builder = WebAssemblyHostBuilder.CreateDefault();
             builder.RootComponents.Add<App>("app");
 
             await builder.Build().RunAsync();

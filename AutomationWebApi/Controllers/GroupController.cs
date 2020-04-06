@@ -24,21 +24,18 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
     [ApiController]
     public class GroupController : ControllerBase
     {
-        private readonly IGroupService _roomService;
-        private readonly IMessageService _messageService;
-        public GroupController(IGroupService roomService, IMessageService messageService)
+        private readonly IGroupService _groupService;
+        public GroupController(IGroupService groupService)
         {
-            _roomService = roomService ?? throw new ArgumentNullException(nameof(roomService));
-            _messageService = messageService ?? throw new ArgumentNullException(nameof(messageService));
+            _groupService = groupService ?? throw new ArgumentNullException(nameof(groupService));
         }
         #region Create
         [HttpPost]
         [Route("")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>")]
-        public async ValueTask<IActionResult> CreateAsync([Required]Group room)
+        public async ValueTask<IActionResult> CreateAsync([Required]Group group)
         {
-            _ = _messageService.Enqueue(message: $"{room.Name} - {room.Id} was created", routingKey: $"{room.Id}//on");
-            var newRoom = await _roomService.CreateAsync(room);
+            var newRoom = await _groupService.CreateAsync(group).ConfigureAwait(false);
             return Ok(newRoom);
         }
 
@@ -48,27 +45,27 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
         [Route("")]
         public async ValueTask<IActionResult> GetAllAsync()
         {
-            var rooms = await _roomService.GetAllAsync();
-            return Ok(rooms);
+            var groups = await _groupService.GetAllAsync().ConfigureAwait(false);
+            return Ok(groups);
         }
         [HttpGet]
         [Route("{Id}")]
         public async ValueTask<IActionResult> GetByIdAsync(string Id)
         {
-            return Ok(await _roomService.GetByIdAsync(Id));
+            return Ok(await _groupService.GetByIdAsync(Id).ConfigureAwait(false));
         }
         [HttpPut]
         [Route("")]
-        public async ValueTask<IActionResult> UpdateAsync(Group room)
+        public async ValueTask<IActionResult> UpdateAsync(Group group)
         {
-            var updateRoom = await _roomService.UpdateAsync(room);
-            return Ok(updateRoom);
+            var updateGroup = await _groupService.UpdateAsync(group).ConfigureAwait(false);
+            return Ok(updateGroup);
         }
         [HttpDelete]
         [Route("{Id}")]
         public async ValueTask<IActionResult> DeleteAsync(string Id)
         {
-            bool success = await _roomService.DeleteAsync(Id);
+            bool success = await _groupService.DeleteAsync(Id).ConfigureAwait(false);
             if (success)
                 return NoContent();
             else

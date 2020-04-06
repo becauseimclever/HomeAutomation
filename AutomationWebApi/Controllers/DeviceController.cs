@@ -21,7 +21,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
         [Route("")]
         public async ValueTask<IActionResult> CreateAsync([Required]IDevice device)
         {
-            var newDevice = await _deviceService.CreateAsync(device);
+            var newDevice = await _deviceService.CreateAsync(device).ConfigureAwait(false);
             return Ok(newDevice);
         }
     }

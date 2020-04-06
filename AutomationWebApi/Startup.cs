@@ -23,7 +23,6 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.OpenApi.Models;
-    using MQTTnet.AspNetCore;
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
@@ -82,24 +81,24 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
             app.UseResponseCompression();
             if (env.IsDevelopment())
             {
-                app.UseBlazorDebugging();
+                app.UseDeveloperExceptionPage();
+                app.UseWebAssemblyDebugging();
             }
             app
-                .UseMqttEndpoint()
                 .UseSwagger()
                 .UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Home Automation V1");
                 })
                 .UseStaticFiles()
-                .UseClientSideBlazorFiles<AutomationBlazorUI.Client.Program>()
+                .UseBlazorFrameworkFiles()
                 .UseRouting()
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllerRoute(
                         name: "default",
                         pattern: "{controller}/{action=Index}/{id?}");
-                    endpoints.MapFallbackToClientSideBlazor<AutomationBlazorUI.Client.Program>("index.html");
+                    endpoints.MapFallbackToFile("index.html");
                 });
 
         }

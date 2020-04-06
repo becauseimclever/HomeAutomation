@@ -26,21 +26,21 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Tests.Controller
         [Fact]
         public void CreateRoomController()
         {
-            var controller = new GroupController(_mockGroupService.Object, _mockMessageService.Object);
+            var controller = new GroupController(_mockGroupService.Object);
             Assert.NotNull(controller);
         }
         [Fact]
         public void CreateRoomControllerThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => { new GroupController(null, null); });
-            Assert.Throws<ArgumentNullException>(() => { new GroupController(_mockGroupService.Object, null); });
+            Assert.Throws<ArgumentNullException>(() => { new GroupController(null); });
+            Assert.Throws<ArgumentNullException>(() => { new GroupController(_mockGroupService.Object); });
         }
         [Fact]
         public async Task CreateAsyncReturnsRoom()
         {
             var room = _fixture.Create<Group>();
             _mockGroupService.Setup(x => x.CreateAsync(It.IsAny<Group>())).ReturnsAsync(room);
-            var controller = new GroupController(_mockGroupService.Object, _mockMessageService.Object);
+            var controller = new GroupController(_mockGroupService.Object);
             var result = await controller.CreateAsync(room).ConfigureAwait(false);
             Assert.NotNull(result);
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
@@ -51,7 +51,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Tests.Controller
         {
             var rooms = _fixture.CreateMany<Group>();
             _mockGroupService.Setup(x => x.GetAllAsync()).ReturnsAsync(rooms);
-            var controller = new GroupController(_mockGroupService.Object, _mockMessageService.Object);
+            var controller = new GroupController(_mockGroupService.Object);
             var result = await controller.GetAllAsync().ConfigureAwait(false);
             Assert.NotNull(result);
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
@@ -63,7 +63,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Tests.Controller
         {
             var room = _fixture.Create<Group>();
             _mockGroupService.Setup(x => x.GetByIdAsync(It.IsAny<string>())).ReturnsAsync(room);
-            var controller = new GroupController(_mockGroupService.Object, _mockMessageService.Object);
+            var controller = new GroupController(_mockGroupService.Object);
             var result = await controller.GetByIdAsync("anyString").ConfigureAwait(false);
             Assert.NotNull(result);
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
@@ -74,7 +74,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Tests.Controller
         {
             var room = _fixture.Create<Group>();
             _mockGroupService.Setup(x => x.UpdateAsync(It.IsAny<Group>())).ReturnsAsync(true);
-            var controller = new GroupController(_mockGroupService.Object, _mockMessageService.Object);
+            var controller = new GroupController(_mockGroupService.Object);
             var result = await controller.UpdateAsync(room).ConfigureAwait(false);
             Assert.NotNull(result);
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
@@ -84,7 +84,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Tests.Controller
         public async Task DeleteAsyncReturnsNoContent()
         {
             _mockGroupService.Setup(x => x.DeleteAsync(It.IsAny<string>())).ReturnsAsync(true);
-            var controller = new GroupController(_mockGroupService.Object, _mockMessageService.Object);
+            var controller = new GroupController(_mockGroupService.Object);
             var result = await controller.DeleteAsync("anyString").ConfigureAwait(false);
             Assert.IsType<NoContentResult>(result);
         }
@@ -92,7 +92,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Tests.Controller
         public async Task DeleteAsyncReturnsBadRequest()
         {
             _mockGroupService.Setup(x => x.DeleteAsync(It.IsAny<string>())).ReturnsAsync(false);
-            var controller = new GroupController(_mockGroupService.Object, _mockMessageService.Object);
+            var controller = new GroupController(_mockGroupService.Object);
             var result = await controller.DeleteAsync("anyString").ConfigureAwait(false);
             Assert.IsType<BadRequestResult>(result);
         }

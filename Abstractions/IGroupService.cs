@@ -23,7 +23,7 @@ namespace BecauseImClever.HomeAutomation.Abstractions
         ValueTask<Group> CreateAsync(Group group);
         ValueTask<IEnumerable<Group>> GetAllAsync();
         ValueTask<Group> GetByIdAsync(string Id);
-        ValueTask<bool> UpdateAsync(Group group);
+        ValueTask<Group> UpdateAsync(Group group);
         ValueTask<bool> DeleteAsync(string id);
         ValueTask<Group> AddDeviceAsync(string id, IDevice device);
     }

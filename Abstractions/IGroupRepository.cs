@@ -17,12 +17,9 @@ namespace BecauseImClever.HomeAutomation.Abstractions
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
 
-	public interface IGroupRepository
+	public interface IGroupRepository : IRepository<Group>
 	{
-		ValueTask<Group> CreateAsync(Group group);
-		ValueTask<List<Group>> GetAllAsync();
-		ValueTask<Group> GetByIdAsync(Guid Id);
-		ValueTask<bool> UpdateAsync(Group group);
-		ValueTask<bool> DeleteAsync(Guid id);
+		ValueTask<Group> UpdateAsync(Group group);
+		ValueTask<IEnumerable<Group>> UpdateManyAsync(IEnumerable<Group> groups);
 	}
 }

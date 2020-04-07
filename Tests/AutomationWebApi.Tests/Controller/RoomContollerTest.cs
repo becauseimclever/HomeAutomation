@@ -33,7 +33,6 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Tests.Controller
         public void CreateRoomControllerThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() => { new GroupController(null); });
-            Assert.Throws<ArgumentNullException>(() => { new GroupController(_mockGroupService.Object); });
         }
         [Fact]
         public async Task CreateAsyncReturnsRoom()
@@ -73,12 +72,12 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Tests.Controller
         public async Task UpdateAsyncReturnsBoolean()
         {
             var room = _fixture.Create<Group>();
-            _mockGroupService.Setup(x => x.UpdateAsync(It.IsAny<Group>())).ReturnsAsync(true);
+            _mockGroupService.Setup(x => x.UpdateAsync(It.IsAny<Group>())).ReturnsAsync(room);
             var controller = new GroupController(_mockGroupService.Object);
             var result = await controller.UpdateAsync(room).ConfigureAwait(false);
             Assert.NotNull(result);
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
-            Assert.True((bool)okObjectResult.Value);
+            Assert.IsAssignableFrom<Group>(okObjectResult.Value);
         }
         [Fact]
         public async Task DeleteAsyncReturnsNoContent()

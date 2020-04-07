@@ -5,9 +5,8 @@ using System.Linq;
 
 namespace BecauseImClever.HomeAutomation.AutomationModels
 {
-    public class Group
+    public class Group : BaseEntity
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public IEnumerable<IDevice> Devices { get; internal set; }
         public void AddDevice(IDevice device)

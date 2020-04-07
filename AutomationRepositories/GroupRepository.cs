@@ -20,49 +20,17 @@ namespace BecauseImClever.HomeAutomation.AutomationRepositories
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    public class GroupRepository : IGroupRepository
+    public class GroupRepository : Repository<Group>, IGroupRepository
     {
 
         private readonly IMongoCollection<Group> _groupCollection;
 
-        public GroupRepository(IMongoDatabase mongoDatabase)
+        public GroupRepository(IMongoDatabase mongoDatabase) : base(mongoDatabase)
         {
             _groupCollection = (mongoDatabase ?? throw new ArgumentNullException(nameof(mongoDatabase))).GetCollection<Group>(typeof(Group).Name);
         }
-
-        #region Create
-        public async ValueTask<Group> CreateAsync(Group group)
-        {
-            var _group = group ?? throw new ArgumentNullException(nameof(group));
-            await _groupCollection.InsertOneAsync(_group).ConfigureAwait(false);
-            return _group;
-        }
-        public async ValueTask<IEnumerable<Group>> CreateManyAsync(IEnumerable<Group> groups)
-        {
-            await _groupCollection.InsertManyAsync(groups).ConfigureAwait(false);
-            return groups;
-        }
-        #endregion
-        #region Read
-        public async ValueTask<List<Group>> GetAllAsync()
-        {
-            var filter = Builders<Group>.Filter.Empty;
-            var results = await _groupCollection.FindAsync(filter).ConfigureAwait(true);
-
-            return await results.ToListAsync().ConfigureAwait(true);
-        }
-        public async ValueTask<Group> GetByIdAsync(Guid Id)
-        {
-            var builder = Builders<Group>.Filter;
-            var filter = builder.Eq(x => x.Id, Id);
-
-            return await _groupCollection.Find(filter).FirstOrDefaultAsync().ConfigureAwait(true);
-        }
-
-        #endregion
         #region Update
-
-        public async ValueTask<bool> UpdateAsync(Group group)
+        public async ValueTask<Group> UpdateAsync(Group group)
         {
             var builder = Builders<Group>.Filter;
             var filter = builder.Eq(x => x.Id, group?.Id);
@@ -71,24 +39,12 @@ namespace BecauseImClever.HomeAutomation.AutomationRepositories
                 .Set(x => x.Name, group?.Name);
             var updateOptions = new UpdateOptions() { IsUpsert = false };
             var returnValue = await _groupCollection.UpdateOneAsync(filter, update, updateOptions).ConfigureAwait(true);
-            return returnValue.IsAcknowledged;
+            return returnValue.IsAcknowledged ? group : null;
 
         }
-
-        #endregion
-        #region Delete
-        public async ValueTask<bool> DeleteAsync(Guid id)
+        public ValueTask<IEnumerable<Group>> UpdateManyAsync(IEnumerable<Group> groups)
         {
-            var returnValue = await _groupCollection.DeleteOneAsync(x => x.Id == id).ConfigureAwait(true);
-
-            return returnValue.IsAcknowledged;
-        }
-        public async ValueTask<(bool, long)> DeleteManyAsync(IEnumerable<Guid> ids)
-        {
-            var builder = Builders<Group>.Filter;
-            var filter = builder.In(x => x.Id, ids);
-            var returnValue = await _groupCollection.DeleteManyAsync(filter).ConfigureAwait(false);
-            return (returnValue.IsAcknowledged, returnValue.DeletedCount);
+            throw new NotImplementedException();
         }
         #endregion
     }

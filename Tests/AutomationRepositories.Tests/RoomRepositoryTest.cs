@@ -122,7 +122,7 @@ namespace AutomationRepositories.Tests
             _mockDatabase.Setup(x => x.GetCollection<Group>(It.IsAny<string>(), It.IsAny<MongoCollectionSettings>())).Returns(_mockCollection.Object);
             var repo = new GroupRepository(_mockDatabase.Object);
             var result = await repo.UpdateAsync(_groupEntity).ConfigureAwait(true);
-            Assert.True(result);
+            Assert.IsType<Group>(result);
         }
         #endregion
         #region Delete

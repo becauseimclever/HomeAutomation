@@ -39,7 +39,7 @@ namespace BecauseImClever.HomeAutomation.AutomationLogic.Services
         {
             return await _groupRepository.GetByIdAsync(Guid.Parse(Id)).ConfigureAwait(false);
         }
-        public async ValueTask<bool> UpdateAsync(Group group)
+        public async ValueTask<Group> UpdateAsync(Group group)
         {
             return await _groupRepository.UpdateAsync(group).ConfigureAwait(false);
         }
@@ -52,10 +52,8 @@ namespace BecauseImClever.HomeAutomation.AutomationLogic.Services
         {
             var group = await _groupRepository.GetByIdAsync(Guid.Parse(id)).ConfigureAwait(false);
             group.AddDevice(device);
-            if (await _groupRepository.UpdateAsync(group).ConfigureAwait(false))
-                return group;
-            else
-                return null;
+            return await _groupRepository.UpdateAsync(group).ConfigureAwait(false);
+
         }
     }
 }

@@ -74,7 +74,7 @@ namespace AutomationLogic.Tests
             var room = fixture.Create<Group>();
             room.Id = Guid.NewGuid();
 
-            _mockGroupRepo.Setup(x => x.UpdateAsync(It.IsAny<Group>())).ReturnsAsync(true);
+            _mockGroupRepo.Setup(x => x.UpdateAsync(It.IsAny<Group>())).ReturnsAsync(room);
             var roomService = new GroupService(_mockGroupRepo.Object);
             var result = await roomService.UpdateAsync(room).ConfigureAwait(true);
         }

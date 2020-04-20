@@ -9,7 +9,7 @@ namespace BecauseImClever.HomeAutomation.AutomationRepositories
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
-        private IMongoCollection<T> _entityCollection;
+        private readonly IMongoCollection<T> _entityCollection;
         public Repository(IMongoDatabase mongoDatabase)
         {
             _entityCollection = (mongoDatabase ?? throw new ArgumentNullException(nameof(mongoDatabase))).GetCollection<T>(typeof(T).Name);

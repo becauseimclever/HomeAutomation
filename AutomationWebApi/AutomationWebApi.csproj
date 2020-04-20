@@ -33,14 +33,13 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0-preview.2.20160.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
-    <PackageReference Include="RabbitMQ.Client" Version="6.0.0-rc.3" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.3.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.3.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="5.3.1" />
+    <PackageReference Include="MongoDB.Driver" Version="2.11.0-beta1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.3.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.3.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="5.3.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AutomationBlazorUI\Client\AutomationBlazorUI.Client.csproj" />
     <ProjectReference Include="..\AutomationLogic\AutomationLogic.csproj" />
     <ProjectReference Include="..\AutomationModels\AutomationModels.csproj" />
     <ProjectReference Include="..\AutomationRepositories\AutomationRepositories.csproj" />

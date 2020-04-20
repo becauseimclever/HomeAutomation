@@ -29,7 +29,7 @@ namespace BecauseImClever.HomeAutomation.AutomationLogic.Services
         }
         public async ValueTask<Group> CreateAsync(Group group)
         {
-            return await _groupRepository.CreateAsync(group);
+            return await _groupRepository.CreateAsync(group).ConfigureAwait(false);
         }
         public async ValueTask<IEnumerable<Group>> GetAllAsync()
         {

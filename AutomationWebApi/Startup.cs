@@ -81,7 +81,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseWebAssemblyDebugging();
+                //app.UseWebAssemblyDebugging();
             }
             app
                 .UseSwagger()
@@ -90,7 +90,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Home Automation V1");
                 })
                 .UseStaticFiles()
-                .UseBlazorFrameworkFiles()
+                //.UseBlazorFrameworkFiles()
                 .UseRouting()
                 .UseEndpoints(endpoints =>
                 {

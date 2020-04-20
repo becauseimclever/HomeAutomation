@@ -14,8 +14,6 @@
 namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
 {
     using Abstractions;
-    using BecauseImClever.HomeAutomation.AutomationModels;
-    using BecauseImClever.HomeAutomation.DeviceBase.Abstractions;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Threading.Tasks;

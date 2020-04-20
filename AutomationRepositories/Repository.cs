@@ -1,7 +1,6 @@
 ﻿using BecauseImClever.HomeAutomation.Abstractions;
 using BecauseImClever.HomeAutomation.AutomationModels;
 using MongoDB.Driver;
-using MongoDB.Driver.Core.Operations;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

@@ -12,14 +12,13 @@
 //	along with this program.If not, see<https://www.gnu.org/licenses/>.
 namespace BecauseImClever.HomeAutomation.Abstractions
 {
-	using AutomationModels;
-	using System;
-	using System.Collections.Generic;
-	using System.Threading.Tasks;
+    using AutomationModels;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
-	public interface IGroupRepository : IRepository<Group>
-	{
-		ValueTask<Group> UpdateAsync(Group group);
-		ValueTask<IEnumerable<Group>> UpdateManyAsync(IEnumerable<Group> groups);
-	}
+    public interface IGroupRepository : IRepository<Group>
+    {
+        ValueTask<Group> UpdateAsync(Group group);
+        ValueTask<IEnumerable<Group>> UpdateManyAsync(IEnumerable<Group> groups);
+    }
 }

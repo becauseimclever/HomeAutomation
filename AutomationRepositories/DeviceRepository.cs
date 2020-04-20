@@ -1,5 +1,4 @@
 ﻿using BecauseImClever.HomeAutomation.Abstractions;
-using BecauseImClever.HomeAutomation.DeviceBase;
 using BecauseImClever.HomeAutomation.DeviceBase.Abstractions;
 using System;
 using System.Collections.Generic;

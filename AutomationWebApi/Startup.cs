@@ -17,13 +17,11 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
     using BecauseImClever.HomeAutomation.AutomationWebApi.Extensions;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc.ApplicationParts;
     using Microsoft.AspNetCore.ResponseCompression;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.OpenApi.Models;
-    using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     [ExcludeFromCodeCoverage]

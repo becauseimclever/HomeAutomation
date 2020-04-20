@@ -14,12 +14,12 @@
 namespace BecauseImClever.HomeAutomation.AutomationModels
 {
 
-	using System;
+    using System;
 
-	public class Plugin
-	{
-		public Guid Id { get; set; }
-		public string Name { get; set; }
-		public string Path { get; set; }
-	}
+    public class Plugin
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string Path { get; set; }
+    }
 }

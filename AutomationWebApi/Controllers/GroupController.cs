@@ -34,7 +34,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
         [HttpPost]
         [Route("")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>")]
-        public async ValueTask<IActionResult> CreateAsync([Required]Group group)
+        public async ValueTask<IActionResult> CreateAsync([Required] Group group)
         {
             var newRoom = await _groupService.CreateAsync(group).ConfigureAwait(false);
             return Ok(newRoom);

@@ -43,25 +43,26 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
             services
                 .AddKestrel(Configuration)
                 .AddMongoDatabase(Configuration)
-                .AddMessageQueue()
+                //.AddMessageQueue()
                 .AddControllers()
-                .ConfigureApplicationPartManager(apm =>
-                {
-                    var types =
-                    AppDomain.CurrentDomain
-                    .GetAssemblies()
-                    .SelectMany(s => s.GetTypes())
-                    .Where(p => p.Assembly.FullName.Contains("Plugin", StringComparison.OrdinalIgnoreCase));
-                    foreach (var t in types)
-                    {
-                        apm.ApplicationParts.Add(new AssemblyPart(t.Assembly));
-                    }
-                })
-                .AddNewtonsoftJson(options =>
-                {
-                    options.SerializerSettings.TypeNameHandling = Newtonsoft.Json.TypeNameHandling.All;
-                    options.SerializerSettings.SerializationBinder = new DeviceDeserializer();
-                });
+                //.ConfigureApplicationPartManager(apm =>
+                //{
+                //    var types =
+                //    AppDomain.CurrentDomain
+                //    .GetAssemblies()
+                //    .SelectMany(s => s.GetTypes())
+                //    .Where(p => p.Assembly.FullName.Contains("Plugin", StringComparison.OrdinalIgnoreCase));
+                //    foreach (var t in types)
+                //    {
+                //        apm.ApplicationParts.Add(new AssemblyPart(t.Assembly));
+                //    }
+                //})
+                //.AddNewtonsoftJson(options =>
+                //{
+                //    options.SerializerSettings.TypeNameHandling = Newtonsoft.Json.TypeNameHandling.All;
+                //    options.SerializerSettings.SerializationBinder = new DeviceDeserializer();
+                //})
+                ;
             services
                 .AddAutomationServices()
                 .AddAutomationRespositories()
@@ -76,7 +77,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseResponseCompression();
             if (env.IsDevelopment())

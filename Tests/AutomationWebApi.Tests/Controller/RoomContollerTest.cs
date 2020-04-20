@@ -15,13 +15,11 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Tests.Controller
     {
         private readonly Fixture _fixture;
         private readonly Mock<IGroupService> _mockGroupService;
-        private readonly Mock<IMessageService> _mockMessageService;
 
         public RoomControllerTest()
         {
             _fixture = new Fixture();
             _mockGroupService = new Mock<IGroupService>();
-            _mockMessageService = new Mock<IMessageService>();
         }
         [Fact]
         public void CreateRoomController()

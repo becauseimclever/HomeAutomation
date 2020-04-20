@@ -42,13 +42,6 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Extensions
             services.AddTransient<IPluginRepository, PluginRepository>();
             return services;
         }
-        public static IServiceCollection AddMessageQueue(this IServiceCollection services)
-        {
-            services.AddSingleton<IMessageService, MessageService>();
-
-            return services;
-        }
-
 
     }
 }

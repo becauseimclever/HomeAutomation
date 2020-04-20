@@ -29,7 +29,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
         public static void Main()
         {
             var host = CreateHostBuilder();
-            RegisterPlugins(host);
+            //RegisterPlugins(host);
             host.Build().Run();
         }
 
@@ -41,47 +41,47 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi
                     webBuilder.UseStartup<Startup>();
                 })
             ;
-        static void RegisterPlugins(IHostBuilder host)
-        {
-            var pluginFolder = Path.Combine(Directory.GetCurrentDirectory(), "Plugins");
-            if (!Directory.Exists(pluginFolder)) { Directory.CreateDirectory(pluginFolder); }
-            var pluginPaths = Directory.GetDirectories(pluginFolder);
-            var dllPaths = pluginPaths.SelectMany(path =>
-            {
-                return Directory.GetFiles(path, "*Plugin.dll");
-            });
+        //static void RegisterPlugins(IHostBuilder host)
+        //{
+        //    var pluginFolder = Path.Combine(Directory.GetCurrentDirectory(), "Plugins");
+        //    if (!Directory.Exists(pluginFolder)) { Directory.CreateDirectory(pluginFolder); }
+        //    var pluginPaths = Directory.GetDirectories(pluginFolder);
+        //    var dllPaths = pluginPaths.SelectMany(path =>
+        //    {
+        //        return Directory.GetFiles(path, "*Plugin.dll");
+        //    });
 
-            IEnumerable<IDevicePlugin> devicePlugins = dllPaths.SelectMany(pluginPath =>
-            {
-                Assembly pluginAssembly = LoadPlugin(pluginPath);
-                return CreateDevices(pluginAssembly);
-            }).ToList();
-            foreach (var pluginType in devicePlugins)
-            {
-                host.ConfigureServices((hostContext, services) => pluginType.RegisterDependencies(services));
-            }
-        }
-        static Assembly LoadPlugin(string relativePath)
-        {
-            Console.WriteLine($"Loading device plugins from: {relativePath}");
-            PluginLoadContext loadContext = new PluginLoadContext(relativePath);
-            return loadContext.LoadFromAssemblyName(new AssemblyName(Path.GetFileNameWithoutExtension(relativePath)));
-        }
-        static IEnumerable<IDevicePlugin> CreateDevices(Assembly assembly)
-        {
-            foreach (Type type in assembly.GetTypes())
-            {
-                if (typeof(IDevicePlugin).IsAssignableFrom(type))
-                {
-                    IDevicePlugin result = Activator.CreateInstance(type) as IDevicePlugin;
-                    if (result != null)
-                    {
-                        Console.WriteLine(type.Name);
-                        yield return result;
-                    }
-                }
-            }
-        }
+        //    IEnumerable<IDevicePlugin> devicePlugins = dllPaths.SelectMany(pluginPath =>
+        //    {
+        //        Assembly pluginAssembly = LoadPlugin(pluginPath);
+        //        return CreateDevices(pluginAssembly);
+        //    }).ToList();
+        //    foreach (var pluginType in devicePlugins)
+        //    {
+        //        host.ConfigureServices((hostContext, services) => pluginType.RegisterDependencies(services));
+        //    }
+        //}
+        //static Assembly LoadPlugin(string relativePath)
+        //{
+        //    Console.WriteLine($"Loading device plugins from: {relativePath}");
+        //    PluginLoadContext loadContext = new PluginLoadContext(relativePath);
+        //    return loadContext.LoadFromAssemblyName(new AssemblyName(Path.GetFileNameWithoutExtension(relativePath)));
+        //}
+        //static IEnumerable<IDevicePlugin> CreateDevices(Assembly assembly)
+        //{
+        //    foreach (Type type in assembly.GetTypes())
+        //    {
+        //        if (typeof(IDevicePlugin).IsAssignableFrom(type))
+        //        {
+        //            IDevicePlugin result = Activator.CreateInstance(type) as IDevicePlugin;
+        //            if (result != null)
+        //            {
+        //                Console.WriteLine(type.Name);
+        //                yield return result;
+        //            }
+        //        }
+        //    }
+        //}
 
 
     }

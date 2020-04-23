@@ -47,13 +47,5 @@ namespace BecauseImClever.HomeAutomation.AutomationLogic.Services
         {
             return await _groupRepository.DeleteAsync(Guid.Parse(id)).ConfigureAwait(false);
         }
-
-        public async ValueTask<Group> AddDeviceAsync(string id, IDevice device)
-        {
-            var group = await _groupRepository.GetByIdAsync(Guid.Parse(id)).ConfigureAwait(false);
-            group.AddDevice(device);
-            return await _groupRepository.UpdateAsync(group).ConfigureAwait(false);
-
-        }
     }
 }

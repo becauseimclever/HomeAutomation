@@ -63,14 +63,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
             var updateGroup = await _groupService.UpdateAsync(group).ConfigureAwait(false);
             return Ok(updateGroup);
         }
-        [HttpPut]
-        [Route("{Id}")]
-        public async ValueTask<IActionResult> AddDeviceAsync(string Id, IDevice device)
-        {
-            var group = await _groupService.AddDeviceAsync(Id, device).ConfigureAwait(false);
-            return Ok(group);
-        }
-        #endregion
+                #endregion
         #region Delete
         [HttpDelete]
         [Route("{Id}")]

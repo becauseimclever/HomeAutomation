@@ -25,6 +25,5 @@ namespace BecauseImClever.HomeAutomation.Abstractions
         ValueTask<Group> GetByIdAsync(string Id);
         ValueTask<Group> UpdateAsync(Group group);
         ValueTask<bool> DeleteAsync(string id);
-        ValueTask<Group> AddDeviceAsync(string id, IDevice device);
     }
 }

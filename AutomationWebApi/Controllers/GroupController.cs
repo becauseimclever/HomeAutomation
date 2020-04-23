@@ -16,7 +16,6 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
 {
     using Abstractions;
     using AutomationModels;
-    using BecauseImClever.HomeAutomation.DeviceBase.Abstractions;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -50,7 +49,7 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
         }
         [HttpGet]
         [Route("{Id}")]
-        public async ValueTask<IActionResult> GetByIdAsync(string Id)
+        public async ValueTask<IActionResult> GetByIdAsync([Required] string Id)
         {
             return Ok(await _groupService.GetByIdAsync(Id).ConfigureAwait(false));
         }
@@ -58,16 +57,16 @@ namespace BecauseImClever.HomeAutomation.AutomationWebApi.Controllers
         #region Update
         [HttpPut]
         [Route("")]
-        public async ValueTask<IActionResult> UpdateAsync(Group group)
+        public async ValueTask<IActionResult> UpdateAsync([Required] Group group)
         {
             var updateGroup = await _groupService.UpdateAsync(group).ConfigureAwait(false);
             return Ok(updateGroup);
         }
-                #endregion
+        #endregion
         #region Delete
         [HttpDelete]
         [Route("{Id}")]
-        public async ValueTask<IActionResult> DeleteAsync(string Id)
+        public async ValueTask<IActionResult> DeleteAsync([Required] string Id)
         {
             bool success = await _groupService.DeleteAsync(Id).ConfigureAwait(false);
             if (success)

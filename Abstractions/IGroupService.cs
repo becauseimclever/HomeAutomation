@@ -13,7 +13,6 @@
 namespace BecauseImClever.HomeAutomation.Abstractions
 {
     using AutomationModels;
-    using BecauseImClever.HomeAutomation.DeviceBase.Abstractions;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
